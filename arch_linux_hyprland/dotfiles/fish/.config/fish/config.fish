@@ -9,6 +9,9 @@ if status --is-interactive && type -q fastfetch
    fastfetch --load-config neofetch
 end
 
+if status is-interactive && not set -q TMUX
+    exec tmux
+end
 
 set -x EDITOR /usr/bin/nvim
 
@@ -53,7 +56,6 @@ alias dir='ls'
 alias GITHUB='cd /home/leo_zhang/Documents/GitHub/'
 alias ZOOM='/home/leo_zhang/.conda/envs/web_auto/bin/python /home/leo_zhang/Documents/GitHub/Zoom-Automation-Python/zoom_lecture_automations.py'
 alias web_auto='/home/leo_zhang/.conda/envs/web_auto/bin/python'
-alias BG='[EXECUTE_SHELL_SCRIPT] [PATH_TO_ARCHIVED_PICS]$(ls [PATH_TO_ARCHIVED_PICS] | sort -V | tail -n 1)'
 alias NOTES='nvim /home/leo_zhang/Documents/GitHub/my_linux_configs/arch_linux_configs/arch_linux.txt'
 alias JOBS='nvim /home/leo_zhang/Documents/GitHub/my_linux_configs/jobs_apps/applications.txt'
 alias OPEN='xdg-open . &'
@@ -67,8 +69,7 @@ alias IFIND='find . -iname'
 alias IFINDDIR='find . -type d -iname'
 alias ACP='git add . && git commit -m"update" && git push'
 alias SLEEP='systemctl suspend'
-alias CONF='nvim /home/leo_zhang/.config/hypr/hyprland.conf'
-alias BTUSB='sudo rmmod btusb && sudo modprobe btusb'
+alias conf='nvim /home/leo_zhang/.config/hypr/hyprland.conf'
 alias v='nvim'
 alias lf='lfcd'
 alias l=lf
@@ -78,6 +79,7 @@ alias m='math'
 alias birth='stat / | grep Birth'
 alias ovpn='sudo openvpn ~/.vpn_stuff/us-free-11.protonvpn.net.udp.ovpn'
 alias py='/home/leo_zhang/miniconda3/envs/web_auto/bin/python'
+alias reset_bt="sudo rfkill unblock all && sudo rmmod btusb && sudo rmmod btintel && sudo modprobe btintel && sudo modprobe btusb"
 
 set -x BROWSER "/usr/bin/firefox"
 set -gx VISUAL nvim

@@ -1,0 +1,46 @@
+
+Step 1: Unplug your iPhone, if it is already plugged in.
+
+
+Step 2: Now, open a terminal and use the following command to install some necessary packages. Don’t worry if they are already installed.
+
+sudo pacman -Sy ifuse usbmuxd libplist libimobiledevice --needed --noconfirm
+
+
+Step 3: Once these programs and libraries are installed, reboot your system.
+
+sudo reboot
+
+
+Step 4: Make a directory where you want the iPhone to be mounted. I would suggest making a directory named iPhone in your home directory.
+
+mkdir ~/iPhone/
+
+Step 5: Unlock your phone and plug it in. If asked to trust the computer, allow it.
+
+
+Step 6: Verify that iPhone is recognized by the system this time.
+
+dmesg | grep -i iphone
+
+This should show you some result with iPhone and Apple in it. Something like this:
+
+[ 31.003392] ipheth 2-1:4.2: Apple iPhone USB Ethernet device attached
+[ 40.950883] ipheth 2-1:4.2: Apple iPhone USB Ethernet now disconnected
+[ 47.471897] ipheth 2-1:4.2: Apple iPhone USB Ethernet device attached
+[ 82.967116] ipheth 2-1:4.2: Apple iPhone USB Ethernet now disconnected
+[ 106.735932] ipheth 2-1:4.2: Apple iPhone USB Ethernet device attached
+
+
+Step 7: When everything is set, it’s time to mount the iPhone. Use the command below:
+
+ifuse ~/iPhone
+
+
+
+Step 8: When you want to unmount it, you should use this command:
+
+sudo umount ~/iPhone
+
+
+Source: https://itsfoss.com/iphone-antergos-linux/
