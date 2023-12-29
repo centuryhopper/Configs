@@ -52,6 +52,10 @@ cmd setwallpaper ${{
     betterlockscreen -u "$f" --fx
 }}
 
+cmd dragon-hide-after %dragon-drop -a -x $fx
+cmd dragon-keep %dragon-drop -a $fx
+cmd dragon-individual %dragon-drop $fx
+
 # Archive bindings
 cmd unarchive ${{
   case "$f" in
@@ -92,6 +96,11 @@ map c $vscodium "$f"
 
 map au unarchive
 map ae $wine "$f"
+
+# Dragon Mappings
+map dh dragon-hide-after
+map dk dragon-keep
+map di dragon-individual
 
 # Basic Functions
 map . set hidden!

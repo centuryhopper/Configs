@@ -1,0 +1,2 @@
+move bios files to /boot folder to reveal them in ez flash menu when updating the bios
+
