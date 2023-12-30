@@ -5,9 +5,11 @@ end
 
 
 ## Run fastfetch if session is interactive
-if status --is-interactive && type -q fastfetch
-    fastfetch
-end
+#if status --is-interactive && type -q fastfetch
+#    fastfetch
+#end
+
+fm6000 -c red -dog -o Arch -n -m 8 -g 8 -l 40
 
 if status is-interactive && not set -q TMUX
     exec tmux
