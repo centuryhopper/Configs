@@ -145,7 +145,7 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
 
 	#Stage 2
 	echo -e "\n$CNT - Stage 2 - Installing additional tools and utilities, this may take a while..."
-	for SOFTWR in polkit-gnome python-requests pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller btop pacman-contrib adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei wqy-microhei-lite wqy-bitmapfont wqy-zenhei ttf-arphic-ukai ttf-arphic-uming fcitx5-im fcitx5-chinese-addons fcitx5-configtool trash-cli-git brave-bin hyprshot man tree cronie mono dotnet-runtime dotnet-sdk aspnet-runtime rust-src cmatrix github-cli libreoffice-fresh godot-mono fish neovim firefox brave-bin discord postman-bin obs-studio xournalpp visual-studio-code-bin virtualbox brave droidcam vlc github-desktop-bin update-grub cliphist lf-bin ctpv-git htop ncdu swayosd nmap realvnc-vnc-viewer net-tools ifuse usbmuxd libplist libimobiledevice inetutils microsoft-edge-stable-bin dosfstools dragon-drop docker-cli-bin; do
+	for SOFTWR in polkit-gnome python-requests pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller btop pacman-contrib adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei wqy-microhei-lite wqy-bitmapfont wqy-zenhei ttf-arphic-ukai ttf-arphic-uming fcitx5-im fcitx5-chinese-addons fcitx5-configtool trash-cli-git brave-bin hyprshot man tree cronie mono dotnet-runtime dotnet-sdk aspnet-runtime rust-src cmatrix github-cli libreoffice-fresh godot-mono fish neovim firefox brave-bin discord postman-bin obs-studio xournalpp visual-studio-code-bin virtualbox brave droidcam vlc github-desktop-bin update-grub cliphist lf-bin ctpv-git htop ncdu swayosd nmap realvnc-vnc-viewer net-tools ifuse usbmuxd libplist libimobiledevice inetutils microsoft-edge-stable-bin dosfstools dragon-drop docker tmux; do
 		#First lets see if the package is there
 		if yay -Qs $SOFTWR >/dev/null; then
 			echo -e "$COK - $SOFTWR is already installed."
@@ -184,6 +184,16 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
 	sudo systemctl enable --now bluetooth.service &>>$INSTLOG
 	sleep 2
 
+	# Start the cronie service
+	echo -e "$CNT - Starting the Cronie Service..."
+	sudo systemctl enable --now cronie.service &>>$INSTLOG
+	sleep 2
+
+	# Start the docker service
+	echo -e "$CNT - Starting the Docker Service..."
+	sudo systemctl enable --now docker.service &>>$INSTLOG
+	sleep 2
+
 	# Enable the sddm login manager service
 	echo -e "$CNT - Enabling the SDDM Service..."
 	sudo systemctl enable sddm &>>$INSTLOG
@@ -202,7 +212,7 @@ omf install bang-bang
 read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy config files? (y,n) ' CFG
 if [[ $CFG == "Y" || $CFG == "y" ]]; then
 	echo -e "$CNT - Copying config files..."
-	for DIR in hypr kitty mako swaylock waybar wlogout wofi fish lf nvim shaders Wallpapers; do
+	for DIR in hypr kitty mako swaylock waybar wlogout wofi fish lf nvim shaders Wallpapers tmux; do
 		DIRPATH=~/.config/$DIR
 		if [ -d "$DIRPATH" ]; then
 			echo -e "$CAT - Config for $DIR located, backing up."
@@ -212,6 +222,21 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 		echo -e "$CNT - Copying $DIR config to $DIRPATH."
 		cp -R $DIR ~/.config/ &>>$INSTLOG
 	done
+
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy files to home directory? (y,n) ' CFG
+if [[ $CFG == "Y" || $CFG == "y" ]]; then
+	echo -e "$CNT - Copying config files..."
+	for DIR in .vpn_stuff .bashrc .ssh; do
+    DIRPATH=~/$DIR
+    if [ -d "$DIRPATH" ]; then
+			echo -e "$CAT - Config for $DIR located, backing up."
+			mv $DIRPATH $DIRPATH-back &>>$INSTLOG
+			echo -e "$COK - Backed up $DIR to $DIRPATH-back."
+		fi
+		echo -e "$CNT - Copying $DIR config to $DIRPATH."
+		cp -R $DIR ~/.config/ &>>$INSTLOG
+	done
+
 
 	# Set some files as exacutable
 	echo -e "$CNT - Setting some file as executable."
@@ -288,7 +313,7 @@ if [[ $ROG == "Y" || $ROG == "y" ]]; then
 fi
 
 # set up fcitx for language inputs
-echo -e "GTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx" | sudo tee -a /etc/environment &>>$INSTLOG
+echo -e "#GTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx\nQT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment &>>$INSTLOG
 
 ### Script is done ###
 echo -e "$CNT - Script had completed!"
