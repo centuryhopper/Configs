@@ -237,6 +237,8 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 		cp -R $DIR ~/.config/ &>>$INSTLOG
 	done
 
+printf "copying cron_contents to the crontab..."
+crontab ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron_contents.txt
 
 	# Set some files as exacutable
 	echo -e "$CNT - Setting some file as executable."
