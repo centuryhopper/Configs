@@ -212,7 +212,7 @@ omf install bang-bang
 read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy config files? (y,n) ' CFG
 if [[ $CFG == "Y" || $CFG == "y" ]]; then
 	echo -e "$CNT - Copying config files..."
-	for DIR in hypr kitty swaylock mako waybar wlogout wofi fish lf shaders Wallpapers tmux; do
+	for DIR in hypr kitty swaylock tmux mako waybar wlogout wofi fish lf shaders Wallpapers tmux; do
 		DIRPATH=~/.config/$DIR
 		if [ -d "$DIRPATH" ]; then
 			echo -e "$CAT - Config for $DIR located, backing up."
@@ -305,3 +305,12 @@ mkdir -p ~/Documents/GitHub
 git clone https://github.com/LazyVim/starter ~/.config/nvim/
 rm -rf ~/.config/nvim/.git
 rm -rf ~/.config/nvim/.gitignore
+
+#tmux tpm
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/
+rm -rf ~/.config/tmux/plugins/.git/
+rm -f ~/.config/tmux/plugins/.gitignore
+rm -f ~/.config/tmux/plugins/.gitmodules
+rm -f ~/.config/tmux/plugins/.gitattributes
+tmux source ~/.config/tmux/tmux.conf
+echo -e "ctrl + s and then shift + I"
