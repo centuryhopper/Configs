@@ -18,7 +18,7 @@
 # swappy: This is a screenshot editor tool
 # grim: This is a screenshot tool it grabs images from a Wayland compositor
 # slurp: This helps with screenshots, it selects a region in a Wayland compositor
-# thunar: This is a graphical file manager (no need for this if using lf and dragon-drop)
+# pcmanfm: This is a graphical file manager (no need for this if using lf and dragon-drop but can still have anyway for simplicity)
 # polkit-gnome: needed to get superuser access on some graphical appliaction
 # python-requests: needed for the weather module script to execute
 # pamixer: This helps with audio settings such as volume
@@ -145,7 +145,11 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
 
 	#Stage 2
 	echo -e "\n$CNT - Stage 2 - Installing additional tools and utilities, this may take a while..."
+<<<<<<< Updated upstream
 	for SOFTWR in polkit-gnome python-requests pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs file-roller btop pacman-contrib adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei wqy-microhei-lite wqy-bitmapfont wqy-zenhei ttf-arphic-ukai ttf-arphic-uming fcitx5-im fcitx5-chinese-addons fcitx5-configtool trash-cli-git brave-bin hyprshot man tree cronie mono dotnet-runtime dotnet-sdk aspnet-runtime rust cmatrix github-cli libreoffice-fresh godot-mono fish neovim firefox brave-bin discord postman-bin obs-studio xournalpp visual-studio-code-bin virtualbox brave droidcam vlc github-desktop-bin update-grub cliphist lf-bin ctpv-git htop ncdu swayosd nmap realvnc-vnc-viewer net-tools ifuse usbmuxd libplist libimobiledevice inetutils microsoft-edge-stable-bin dosfstools dragon-drop docker tmux fm6000 hy3-git; do
+=======
+	for SOFTWR in polkit-gnome python-requests pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs file-roller btop pacman-contrib adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei wqy-microhei-lite wqy-bitmapfont wqy-zenhei ttf-arphic-ukai ttf-arphic-uming fcitx5-im fcitx5-chinese-addons fcitx5-configtool trash-cli-git brave-bin hyprshot man tree cronie mono dotnet-runtime dotnet-sdk aspnet-runtime rust cmatrix github-cli libreoffice-fresh fish neovim firefox brave-bin discord postman-bin obs-studio xournalpp visual-studio-code-bin virtualbox brave vlc github-desktop-bin update-grub cliphist lf-bin ctpv-git htop ncdu sassc swayosd-git nmap realvnc-vnc-viewer net-tools ifuse usbmuxd libplist libimobiledevice inetutils microsoft-edge-stable-bin dosfstools dragon-drop docker tmux fm6000 hy3-git exa pcmanfm bat; do
+>>>>>>> Stashed changes
 		#First lets see if the package is there
 		if yay -Qs $SOFTWR >/dev/null; then
 			echo -e "$COK - $SOFTWR is already installed."
@@ -205,14 +209,14 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
 fi
 
 # additional tools set up not in the arch repo:
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
-omf install bang-bang
+#curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+#omf install bang-bang
 
 ### Copy Config Files ###
 read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy config files? (y,n) ' CFG
 if [[ $CFG == "Y" || $CFG == "y" ]]; then
 	echo -e "$CNT - Copying config files..."
-	for DIR in hypr kitty mako swaylock waybar wlogout wofi fish lf shaders Wallpapers tmux; do
+	for DIR in hypr kitty swaylock mako waybar wlogout wofi fish lf shaders Wallpapers tmux; do
 		DIRPATH=~/.config/$DIR
 		if [ -d "$DIRPATH" ]; then
 			echo -e "$CAT - Config for $DIR located, backing up."
@@ -234,13 +238,13 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 			echo -e "$COK - Backed up $DIR to $DIRPATH-back."
 		fi
 		echo -e "$CNT - Copying $DIR config to $DIRPATH."
-		cp -R $DIR ~/.config/ &>>$INSTLOG
+		cp -R $DIR ~ &>>$INSTLOG
 	done
 
-printf "copying cron_contents to the crontab..."
-crontab ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron_contents.txt
+#printf "copying cron_contents to the crontab..."
+#crontab ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron_contents.txt
 
-	# Set some files as exacutable
+	# Set some files as executable
 	echo -e "$CNT - Setting some file as executable."
 	chmod +x ~/.config/hypr/scripts/bgaction
 	chmod +x ~/.config/hypr/scripts/xdg-portal-hyprland
@@ -273,6 +277,7 @@ crontab ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron_cont
 	gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 	gsettings set org.gnome.desktop.interface icon-theme "Adwaita-dark"
 	ln -sf /usr/share/sddm/themes/sdt/Backgrounds/wallpaper-dark.jpg /usr/share/sddm/themes/sdt/wallpaper.jpg
+	fi
 fi
 
 ### Install the starship shell ###
@@ -286,33 +291,6 @@ if [[ $STAR == "Y" || $STAR == "y" ]]; then
 	cp extras/starship.toml ~/.config/
 fi
 
-### Install software for Asus ROG laptops ###
-read -n1 -rep $'[\e[1;33mACTION\e[0m] - For ASUS ROG Laptops - Would you like to install Asus ROG software support? (y,n) ' ROG
-if [[ $ROG == "Y" || $ROG == "y" ]]; then
-	echo -e "$CNT - Adding Keys..."
-	sudo pacman-key --recv-keys 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35 &>>$INSTLOG
-	sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35 &>>$INSTLOG
-	sudo pacman-key --lsign-key 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35 &>>$INSTLOG
-	sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35 &>>$INSTLOG
-
-	LOC="/etc/pacman.conf"
-	echo -e "$CNT - Updating $LOC with g14 repo."
-	echo -e "\n[g14]\nServer = https://arch.asus-linux.org" | sudo tee -a $LOC &>>$INSTLOG
-	echo -e "\n"
-	echo -e "$CNT - Update the system..."
-	sudo pacman -Suy --noconfirm &>>$INSTLOG
-
-	echo -e "$CNT - Installing ROG pacakges..."
-	sudo pacman -S --noconfirm asusctl supergfxctl rog-control-center &>>$INSTLOG
-	echo -e "$CNT - Activating ROG services..."
-	sudo systemctl enable --now power-profiles-daemon.service &>>$INSTLOG
-	sleep 2
-	sudo systemctl enable --now supergfxd &>>$INSTLOG
-	sleep 2
-
-	#add the keybinding file to the config
-	echo -e "\nsource = ~/.config/hypr/rog-g15-strix-2021-binds.conf" >>~/.config/hypr/hyprland.conf
-fi
 
 # set up fcitx for language inputs
 echo -e "#GTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx\nQT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment &>>$INSTLOG
@@ -325,3 +303,10 @@ if [[ $HYP == "Y" || $HYP == "y" ]]; then
 else
 	exit
 fi
+
+mkdir -p ~/Documents/GitHub
+
+# lazyvim install
+git clone https://github.com/LazyVim/starter ~/.config/nvim/
+rm -rf ~/.config/nvim/.git
+rm -rf ~/.config/nvim/.gitignore

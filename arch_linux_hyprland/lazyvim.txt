@@ -1,0 +1,4 @@
+
+after installing, set checker to false in lazy.lua to stop unwanted notifications
+:LazyExtras
+and enable omnisharp, python and vscode
