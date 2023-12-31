@@ -205,8 +205,8 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
 fi
 
 # additional tools set up not in the arch repo:
-#curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
-#omf install bang-bang
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+omf install bang-bang
 
 ### Copy Config Files ###
 read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy config files? (y,n) ' CFG
@@ -223,56 +223,56 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 		cp -R $DIR ~/.config/ &>>$INSTLOG
 	done
 
-read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy files to home directory? (y,n) ' CFG
-if [[ $CFG == "Y" || $CFG == "y" ]]; then
-	echo -e "$CNT - Copying config files..."
-	for DIR in .vpn_stuff .bashrc; do
-    DIRPATH=~/$DIR
-    if [ -d "$DIRPATH" ]; then
-			echo -e "$CAT - Config for $DIR located, backing up."
-			mv $DIRPATH $DIRPATH-back &>>$INSTLOG
-			echo -e "$COK - Backed up $DIR to $DIRPATH-back."
+	read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy files to home directory? (y,n) ' CFG
+	if [[ $CFG == "Y" || $CFG == "y" ]]; then
+		echo -e "$CNT - Copying config files..."
+		for DIR in .vpn_stuff .bashrc; do
+			DIRPATH=~/$DIR
+			if [ -d "$DIRPATH" ]; then
+				echo -e "$CAT - Config for $DIR located, backing up."
+				mv $DIRPATH $DIRPATH-back &>>$INSTLOG
+				echo -e "$COK - Backed up $DIR to $DIRPATH-back."
+			fi
+			echo -e "$CNT - Copying $DIR config to $DIRPATH."
+			cp -R $DIR ~ &>>$INSTLOG
+		done
+
+		#printf "copying cron_contents to the crontab..."
+		#crontab ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron_contents.txt
+
+		# Set some files as executable
+		echo -e "$CNT - Setting some file as executable."
+		chmod +x ~/.config/hypr/scripts/bgaction
+		chmod +x ~/.config/hypr/scripts/xdg-portal-hyprland
+		chmod +x ~/.config/waybar/scripts/waybar-wttr.py
+		chmod +x ~/.config/waybar/scripts/baraction
+		chmod +x ~/.config/waybar/scripts/update-sys
+
+		# Copy the SDDM theme
+		echo -e "$CNT - Setting up the login screen."
+		sudo cp -R sdt /usr/share/sddm/themes/
+		sudo chown -R $USER:$USER /usr/share/sddm/themes/sdt
+		sudo mkdir /etc/sddm.conf.d
+		echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf &>>$INSTLOG
+		WLDIR=/usr/share/wayland-sessions
+		if [ -d "$WLDIR" ]; then
+			echo -e "$COK - $WLDIR found"
+		else
+			echo -e "$CWR - $WLDIR NOT found, creating..."
+			sudo mkdir $WLDIR
 		fi
-		echo -e "$CNT - Copying $DIR config to $DIRPATH."
-		cp -R $DIR ~ &>>$INSTLOG
-	done
+		sudo cp extras/hyprland.desktop /usr/share/wayland-sessions/
+		sudo sudo sed -i 's/Exec=Hyprland/Exec=\/home\/'$USER'\/start-hypr/' /usr/share/wayland-sessions/hyprland.desktop
+		cp extras/start-hypr ~/
 
-#printf "copying cron_contents to the crontab..."
-#crontab ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron_contents.txt
-
-	# Set some files as executable
-	echo -e "$CNT - Setting some file as executable."
-	chmod +x ~/.config/hypr/scripts/bgaction
-	chmod +x ~/.config/hypr/scripts/xdg-portal-hyprland
-	chmod +x ~/.config/waybar/scripts/waybar-wttr.py
-	chmod +x ~/.config/waybar/scripts/baraction
-	chmod +x ~/.config/waybar/scripts/update-sys
-
-	# Copy the SDDM theme
-	echo -e "$CNT - Setting up the login screen."
-	sudo cp -R sdt /usr/share/sddm/themes/
-	sudo chown -R $USER:$USER /usr/share/sddm/themes/sdt
-	sudo mkdir /etc/sddm.conf.d
-	echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf &>>$INSTLOG
-	WLDIR=/usr/share/wayland-sessions
-	if [ -d "$WLDIR" ]; then
-		echo -e "$COK - $WLDIR found"
-	else
-		echo -e "$CWR - $WLDIR NOT found, creating..."
-		sudo mkdir $WLDIR
-	fi
-	sudo cp extras/hyprland.desktop /usr/share/wayland-sessions/
-	sudo sudo sed -i 's/Exec=Hyprland/Exec=\/home\/'$USER'\/start-hypr/' /usr/share/wayland-sessions/hyprland.desktop
-	cp extras/start-hypr ~/
-
-	#setup the first look and feel as dark
-	ln -sf ~/.config/waybar/style/style-dark.css ~/.config/waybar/style.css
-	ln -sf ~/.config/wofi/style/style-dark.css ~/.config/wofi/style.css
-	xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
-	xfconf-query -c xsettings -p /Net/IconThemeName -s "Adwaita-dark"
-	gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
-	gsettings set org.gnome.desktop.interface icon-theme "Adwaita-dark"
-	ln -sf /usr/share/sddm/themes/sdt/Backgrounds/wallpaper-dark.jpg /usr/share/sddm/themes/sdt/wallpaper.jpg
+		#setup the first look and feel as dark
+		ln -sf ~/.config/waybar/style/style-dark.css ~/.config/waybar/style.css
+		ln -sf ~/.config/wofi/style/style-dark.css ~/.config/wofi/style.css
+		xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
+		xfconf-query -c xsettings -p /Net/IconThemeName -s "Adwaita-dark"
+		gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+		gsettings set org.gnome.desktop.interface icon-theme "Adwaita-dark"
+		ln -sf /usr/share/sddm/themes/sdt/Backgrounds/wallpaper-dark.jpg /usr/share/sddm/themes/sdt/wallpaper.jpg
 	fi
 fi
 
@@ -286,7 +286,6 @@ if [[ $STAR == "Y" || $STAR == "y" ]]; then
 	echo -e "$CNT - copying starship config file to ~/.confg ..."
 	cp extras/starship.toml ~/.config/
 fi
-
 
 # set up fcitx for language inputs
 echo -e "#GTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx\nQT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment &>>$INSTLOG
