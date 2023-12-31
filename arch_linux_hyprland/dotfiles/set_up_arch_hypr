@@ -314,3 +314,6 @@ rm -f ~/.config/tmux/plugins/.gitmodules
 rm -f ~/.config/tmux/plugins/.gitattributes
 tmux source ~/.config/tmux/tmux.conf
 echo -e "ctrl + s and then shift + I"
+
+# github ssh key setup
+~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/scripts/./github_ssh_key
