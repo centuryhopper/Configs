@@ -1,0 +1,10 @@
+#!/bin/bash
+
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+rm -rf ~/.config/nvim/.gitignore
+
+printf "add to options.lua: 
+        local opt = vim.opt
+        opt.wrap = true"
+echo -e "toggle rust, python, omnisharp, and vscode on within :LazyExtras command"
