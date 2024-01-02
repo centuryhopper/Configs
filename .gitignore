@@ -15,3 +15,4 @@ Cargo.lock
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
+arch_linux_hyprland/dotfiles/tmux/plugins/

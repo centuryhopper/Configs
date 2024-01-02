@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# please run this script inside a firefox profile folder
+
+# Get the current directory
+current_dir="$PWD"
+#echo -e "current_dir: $current_dir"
+
+# Define the target directory pattern
+target_dir="$HOME/.mozilla/firefox/(.*)?default-release"
+#echo -e "target_dir: $target_dir"
+
+# Check if the current directory matches the pattern
+if [[ "$current_dir" =~ $target_dir ]]; then
+	echo "The script is inside a default-release directory."
+	dest="$PWD/chrome/"
+	mkdir "$dest"
+	cd "$dest"
+	printf "
+    /* Hides the tab bar */
+
+    #TabsToolbar {
+      visibility: collapse !important;
+
+    }
+  " >>userChrome.css
+	echo -e "restart firefox and the top tab bar should be gone :)"
+else
+	echo "The script is not inside a default-release directory."
+fi
