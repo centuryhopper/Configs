@@ -145,7 +145,7 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
 
 	#Stage 2
 	echo -e "\n$CNT - Stage 2 - Installing additional tools and utilities, this may take a while..."
-	for SOFTWR in polkit-gnome python-requests pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs file-roller btop pacman-contrib adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei wqy-microhei-lite wqy-bitmapfont wqy-zenhei ttf-arphic-ukai ttf-arphic-uming fcitx5-im fcitx5-chinese-addons fcitx5-configtool trash-cli-git brave-bin hyprshot man tree cronie mono dotnet-runtime dotnet-sdk aspnet-runtime rust cmatrix github-cli libreoffice-fresh fish neovim firefox brave-bin discord postman-bin obs-studio xournalpp visual-studio-code-bin virtualbox brave vlc github-desktop-bin update-grub cliphist lf-bin ctpv-git htop ncdu sassc swayosd-git nmap realvnc-vnc-viewer net-tools ifuse usbmuxd libplist libimobiledevice inetutils microsoft-edge-stable-bin dosfstools dragon-drop docker tmux fm6000 hy3-git exa pcmanfm bat openvpn popsicle-bin swayidle swayimg; do
+	for SOFTWR in polkit-gnome python-requests pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs file-roller btop pacman-contrib adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei wqy-microhei-lite wqy-bitmapfont wqy-zenhei ttf-arphic-ukai ttf-arphic-uming fcitx5-im fcitx5-chinese-addons fcitx5-configtool trash-cli-git brave-bin hyprshot man tree cronie mono dotnet-runtime dotnet-sdk aspnet-runtime rust cmatrix github-cli libreoffice-fresh fish neovim firefox brave-bin discord postman-bin obs-studio xournalpp visual-studio-code-bin virtualbox brave vlc github-desktop-bin update-grub cliphist lf-bin ctpv-git htop ncdu sassc swayosd-git nmap realvnc-vnc-viewer net-tools ifuse usbmuxd libplist libimobiledevice inetutils microsoft-edge-stable-bin dosfstools dragon-drop docker tmux fm6000 hy3-git exa pcmanfm bat openvpn popsicle-bin swayidle swayimg less; do
 		#First lets see if the package is there
 		if yay -Qs $SOFTWR >/dev/null; then
 			echo -e "$COK - $SOFTWR is already installed."
@@ -301,21 +301,9 @@ else
 	exit
 fi
 
-mkdir -p ~/Documents/GitHub
-
 # lazyvim install
-git clone https://github.com/LazyVim/starter ~/.config/nvim/
-rm -rf ~/.config/nvim/.git
-rm -rf ~/.config/nvim/.gitignore
 
 #tmux tpm
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/
-rm -rf ~/.config/tmux/plugins/.git/
-rm -f ~/.config/tmux/plugins/.gitignore
-rm -f ~/.config/tmux/plugins/.gitmodules
-rm -f ~/.config/tmux/plugins/.gitattributes
-tmux source ~/.config/tmux/tmux.conf
-echo -e "ctrl + s and then shift + I"
 
 # github ssh key setup
-~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/scripts/./github_ssh_key
+#~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/scripts/./github_ssh_key
