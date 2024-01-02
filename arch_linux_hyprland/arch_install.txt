@@ -69,7 +69,9 @@ installing yay:
     yay -Syu --noconfirm
 
 config files and setup script:
-    go back to /opt/
+    go back to /opt/ ***dont go into /opt/ to to ~/Documents/GitHub/ instead!***
+    mkdir -p ~/Documents/GitHub
+    cd ~/Documents/GitHub
     sudo git clone https://github.com/centuryhopper/Configs.git
     sudo chown -R leo_zhang:leo_zhang dotfiles/
     cd into my dotfiles/
