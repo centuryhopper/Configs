@@ -1,0 +1,8 @@
+
+press windows key and search for "registry editor"
+then under the "HKEY_USERS/.DEFAULT/Control Panel/Keyboard/" folder,
+right click on "InitialKeyboardIndicators" and click "Modify".
+Change the value data to 2147483650.
+
+Restart windows and you should be all set!
+
