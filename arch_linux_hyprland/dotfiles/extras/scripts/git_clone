@@ -1,11 +1,11 @@
 #!/bin/bash
 
 cd ~/Documents/GitHub
-git clone git@github.com:leozhang1/Bots.git
-#git clone git@github.com:leozhang1/Configs.git
-git clone git@github.com:leozhang1/important_docs.git
-git clone git@github.com:leozhang1/Journal.git
-git clone git@github.com:leozhang1/MachineLearning_Practice.git
+git clone git@github.com:centuryhopper/Bots.git
+#git clone git@github.com:centuryhopper/Configs.git
+git clone git@github.com:centuryhopper/important_docs.git
+git clone git@github.com:centuryhopper/Journal.git
+git clone git@github.com:centuryhopper/MachineLearning_Practice.git
 git clone git@github.com:centuryhopper/PasswordManagerDotNet.git
-git clone git@github.com:leozhang1/practice_interview_problems.git
-git clone git@github.com:leozhang1/Tools.git
+git clone git@github.com:centuryhopper/practice_interview_problems.git
+git clone git@github.com:centuryhopper/Tools.git
