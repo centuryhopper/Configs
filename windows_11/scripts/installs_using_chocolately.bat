@@ -23,5 +23,7 @@ choco install sidequest -y
 choco install steam -y
 choco install vlc -y
 choco install neovim -y
+choco install nodejs -y
+choco install mingw -y
 
 pause
