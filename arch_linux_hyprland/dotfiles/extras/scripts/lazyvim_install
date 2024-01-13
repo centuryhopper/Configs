@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# for installing pyright
+yay -S --needed --noconfirm npm
+
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
 rm -rf ~/.config/nvim/.gitignore
@@ -7,4 +10,5 @@ rm -rf ~/.config/nvim/.gitignore
 printf "add to options.lua: 
         local opt = vim.opt
         opt.wrap = true\n"
-echo -e "toggle rust, python, omnisharp, and vscode on within :LazyExtras command"
+echo -e "set checker to false in lazy.lua"
+echo -e "toggle clangd, python, omnisharp, and prettier within :LazyExtras command"
