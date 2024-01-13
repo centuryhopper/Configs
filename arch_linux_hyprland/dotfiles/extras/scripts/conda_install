@@ -1,15 +1,19 @@
 #!/bin/bash
 
+yay -S --noconfirm --needed wget
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 sh Miniconda3-latest-Linux-x86_64.sh
+rm Miniconda3-latest-Linux-x86_64.sh
+
 
 # if using fish shell, set path like so:
 set -gx PATH /path/to/custom/directory/miniconda3/bin $PATH
 
-# make sure we dont open up in the base environment everytime we open up a new terminal
-conda config --set auto_activate_base false
 
 conda create --name web_auto python=3.10
 conda activate web_auto
 #pip install -r /home/leo_zhang/Documents/GitHub/my_linux_configs/python_configs/envs/web_auto/web_auto.txt
 conda deactivate
+
+# make sure we dont open up in the base environment everytime we open up a new terminal
+conda config --set auto_activate_base false
