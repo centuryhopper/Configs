@@ -15,7 +15,9 @@ if [ -t 1 ]; then exec fish; fi
 
 export LANG=zh_CN.UTF-8
 export LANGUAGE=zh_CN:en_US
-
+# should do export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 && mlnet for mlnet to work
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+export PATH=$PATH:~/.dotnet/tools/
 # Change working dir in shell to last dir in lf on exit (adapted from ranger).
 #
 # You need to either copy the content of this file to your shell rc file
