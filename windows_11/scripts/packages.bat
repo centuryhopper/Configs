@@ -25,5 +25,6 @@ choco install vlc -y
 choco install neovim -y
 choco install nodejs -y
 choco install mingw -y
+choco install miniconda3 -y
 
 pause
