@@ -14,7 +14,7 @@
 # wofi: This is an application launcher menu
 # wlogout: This is a logout menu that allows for shutdown, reboot and sleep
 # mako: This is a graphical notification daemon
-# xdg-desktop-portal-hyprland-git: xdg-desktop-portal backend for hyprland
+# xdg-desktop-portal-hyprland: xdg-desktop-portal backend for hyprland
 # swappy: This is a screenshot editor tool
 # grim: This is a screenshot tool it grabs images from a Wayland compositor
 # slurp: This helps with screenshots, it selects a region in a Wayland compositor
@@ -125,7 +125,7 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
 
 	#Stage 1
 	echo -e "\n$CNT - Stage 1 - Installing main components, this may take a while..."
-	for SOFTWR in hyprland-git kitty waybar swww swaylock-effects-git wofi wlogout mako xdg-desktop-portal-hyprland-git swappy grim slurp obs-studio wlrobs linux-zen linux-zen-headers; do
+	for SOFTWR in hyprland-git kitty waybar swww swaylock-effects-git wofi wlogout mako xdg-desktop-portal-hyprland swappy grim slurp obs-studio wlrobs linux-zen linux-zen-headers; do
 		#First lets see if the package is there
 		if yay -Qs $SOFTWR >/dev/null; then
 			echo -e "$COK - $SOFTWR is already installed."
@@ -145,7 +145,7 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
 
 	#Stage 2
 	echo -e "\n$CNT - Stage 2 - Installing additional tools and utilities, this may take a while..."
-	for SOFTWR in polkit-gnome python-requests pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs file-roller btop pacman-contrib adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei wqy-microhei-lite wqy-bitmapfont wqy-zenhei ttf-arphic-ukai ttf-arphic-uming fcitx5-im fcitx5-chinese-addons fcitx5-configtool trash-cli-git brave-bin hyprshot man tree cronie mono dotnet-runtime dotnet-sdk aspnet-runtime rust cmatrix github-cli libreoffice-fresh fish neovim firefox brave-bin discord postman-bin xournalpp visual-studio-code-bin virtualbox brave vlc github-desktop-bin update-grub cliphist lf-bin ctpv-git htop ncdu sassc swayosd-git nmap realvnc-vnc-viewer net-tools ifuse usbmuxd libplist libimobiledevice inetutils microsoft-edge-stable-bin dosfstools dragon-drop docker tmux fm6000 hy3-git exa pcmanfm bat openvpn popsicle-bin swayidle swayimg less feh; do
+	for SOFTWR in polkit-gnome python-requests pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs file-roller btop pacman-contrib adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei wqy-microhei-lite wqy-bitmapfont wqy-zenhei ttf-arphic-ukai ttf-arphic-uming fcitx5-im fcitx5-chinese-addons fcitx5-configtool trash-cli-git brave-bin hyprshot man tree cronie mono dotnet-runtime dotnet-sdk aspnet-runtime rust cmatrix github-cli libreoffice-fresh fish neovim firefox brave-bin discord postman-bin xournalpp visual-studio-code-bin virtualbox brave vlc github-desktop-bin update-grub cliphist lf-bin ctpv-git htop ncdu sassc swayosd-git nmap realvnc-vnc-viewer net-tools ifuse usbmuxd libplist libimobiledevice inetutils microsoft-edge-stable-bin dosfstools dragon-drop docker tmux fm6000 hy3-git exa pcmanfm bat openvpn popsicle-bin swayidle swayimg less feh python-pip npm nodejs-lts-iron openssl-1.1-1.1.1.w-1 dotnet-sdk-3.1-bin; do
 		#First lets see if the package is there
 		if yay -Qs $SOFTWR >/dev/null; then
 			echo -e "$COK - $SOFTWR is already installed."
