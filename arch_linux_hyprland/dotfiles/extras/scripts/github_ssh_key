@@ -26,7 +26,7 @@ ssh_agent_pid=$(echo "$file_contents" | grep -oP '(?<=SSH_AGENT_PID=).*?(?=;)')
 fish_path=$(which fish) # Get the path to the Fish interpreter
 
 if [ -x "$fish_path" ]; then
-    "$fish_path" ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/scripts/set_variables.fish "$ssh_auth_sock" "$ssh_agent_pid"
+    "$fish_path" ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/scripts/helpers/set_variables.fish "$ssh_auth_sock" "$ssh_agent_pid"
 else
     echo "Fish interpreter not found."
 fi
