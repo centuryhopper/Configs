@@ -294,6 +294,14 @@ fi
 # set up fcitx for language inputs
 echo -e "#GTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx\nQT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment &>>$INSTLOG
 
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to install extras tools (y,n) ' USER_RESPONSE
+if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+    echo -e "you said yes"
+    ./extras/scripts/./master 
+else
+    echo -e "you said no"
+fi
+
 ### Script is done ###
 echo -e "$CNT - Script had completed!"
 read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to start Hyprland now? (y,n) ' HYP
@@ -303,9 +311,3 @@ else
 	exit
 fi
 
-# lazyvim install
-
-#tmux tpm
-
-# github ssh key setup
-#~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/scripts/./github_ssh_key
