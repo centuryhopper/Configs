@@ -1,5 +1,5 @@
 # 9 to 5 every day
-#0 9-17 * * * ~/Documents/GitHub/Tools/rust_tools/fetch_nasa_pic/target/release/./fetch_nasa_pic
+#0 9-17 * * * ~/Documents/GitHub/Tools/python_tools/fetch_nasa_pic/./get_daily_pic.py
 
 #0 9-17 * * * ~/Documents/GitHub/Tools/c#_tools/dotnet_news_scraper/bin/Debug/net8.0/./dotnet_news_scraper
 
@@ -12,10 +12,10 @@
 #*/10 * * * * export DISPLAY=:1 && ~/Documents/GitHub/Bots/dotnet_okc_bot/bin/Debug/net8.0/./dotnet_okc_bot
 
 # every day at noon
-0 12 * * * crontab -l > ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron_contents.txt
+0 12 * * * crontab -l > ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron/cron_contents.txt
 
 # keep configs up to date
-*/30 * * * * ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/scripts/./cron_configs
+*/30 * * * * ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron/./cron_configs
 
 
 
