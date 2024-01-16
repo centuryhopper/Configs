@@ -32,6 +32,13 @@ read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to clone your github proj
 if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
     echo -e "you said yes"
     ./git_clone
+    read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to configure secret values into your cloned github projects (y,n) ' USER_RESPONSE
+    if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+        echo -e "you said yes"
+        ~/Documents/GitHub/important_docs/secrets/./github_project_secrets
+    else
+        echo -e "you said no"
+    fi
 else
     echo -e "you said no"
 fi

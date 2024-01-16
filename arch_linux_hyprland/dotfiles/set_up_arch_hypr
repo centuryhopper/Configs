@@ -294,7 +294,7 @@ fi
 # set up fcitx for language inputs
 echo -e "#GTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx\nQT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment &>>$INSTLOG
 
-read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to install extras tools (y,n) ' USER_RESPONSE
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to install extras tools to set up the remaining configs (y,n) ' USER_RESPONSE
 if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
     echo -e "you said yes"
     ./extras/scripts/./master 
