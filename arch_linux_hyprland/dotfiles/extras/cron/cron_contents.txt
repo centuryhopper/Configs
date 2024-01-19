@@ -1,10 +1,11 @@
-# 9 to 5 every day
-0 9-17 * * * ~/Documents/GitHub/Tools/python_tools/fetch_nasa_pic/./get_daily_pic.py
+# every hour daily
+0 * * * * ~/Documents/GitHub/Tools/python_tools/fetch_nasa_pic/./get_daily_pic.py
 
-0 9-17 * * * ~/Documents/GitHub/Tools/c#_tools/dotnet_news_scraper/bin/Debug/net8.0/./dotnet_news_scraper
+0 * * * * ~/Documents/GitHub/Tools/c#_tools/dotnet_news_scraper/bin/Debug/net8.0/./dotnet_news_scraper
 
-0 9-17 * * * ~/Documents/GitHub/Tools/c#_tools/dotnet_amazon_pricetracker/bin/Debug/net8.0/./dotnet_amazon_pricetracker
+0 * * * * ~/Documents/GitHub/Tools/c#_tools/dotnet_amazon_pricetracker/bin/Debug/net8.0/./dotnet_amazon_pricetracker
 
+# every three minutes
 */3 * * * * ~/Documents/GitHub/Bots/dotnet_bot/bin/Debug/net8.0/./dotnet_bot
 
 #*/5 * * * * ~/Documents/GitHub/Bots/dotnet_bmbl_bot/bin/Debug/net8.0/./dotnet_bmbl_bot
