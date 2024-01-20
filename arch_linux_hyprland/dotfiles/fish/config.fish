@@ -16,7 +16,8 @@ if status is-interactive && not set -q TMUX
 end
 
 set -x EDITOR /usr/bin/nvim
-
+set -x PATH ~/.dotnet/tools/ $PATH
+#set -x DOTNET_SYSTEM_GLOBALIZATION_INVARIANT 1
 
 # Fish command history
 function history

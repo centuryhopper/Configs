@@ -2,13 +2,16 @@
 iwctl
 station wlan0 show
 station wlan0 scan
-station wlan0 SpectrumSetup-2D
+station wlan0 connect SpectrumSetup-2D
 *type in wifi password when prompted*
 "quit" out of iwctl
 
 optional:
     pacman-key --init
     pacman-key --populate archlinux
+
+before archinstall, make sure package keyrings are synced, so run this command:
+pacman -Sy archlinux-keyring
 
 archinstall
 lanuage and mirror region pick english and united states
@@ -19,6 +22,8 @@ select no for separate partition for /home
 leave disk encryption alone (default is off)
 
 bootloader (use grub)
+
+leave unified kernel images alone (default is false)
 
 leave swap alone (default is true)
 leave hostname (default is archlinux)
@@ -48,7 +53,7 @@ hit install (this should take several minutes or more)
 
 once done you can unplug the usb installation medium
 
-say no to performing post-installation configuration
+say no to "Would you like to chroot into the newly created installation and perform post-installation configuration?"
 
 reboot the computer
 
@@ -73,8 +78,8 @@ config files and setup script:
     mkdir -p ~/Documents/GitHub
     cd ~/Documents/GitHub
     sudo git clone https://github.com/centuryhopper/Configs.git
-    sudo chown -R leo_zhang:leo_zhang dotfiles/
-    cd into my dotfiles/
+    sudo chown -R leo_zhang:leo_zhang ./Configs/
+    cd ./Configs/dotfiles/
     and run: ./set_up_arch_hypr
 
     say yes to continuing the install
