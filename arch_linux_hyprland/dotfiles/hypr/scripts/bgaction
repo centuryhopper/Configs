@@ -7,7 +7,7 @@ swww query || swww init
 THEMEIS=$(readlink -f ~/.config/waybar/style.css | cut -d '-' -f2)
 
 # Get the randomly selected filename
-wallpaper=$(find ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/Wallpapers/.config/Wallpapers/ -type f | shuf -n 1)
+wallpaper=$(find ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/Wallpapers/ -type f | shuf -n 1)
 
 echo $wallpaper
 

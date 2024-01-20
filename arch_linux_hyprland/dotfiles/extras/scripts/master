@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# run all scripts in this directory
+
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to install conda (y,n) ' USER_RESPONSE
+if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+    echo -e "you said yes"
+    ./conda_install 
+else
+    echo -e "you said no"
+fi
+
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to install droidcam (y,n) ' USER_RESPONSE
+if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+    echo -e "you said yes"
+    ./droidcam_install 
+else
+    echo -e "you said no"
+fi
+
+echo -e "you must enable github ssh keys for this next one to work"
+
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to add an ssh key for github repo cloning (y,n) ' USER_RESPONSE
+if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+    echo -e "you said yes"
+    ./github_ssh_key
+else
+    echo -e "you said no"
+fi
+
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to clone your github projects into you designated folder. You should select no if you did not add an ssh key from earlier (y,n) ' USER_RESPONSE
+if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+    echo -e "you said yes"
+    ./git_clone
+    read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to configure secret values into your cloned github projects (y,n) ' USER_RESPONSE
+    if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+        echo -e "you said yes"
+        ~/Documents/GitHub/important_docs/secrets/./github_project_secrets
+    else
+        echo -e "you said no"
+    fi
+else
+    echo -e "you said no"
+fi
+
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to install lazy vim (y,n) ' USER_RESPONSE
+if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+    echo -e "you said yes"
+    ./lazyvim_install
+else
+    echo -e "you said no"
+fi
+
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to install tmux tpm (y,n) ' USER_RESPONSE
+if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+    echo -e "you said yes"
+    ./tmux_tpm_install
+else
+    echo -e "you said no"
+fi
+
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to configure firefox (y,n) ' USER_RESPONSE
+if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+    echo -e "you said yes"
+    ./firefox_config
+else
+    echo -e "you said no"
+fi
+
+
+
+

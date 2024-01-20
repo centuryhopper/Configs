@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # please run this script inside a firefox profile folder
+# go to firefox about:config and search for "toolkit.legacyUserProfileCustomizations.stylesheets" and set it to true
 
 # Get the current directory
 current_dir="$PWD"
