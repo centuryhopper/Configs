@@ -27,5 +27,6 @@ choco install nodejs -y
 choco install mingw -y
 choco install miniconda3 -y
 choco install -y docker-desktop --ia --quiet --accept-license
+choco install -y nmap
 
 pause
