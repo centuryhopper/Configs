@@ -1,0 +1,9 @@
+
+# find raspberry pi address
+nmap -sn 192.168.1.0/24
+
+nmap -sn 192.168.1.0/24 | findstr /i "raspberry"
+
+
+ssh <username>@<raspberry-pi-address> (in my case, ssh leozhang1@192.168.1.251)
+
