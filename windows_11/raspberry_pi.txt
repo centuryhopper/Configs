@@ -7,3 +7,10 @@ nmap -sn 192.168.1.0/24 | findstr /i "raspberry"
 
 ssh <username>@<raspberry-pi-address> (in my case, ssh leozhang1@192.168.1.251)
 
+
+# example of how to copy one file from local machine to raspberry pi
+scp $home/Downloads/file.txt leozhang1@192.168.1.251:~/Documents/
+
+# example of how to copy one file from pi to local machine
+scp leozhang1@192.168.1.251:~/Documents/file.txt ~/Downloads/
+

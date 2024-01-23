@@ -1,0 +1,11 @@
+# build a docker container from a docker-compose.yml file (see fetch_nasa_pic for an example)
+docker-compose build
+
+# start the container in detached mode (make container run independently from host machine state)
+docker-compose up -d
+
+# shut down the container
+docker-compose down
+
+# show all containers, both active and inactive ones
+docker-compose ps -a
