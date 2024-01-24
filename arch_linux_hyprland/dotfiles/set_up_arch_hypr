@@ -146,8 +146,8 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
 
 	#Stage 2
 	echo -e "\n$CNT - Stage 2 - Installing additional tools and utilities, this may take a while..."
-	# trash-cli-git openssl-1.1-1.1.1.w-1
-	for SOFTWR in polkit-gnome python-requests pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs file-roller btop pacman-contrib adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei wqy-microhei-lite wqy-bitmapfont wqy-zenhei ttf-arphic-ukai ttf-arphic-uming fcitx5-im fcitx5-chinese-addons fcitx5-configtool brave-bin hyprshot man tree cronie mono dotnet-runtime dotnet-sdk aspnet-runtime rust cmatrix github-cli libreoffice-fresh fish neovim firefox brave-bin discord postman-bin xournalpp visual-studio-code-bin virtualbox brave vlc github-desktop-bin update-grub cliphist lf-bin ctpv-git htop ncdu sassc swayosd-git nmap realvnc-vnc-viewer net-tools ifuse usbmuxd libplist libimobiledevice inetutils microsoft-edge-stable-bin google-chrome dosfstools dragon-drop docker tmux fm6000 hy3-git exa thunar bat openvpn popsicle-bin swayidle swayimg less feh python-pip npm nodejs-lts-iron dotnet-sdk-3.1-bin; do
+	# openssl-1.1-1.1.1.w-1
+	for SOFTWR in trash-cli polkit-gnome python-requests pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs file-roller btop pacman-contrib adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei wqy-microhei-lite wqy-bitmapfont wqy-zenhei ttf-arphic-ukai ttf-arphic-uming fcitx5-im fcitx5-chinese-addons fcitx5-configtool brave-bin hyprshot man tree cronie mono dotnet-runtime dotnet-sdk aspnet-runtime rust cmatrix github-cli libreoffice-fresh fish neovim firefox brave-bin discord postman-bin xournalpp visual-studio-code-bin virtualbox brave vlc github-desktop-bin update-grub cliphist lf-bin ctpv-git htop ncdu sassc swayosd-git nmap realvnc-vnc-viewer net-tools ifuse usbmuxd libplist libimobiledevice inetutils microsoft-edge-stable-bin google-chrome dosfstools dragon-drop docker tmux fm6000 hy3-git exa thunar bat openvpn popsicle-bin swayidle swayimg less feh python-pip npm nodejs-lts-iron dotnet-sdk-3.1-bin; do
 		#First lets see if the package is there
 		if yay -Qs $SOFTWR >/dev/null; then
 			echo -e "$COK - $SOFTWR is already installed."
@@ -242,7 +242,7 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 		done
 
 		echo -e "copying cron_contents to the crontab..."
-		crontab ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron_contents.txt
+		crontab ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron/cron_contents.txt
 
 		# Set some files as executable
 		echo -e "$CNT - Setting some file as executable."
@@ -296,10 +296,10 @@ echo -e "#GTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx\nQT_QPA_
 
 read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to install extras tools to set up the remaining configs (y,n) ' USER_RESPONSE
 if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
-    echo -e "you said yes"
-    ./extras/scripts/./master 
+	echo -e "you said yes"
+	./extras/scripts/./master
 else
-    echo -e "you said no"
+	echo -e "you said no"
 fi
 
 ### Script is done ###
@@ -310,4 +310,3 @@ if [[ $HYP == "Y" || $HYP == "y" ]]; then
 else
 	exit
 fi
-
