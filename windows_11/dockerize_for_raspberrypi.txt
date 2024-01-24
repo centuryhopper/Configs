@@ -1,0 +1,19 @@
+
+on host machine (e.g. linux or windows):
+  go to a directory with a dockerfile and type:
+    docker buildx build -t leozhang1/automation:[image_name] --platform linux/arm64/v8 .
+
+
+    GENERIC VERSION
+      docker buildx build -t [username]/[repository_name]:[image_name] --platform linux/arm64/v8 .
+
+
+    docker push leozhang1/automation:[image_name]
+
+
+on raspberry pi:
+
+docker pull [username]/[repository_name]:[image_name]
+docker run leozhang1/[repository_name]:[image_name]
+
+sudo docker cp 5aefb0c47570:app/nasa_pic_collection/ .
