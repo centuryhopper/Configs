@@ -10,3 +10,7 @@ scp ~/Downloads/file.txt leozhang1@192.168.1.251:~/Documents/
 # example of how to copy one file from pi to local machine
 scp leozhang1@192.168.1.251:~/Documents/file.txt ~/Downloads/
 
+# generic example
+scp pi@192.168.1.100:/home/pi/myfile.txt /path/on/host
+
+
