@@ -7,13 +7,14 @@ swww query || swww init
 THEMEIS=$(readlink -f ~/.config/waybar/style.css | cut -d '-' -f2)
 
 # Get the randomly selected filename
-wallpaper=$(find ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/Wallpapers/ -type f | shuf -n 1)
+#wallpaper=$(find ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/Wallpapers/ -type f | shuf -n 1)
+wallpaper=~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/Wallpapers/wallpaper-dark.jpg
 
 echo $wallpaper
 
 #show the correct wallpapper based on the theme
 if [ $THEMEIS == "dark.css" ]; then
-    swww img $wallpaper --resize fit
+	swww img $wallpaper
 else
-    swww img ~/.config/hypr/Wallpapers/Wallpapers/wallpaper.jpg --resize fit
+	swww img ~/.config/hypr/Wallpapers/Wallpapers/wallpaper.jpg --resize fit
 fi
