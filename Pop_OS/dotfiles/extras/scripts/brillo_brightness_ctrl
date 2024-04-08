@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd ~
+git clone https://github.com/CameronNemo/brillo.git
+cd ~/brillo/
+make
+# .setid makes it available to all users
+sudo make install.setid

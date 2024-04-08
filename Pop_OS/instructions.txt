@@ -1,0 +1,3 @@
+
+clone configs repo
+install exa, bat, fish, vim, lf, tmux, starship, and add github ssh key to system

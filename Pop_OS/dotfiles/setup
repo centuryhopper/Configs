@@ -1,0 +1,84 @@
+
+# downloads
+cd ~/Downloads
+
+# online deb files to retrieve
+#wget -O zoom.deb "https://zoom.us/client/latest/zoom_amd64.deb"
+wget -O chrome.deb "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb"
+wget -O vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+#wget -O iriun.deb 'https://iriun.gitlab.io/iriunwebcam-2.7.deb'
+#wget -O github_desktop.deb "https://github.com/shiftkey/desktop/releases/download/release-2.6.3-linux1/GitHubDesktop-linux-2.6.3-linux1.deb"
+
+# xppentablet
+# https://www.xp-pen.com/download-55.html
+wget -O xp.deb "xp-pen.com/download/file/id/1949/pid/55/ext/deb.html"
+
+
+# github desktop
+sudo apt install wget apt-transport-https gnupg2 software-properties-common
+
+wget https://github.com/shiftkey/desktop/releases/download/release-3.1.7-linux1/GitHubDesktop-linux-3.1.7-linux1.deb
+
+
+# install all the deb files retrieved from the internet
+sudo apt install -f ./*.deb
+
+
+
+# flatpak install:
+#
+#
+#
+
+
+# flathub packages:
+flatpak install flathub com.brave.Browser
+github desktop
+raspberry pi imager
+edge
+flatpak install flathub com.github.xournalpp.xournalpp
+flatpak install flathub org.gnome.Cheese
+flatpak install flathub com.obsproject.Studio
+flatpak install flathub com.getpostman.Postman
+
+
+
+sudo apt install -y trash-cli ncdu exa bat vim cmake kitty htop
+
+# rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# oh-my-fish
+# ...
+
+# neovim version manager
+cargo install --git https://github.com/MordechaiHadad/bob.git
+
+# neovim build from source
+# build prereqs
+sudo apt-get install ninja-build gettext cmake unzip curl build-essential -y
+
+# build neovim from source
+git clone https://github.com/neovim/neovim /tmp/neovim/
+cd /tmp/neovim/
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+git checkout stable
+sudo make install
+
+
+# cptv from source (previewer for lf file manager)
+sudo apt install -y libssl-dev libmagic-dev file openssl imagemagick coreutils
+
+git clone https://github.com/NikitaIvanovV/ctpv /tmp/cptv && cd /tmp/ctpv && make && sudo make install
+
+
+# dotnet sdk and runtime
+sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-8.0
+
+sudo apt-get update && \
+  sudo apt-get install -y aspnetcore-runtime-8.0
+
+
+echo -e "To swap caps lock and esc, install gnome tweaks from pop shop, go to keyboard & mouse and find it in additional options"
