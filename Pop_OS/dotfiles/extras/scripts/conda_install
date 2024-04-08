@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # python virtual environments configurations
-wget -O /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-cd /tmp/
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash miniconda.sh -bup ~/miniconda3
+rm -f miniconda.sh
 
 # if using fish shell, set path like so:
 #set -gx PATH /path/to/custom/directory/miniconda3/bin $PATH
