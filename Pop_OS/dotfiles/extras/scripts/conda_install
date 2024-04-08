@@ -11,6 +11,7 @@ set -gx PATH ~/miniconda3/bin $PATH
 
 conda create --name web_auto python=3.10
 conda activate web_auto
+pip install python-dotenv pygithub
 #pip install -r /home/leo_zhang/Documents/GitHub/my_linux_configs/python_configs/envs/web_auto/web_auto.txt
 conda deactivate
 
