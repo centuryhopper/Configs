@@ -1,14 +1,13 @@
 #!/bin/bash
 
-yay -S --noconfirm --needed wget
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-sh Miniconda3-latest-Linux-x86_64.sh
-rm Miniconda3-latest-Linux-x86_64.sh
-
+# python virtual environments configurations
+wget -O /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+cd /tmp/
+bash miniconda.sh -bup ~/miniconda3
 
 # if using fish shell, set path like so:
-set -gx PATH /path/to/custom/directory/miniconda3/bin $PATH
-
+#set -gx PATH /path/to/custom/directory/miniconda3/bin $PATH
+set -gx PATH ~/miniconda3/bin $PATH
 
 conda create --name web_auto python=3.10
 conda activate web_auto
