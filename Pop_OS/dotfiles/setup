@@ -20,37 +20,42 @@ sudo apt install wget apt-transport-https gnupg2 software-properties-common
 
 wget https://github.com/shiftkey/desktop/releases/download/release-3.1.7-linux1/GitHubDesktop-linux-3.1.7-linux1.deb
 
+wget -O edge.deb "https://go.microsoft.com/fwlink?linkid=2149051&brand=M102"
 
 # install all the deb files retrieved from the internet
 sudo apt install -f ./*.deb
 
-
+# lf
+sudo apt install -y golang && env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 
 # flatpak install:
-#
-#
-#
+sudo apt install flatpak
+sudo add-apt-repository ppa:flatpak/stable
+sudo apt update
+sudo apt install flatpak
 
+# add flathub repo
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # flathub packages:
-flatpak install flathub com.brave.Browser
-github desktop
-raspberry pi imager
-edge
-flatpak install flathub com.github.xournalpp.xournalpp
-flatpak install flathub org.gnome.Cheese
-flatpak install flathub com.obsproject.Studio
-flatpak install flathub com.getpostman.Postman
+flatpak install flathub com.brave.Browser --system -y
+flatpak install flathub com.github.xournalpp.xournalpp --system -y
+flatpak install flathub com.obsproject.Studio --system -y
+flatpak install flathub com.getpostman.Postman --system -y
 
+# more tools
+sudo apt install -y ncdu exa bat cmake kitty htop rpi-imager cheese tree neofetch cmatrix fish
 
-
-sudo apt install -y trash-cli ncdu exa bat vim cmake kitty htop
+# for pop os built in video player
+sudo apt install -y gstreamer1.0-libav ffmpeg
 
 # rustup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # oh-my-fish
-# ...
+# additional tools set up not in the arch repo:
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+omf install bang-bang
 
 # neovim version manager
 cargo install --git https://github.com/MordechaiHadad/bob.git
@@ -82,3 +87,33 @@ sudo apt-get update && \
 
 
 echo -e "To swap caps lock and esc, install gnome tweaks from pop shop, go to keyboard & mouse and find it in additional options"
+
+
+# nodejs and python
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - && \
+sudo apt-get install -y nodejs
+sudo apt install python3-pip
+
+# python virtual environments configurations
+wget -O /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+cd /tmp/
+bash miniconda.sh -bup ~/miniconda3
+
+# dont let conda base activate by default
+conda config --set auto_activate_base false
+
+#conda create --name web_auto python=3.9
+#conda activate web_auto
+#pip install -r /home/leo_zhang/Documents/GitHub/my_linux_configs/python_configs/envs/web_auto/web_auto.txt
+#conda deactivate
+#conda create --name time_series python=3.8
+#conda activate time_series
+#pip install -r /home/leo_zhang/Documents/GitHub/my_linux_configs/python_configs/envs/time_series/time_series.txt
+#conda deactivate
+
+# to copy terminal command output to clipboard on xorg:
+# echo "[your_linux_command]" | xsel -b
+
+# bleeding edge trash-cli useful for tools such as lf
+sudo pip install git+https://github.com/andreafrancia/trash-cli
+
