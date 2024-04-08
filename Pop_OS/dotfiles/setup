@@ -113,23 +113,6 @@ echo -e "To swap caps lock and esc, install gnome tweaks from pop shop, go to ke
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - && \
 sudo apt install -y nodejs python3-pip
 
-# python virtual environments configurations
-wget -O /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-cd /tmp/
-bash miniconda.sh -bup ~/miniconda3
-
-# dont let conda base activate by default
-conda config --set auto_activate_base false
-
-#conda create --name web_auto python=3.9
-#conda activate web_auto
-#pip install -r /home/leo_zhang/Documents/GitHub/my_linux_configs/python_configs/envs/web_auto/web_auto.txt
-#conda deactivate
-#conda create --name time_series python=3.8
-#conda activate time_series
-#pip install -r /home/leo_zhang/Documents/GitHub/my_linux_configs/python_configs/envs/time_series/time_series.txt
-#conda deactivate
-
 # to copy terminal command output to clipboard on xorg:
 # echo "[your_linux_command]" | xsel -b
 
