@@ -1,3 +1,20 @@
+#!/bin/bash
+
+
+
+
+
+# set some colors
+CNT="[\e[1;36mNOTE\e[0m]"
+COK="[\e[1;32mOK\e[0m]"
+CER="[\e[1;31mERROR\e[0m]"
+CAT="[\e[1;37mATTENTION\e[0m]"
+CWR="[\e[1;35mWARNING\e[0m]"
+CAC="[\e[1;33mACTION\e[0m]"
+INSTLOG="install.log"
+
+#clear the screen
+clear
 
 # downloads
 cd ~/Downloads
@@ -44,13 +61,16 @@ flatpak install flathub com.obsproject.Studio --system -y
 flatpak install flathub com.getpostman.Postman --system -y
 
 # more tools
-sudo apt install -y ncdu exa bat cmake kitty htop rpi-imager cheese tree neofetch cmatrix fish
+sudo apt install -y ncdu exa bat cmake kitty htop rpi-imager cheese tree neofetch cmatrix fish xsel
 
 # for pop os built in video player
 sudo apt install -y gstreamer1.0-libav ffmpeg
 
 # rustup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# starship
+curl -sS https://starship.rs/install.sh | sh
 
 # oh-my-fish
 # additional tools set up not in the arch repo:
@@ -91,8 +111,7 @@ echo -e "To swap caps lock and esc, install gnome tweaks from pop shop, go to ke
 
 # nodejs and python
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - && \
-sudo apt-get install -y nodejs
-sudo apt install python3-pip
+sudo apt install -y nodejs python3-pip
 
 # python virtual environments configurations
 wget -O /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -117,3 +136,57 @@ conda config --set auto_activate_base false
 # bleeding edge trash-cli useful for tools such as lf
 sudo pip install git+https://github.com/andreafrancia/trash-cli
 
+
+### Copy Config Files ###
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy config files? (y,n) ' CFG
+if [[ $CFG == "Y" || $CFG == "y" ]]; then
+	echo -e "$CNT - Copying config files..."
+	for DIR in kitty tmux fish lf Wallpapers; do
+		DIRPATH=~/.config/$DIR
+		if [ -d "$DIRPATH" ]; then
+			echo -e "$CAT - Config for $DIR located, backing up."
+			mv $DIRPATH $DIRPATH-back &>>$INSTLOG
+			echo -e "$COK - Backed up $DIR to $DIRPATH-back."
+		fi
+		echo -e "$CNT - Copying $DIR config to $DIRPATH."
+		cp -R $DIR ~/.config/ &>>$INSTLOG
+	done
+
+	read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy files to home directory? (y,n) ' CFG
+	if [[ $CFG == "Y" || $CFG == "y" ]]; then
+		echo -e "$CNT - Copying config files..."
+		for DIR in .bashrc; do
+			DIRPATH=~/$DIR
+			if [ -d "$DIRPATH" ]; then
+				echo -e "$CAT - Config for $DIR located, backing up."
+				mv $DIRPATH $DIRPATH-back &>>$INSTLOG
+				echo -e "$COK - Backed up $DIR to $DIRPATH-back."
+			fi
+			echo -e "$CNT - Copying $DIR config to $DIRPATH."
+			cp -R $DIR ~ &>>$INSTLOG
+		done
+
+		echo -e "copying cron_contents to the crontab..."
+		crontab ~/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/cron/cron_contents.txt
+
+    ### Install the starship shell ###
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to activate the starship shell? (y,n) ' STAR
+if [[ $STAR == "Y" || $STAR == "y" ]]; then
+	# install the starship shell
+	echo -e "$CNT - Hansen Crusher, Engage!"
+	echo -e "$CNT - Updating .bashrc..."
+	#echo -e '\neval "$(starship init bash)"' >>~/.bashrc
+	echo -e "$CNT - copying starship config file to ~/.confg ..."
+	cp ./extras/starship.toml ~/.config/
+fi
+
+    read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to install extras tools to set up the remaining configs (y,n) ' USER_RESPONSE
+if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+	echo -e "you said yes"
+	./extras/scripts/./master
+else
+	echo -e "you said no"
+fi
+
+### Script is done ###
+echo -e "$CNT - Script had completed!"
