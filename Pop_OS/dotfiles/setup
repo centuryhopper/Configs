@@ -76,6 +76,7 @@ curl -sS https://starship.rs/install.sh | sh
 # additional tools set up not in the arch repo:
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 omf install bang-bang
+omf install https://github.com/Alaz-Oz/fish-insulter
 
 # neovim version manager
 cargo install --git https://github.com/MordechaiHadad/bob.git
