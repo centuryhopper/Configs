@@ -3,13 +3,31 @@ if status is-interactive
     starship init fish | source
 end
 
+set -gx DOTNET_ROOT /usr/bin/dotnet
+
+set -gx DOTNET_ROOT /home/leo_zhang/.dotnet
+set -gx PATH $DOTNET_ROOT $PATH $DOTNET_ROOT/tools
+
+
+set PATH $PATH ~/flutter_development/flutter/bin
+
+
+set -gx JAVA_HOME /opt/java/jdk-17.0.12+7/
+set -gx PATH $JAVA_HOME/bin $PATH
+
+set -gx PATH $PATH ~/android-sdk/platform-tools
+
+set -gx ANDROID_HOME ~/android-sdk
+set -gx PATH $PATH $ANDROID_HOME/platform-tools
+set -gx PATH $PATH ~/android-sdk/cmdline-tools/latest/bin
+
+set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/
 
 ## Run fastfetch if session is interactive
 #if status --is-interactive && type -q fastfetch
 #    fastfetch
 #end
 
-fm6000 -c red -dog -o Arch -n -m 8 -g 12 -l 40
 
 if status is-interactive && not set -q TMUX
     exec tmux
@@ -17,6 +35,8 @@ end
 
 set -x EDITOR /usr/bin/nvim
 set -x PATH ~/.dotnet/tools/ $PATH
+set -x PATH ~/.local/bin/ $PATH
+set -x PATH $(go env GOPATH)/bin/ $PATH
 #set -x DOTNET_SYSTEM_GLOBALIZATION_INVARIANT 1
 
 # Fish command history
@@ -30,6 +50,8 @@ end
 
 fish_add_path -g "/home/leo_zhang/.local/bin/"
 
+
+fm6000 -c red -dog -o Pop!_OS -n -m 8 -g 12 -l 40
 
 ## Useful aliases
 
@@ -47,6 +69,7 @@ alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
 # Recent installed packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
+alias bat='batcat'
 
 # Replace some more things with better alternatives
 alias cat='bat --style header --style snip --style changes --style header'

@@ -34,7 +34,9 @@ This should show you some result with iPhone and Apple in it. Something like thi
 
 Step 7: When everything is set, it’s time to mount the iPhone. Use the command below:
 
-ifuse ~/iPhone
+sudo -i
+# cd into your home dir, in my case: cd /home/leo_zhang/
+# then type ifuse ~/iPhone
 
 
 

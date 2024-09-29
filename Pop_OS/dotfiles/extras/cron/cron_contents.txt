@@ -1,25 +1,3 @@
-# every hour daily
-#0 * * * * ~/Documents/GitHub/Tools/python_tools/fetch_nasa_pic/./get_daily_pic.py
-
-#0 * * * * ~/Documents/GitHub/Tools/c#_tools/dotnet_news_scraper/bin/Debug/net8.0/./dotnet_news_scraper
-
-#0 * * * * ~/Documents/GitHub/Tools/c#_tools/dotnet_amazon_pricetracker/bin/Debug/net8.0/./dotnet_amazon_pricetracker
-
-# every three minutes
-#*/3 * * * * ~/Documents/GitHub/Bots/dotnet_bot/bin/Debug/net8.0/./dotnet_bot
-
-#*/5 * * * * ~/Documents/GitHub/Bots/dotnet_bmbl_bot/bin/Debug/net8.0/./dotnet_bmbl_bot
-
-#*/10 * * * * export DISPLAY=:1 && ~/Documents/GitHub/Bots/dotnet_okc_bot/bin/Debug/net8.0/./dotnet_okc_bot
-
-# every day at noon
-0 12 * * * crontab -l > ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron/cron_contents.txt
-
-# keep configs up to date
-*/30 * * * * ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/cron/./cron_configs
-
-
-
 # Edit this file to introduce tasks to be run by cron.
 # 
 # Each task to run has to be defined through a single line
@@ -43,19 +21,19 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-
-# ┌───────────── minute (0 - 59)
-# │ ┌───────────── hour (0 - 23)
-# │ │ ┌───────────── day of month (1 - 31)
-# │ │ │ ┌───────────── month (1 - 12)
-# │ │ │ │ ┌───────────── day of week (0 - 6) (Sunday to Saturday;
-# │ │ │ │ │                                       7 is also Sunday on some systems)
-# │ │ │ │ │
-# │ │ │ │ │
-# * * * * * [insert command here] 
-# 0 10-22/12 * * *
+#* * * * * /home/leo_zhang/miniconda3/envs/web_auto/bin/python /home/leo_zhang/Documents/GitHub/Tools/python_tools/scrapers/PeopleFirstCareers.py
 
 
+* * * * * /home/leo_zhang/.dotnet/dotnet /home/leo_zhang/Documents/GitHub/Bots/dotnet_bot/test/dotnet_bot.dll > /tmp/dotnet_bot.log 2>&1
+
+
+*/5 * * * * /home/leo_zhang/miniconda3/envs/web_auto/bin/python /home/leo_zhang/Documents/GitHub/Tools/python_tools/utils/delete_gmails.py > /tmp/delete_gmails.log 2>&1
+
+# every day at noon
+0 12 * * * crontab -l > ~/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/cron/cron_contents.txt > /tmp/cron_contents_copying.log 2>&1
+
+# keep configs up to date
+*/30 * * * * ~/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/cron/./cron_configs > /tmp/cron_config_copying.log 2>&1
 
 
 

@@ -1,0 +1,23 @@
+Android components:
+	- Java SDK: installed version '17.0.12'
+ 
+	Android SDK recommended required components:
+	- platforms/android-34: installed version '3'
+	- build-tools/34.0.0: installed version '34.0.0'
+	- platform-tools: installed version '35.0.2'
+	- cmdline-tools/11.0: installed version '26.1.1'
+ 
+	Android SDK recommended optional components:
+	- emulator: installed version '35.1.20'
+	- system-images/android-34/google_apis/x86_64: installed version '14'
+
+
+.Net Maui needs this ^^^ to work
+
+
+Also need these in the maui .csproj (for my own case):
+<PropertyGroup>
+		<EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+		<AndroidSdkDirectory>/home/leo_zhang/android-sdk</AndroidSdkDirectory>
+		<TargetFrameworks>net8.0-android</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>

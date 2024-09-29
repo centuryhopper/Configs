@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Set the base path
+base_path="$HOME/Documents/GitHub/Journal"
+
+# Get the current year, month, and day
+year=$(date +"%Y")
+month=$(date +"%m")
+day=$(date +"%d")
+
+# Create the year and month folders if they don't exist
+mkdir -p "$base_path/$year/$month"
+
+# Define the file name for the day
+file_path="$base_path/$year/$month/$day.md"
+
+# Create the .md file for the current day if it doesn't exist
+if [ ! -f "$file_path" ]; then
+	touch "$file_path"
+	echo "Created $file_path"
+else
+	echo "$file_path already exists"
+fi
+
+nvim $file_path
