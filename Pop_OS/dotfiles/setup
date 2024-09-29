@@ -63,8 +63,17 @@ flatpak install flathub com.getpostman.Postman --system -y
 # more tools
 sudo apt install -y ncdu exa bat cmake kitty htop rpi-imager cheese tree neofetch cmatrix fish xsel
 
+# iphone transfer Files
+sudo apt install ifuse
+
+# 7zip
+sudo apt install p7zip-full
+
 # for pop os built in video player
 sudo apt install -y gstreamer1.0-libav ffmpeg
+
+# postgresql
+sudo apt install -y postgresql
 
 # rustup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -105,6 +114,12 @@ sudo apt-get update && \
 
 sudo apt-get update && \
   sudo apt-get install -y aspnetcore-runtime-8.0
+
+#wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+#chmod +x ./dotnet-install.sh
+#./dotnet-install.sh --version latest
+#./dotnet-install.sh --version latest --runtime aspnetcore
+#./dotnet-install.sh --channel 8.0
 
 
 echo -e "To swap caps lock and esc, install gnome tweaks from pop shop, go to keyboard & mouse and find it in additional options"
@@ -168,6 +183,14 @@ fi
 if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
 	echo -e "you said yes"
 	./extras/scripts/./master
+else
+	echo -e "you said no"
+fi
+
+read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to replace the default emulator with a custom one? (y,n) ' USER_RESPONSE
+if [[ $USER_RESPONSE == "Y" || $USER_RESPONSE == "y" ]]; then
+	echo -e "you said yes"
+  sudo update-alternatives --config x-terminal-emulator
 else
 	echo -e "you said no"
 fi

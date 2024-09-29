@@ -1,33 +1,21 @@
 #!/bin/bash
 
 # store in public repo
-cp -r ~/.config/fish/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/fish/
+cp -r /home/leo_zhang/.config/fish/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/fish/
 
-cp -r ~/.config/hypr/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/hypr/
+cp -r /home/leo_zhang/.config/lf/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/lf/
 
-cp -r ~/.config/lf/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/lf/
-
-cp -r ~/.config/kitty/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/kitty/
-
-cp -r ~/.config/mako/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/mako/
+cp -r /home/leo_zhang/.config/kitty/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/kitty/
 
 # should pull from github for most up to date version
-cp -r ~/.config/nvim/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/nvim/
+cp -r /home/leo_zhang/.config/nvim/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/nvim/
 
-cp -r ~/.config/shaders/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/shaders/
+cp -r /home/leo_zhang/.config/tmux/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/tmux/
 
-cp -r ~/.config/tmux/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/tmux/
-
-cp -r ~/.config/waybar/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/waybar/
-
-cp -r ~/.config/wlogout/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/wlogout/
-
-cp -r ~/.config/wofi/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/wofi/
-
-cp -r ~/.config/Wallpapers/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/Wallpapers/
+#cp -r /home/leo_zhang/.config/Wallpapers/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/Wallpapers/
 
 # bashrc
-cp ~/.bashrc ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/.bashrc
+cp /home/leo_zhang/.bashrc ~/Documents/GitHub/Configs/Pop_OS/dotfiles/.bashrc
 
 # starship
-cp ~/.config/starship.toml ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/starship.toml
+#cp /home/leo_zhang/.config/starship.toml ~/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/starship.toml

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sudo apt-get update -y && sudo apt-get upgrade -y
+sudo apt-get install -y curl git unzip xz-utils zip libglu1-mesa
+
+wget "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.3-stable.tar.xz"
+
+mkdir -p ~/flutter_development
+tar -xvf flutter_linux_3.24.3-stable.tar.xz -C ~/flutter_development
+
+rm -f flutter_linux_3.24.3-stable.tar.xz
