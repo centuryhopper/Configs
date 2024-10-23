@@ -11,19 +11,25 @@ if [ -z "$2" ]; then
 	exit 1
 fi
 
+if [ -z "$3" ]; then
+	echo "Error: No argument provided. Please pass the number of iterations you want to run."
+	exit 1
+fi
+
 # Set the argument to a variable
-arg=$1
-arg2=$2
+img_path=$1
+pattern=$2
+iterations=$3
 
 # Run the commands twice
-for i in {1..2}; do
+for ((i = 1; i <= $iterations; i++)); do
 	echo "Running iteration $i..."
 
 	# Run the Fawkes image protection command
-	fawkes_image_protection -m high -d "$arg"
+	fawkes_image_protection -m high -d "$img_path"
 
 	# Run the filename replacement script
-	filename_replace.py "$arg" "$arg2"
+	filename_replace.py "$img_path" "$pattern"
 
 	echo "Iteration $i completed."
 done
