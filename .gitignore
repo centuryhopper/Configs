@@ -17,3 +17,4 @@ Cargo.lock
 *.pdb
 arch_linux_hyprland/dotfiles/tmux/plugins/*
 arch_linux_hyprland/dotfiles/nvim/*
+Pop_OS/dotfiles/extras/scripts/fawkes_image_protection
