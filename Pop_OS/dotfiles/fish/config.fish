@@ -23,6 +23,8 @@ set -gx PATH $PATH ~/android-sdk/cmdline-tools/latest/bin
 
 set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/
 
+set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Tools/python_tools/utils/
+
 ## Run fastfetch if session is interactive
 #if status --is-interactive && type -q fastfetch
 #    fastfetch

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Check if an argument was passed
+if [ -z "$1" ]; then
+	echo "Error: No argument provided. Please pass a directory path."
+	exit 1
+fi
+
+if [ -z "$2" ]; then
+	echo "Error: No argument provided. Please pass a pattern argument."
+	exit 1
+fi
+
+# Set the argument to a variable
+arg=$1
+arg2=$2
+
+# Run the commands twice
+for i in {1..2}; do
+	echo "Running iteration $i..."
+
+	# Run the Fawkes image protection command
+	fawkes_image_protection -m high -d "$arg"
+
+	# Run the filename replacement script
+	filename_replace.py "$arg" "$arg2"
+
+	echo "Iteration $i completed."
+done
+
+echo "All iterations completed."
