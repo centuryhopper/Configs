@@ -1,0 +1,22 @@
+quickconnect id:scp -P 2299 path/to/file leo_admin@192.168.1.188:/volume1/Drive_A
+  web: https://quickconnect.to/leozhang1
+  mobile: leozhang1
+
+url: https://192-168-1-188.leozhang1.direct.quickconnect.to:5001
+
+
+ssh command:
+  ssh leo_admin@192.168.1.188 -p2299
+
+# 2299 is the port number I configured
+
+# secure copying over to the network drive (non-standard ssh):
+  scp -P 2299 path/to/file leo_admin@192.168.1.188:/volume1/Drive_A
+
+
+# to copy certain files over to local directory example:
+
+  # here we're assuming the test folder exists in the current directory 
+  # and we're copying over all pngs in that location over to it
+  scp -P 2299 leo_admin@192.168.1.187:/volume1/Drive_A/memories_backup/'*.png' ./test/
+
