@@ -1,0 +1,7 @@
+
+To find all instances of a file within the current directory (recursive by default):
+# this command excludes search in bin folders
+  find . \
+  -path "*/bin/*" -prune \
+  -o -type f -iname "*.env" -print
+
