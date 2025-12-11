@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# store in public repo
+cp -r ~/.config/fish/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/fish/
+
+cp -r ~/.config/hypr/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/hypr/
+
+cp -r ~/.config/lf/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/lf/
+
+cp -r ~/.config/kitty/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/kitty/
+
+cp -r ~/.config/mako/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/mako/
+
+# should pull from github for most up to date version
+cp -r ~/.config/nvim/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/nvim/
+
+cp -r ~/.config/shaders/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/shaders/
+
+cp -r ~/.config/tmux/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/tmux/
+
+cp -r ~/.config/waybar/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/waybar/
+
+cp -r ~/.config/wlogout/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/wlogout/
+
+cp -r ~/.config/wofi/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/wofi/
+
+cp -r ~/.config/Wallpapers/* ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/Wallpapers/
+
+# bashrc
+cp ~/.bashrc ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/.bashrc
+
+# starship
+cp ~/.config/starship.toml ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/starship.toml

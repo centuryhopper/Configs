@@ -1,0 +1,32 @@
+https://www.youtube.com/watch?v=8X4u9sca3Io
+
+If using garuda linux distributions like garuda sway,
+please change the shell from /bin/fish to /bin/bash for this to work. After this, you can just switch back to fish. If using garuda sway like I am, then you can change the shell via ~/.config/alacritty/alacritty.yml
+
+generate ssh key:
+ssh-keygen -t ed25519 -C leotheasianlion@gmail.com
+
+on wayland:
+wl-copy < ~/.ssh/id_ed25519.pub
+paste contents into github ssh account
+
+on xorg:
+use xclip instead of wl-copy
+
+to check ssh agent, type: eval "$(ssh-agent -s)". For fish: eval "ssh-agent -c"
+
+create file if doesn't exist already "touch ~/.ssh/config"
+
+printf "Host *\n AddKeysToAgent yes\n IdentityFile ~/.ssh/id_ed25519" > ~/.ssh/config
+
+add private key to ssh agent (inside that config):
+Host *
+ AddKeysToAgent yes
+ IdentityFile ~/.ssh/id_ed25519
+
+run: ssh-add ~/.ssh/id_ed25519
+
+add contents of "cat ~/.ssh/id_ed25519.pub" to github ssh key
+
+run "ssh -T git@github.com"
+

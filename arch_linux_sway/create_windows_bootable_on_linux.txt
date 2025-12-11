@@ -1,0 +1,4 @@
+
+https://www.addictivetips.com/ubuntu-linux-tips/how-to-create-windows-10-bootable-usb-on-linux/
+
+sudo mount -o loop ~/Downloads/Win10*.iso /mnt/

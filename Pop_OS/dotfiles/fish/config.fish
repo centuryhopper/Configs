@@ -3,7 +3,16 @@ if status is-interactive
     starship init fish | source
 end
 
-set -gx DOTNET_ROOT /usr/bin/dotnet
+#source ~/emsdk/emsdk_env.fish ^/dev/null
+
+#status --is-interactive; and source ~/emsdk/emsdk_env.fish
+#source ~/emsdk/emsdk_env.fish
+
+set -x LANG en_US.UTF-8
+set -x LC_ALL en_US.UTF-8
+
+#set -gx DOTNET_ROOT /usr/bin/dotnet
+#set -gx DOTNET_ROOT /usr/lib/dotnet
 
 set -gx DOTNET_ROOT /home/leo_zhang/.dotnet
 set -gx PATH $DOTNET_ROOT $PATH $DOTNET_ROOT/tools
@@ -12,7 +21,7 @@ set -gx PATH $DOTNET_ROOT $PATH $DOTNET_ROOT/tools
 set PATH $PATH ~/flutter_development/flutter/bin
 
 
-set -gx JAVA_HOME /opt/java/jdk-17.0.12+7/
+set -gx JAVA_HOME /opt/java/jdk-17.0.12+7
 set -gx PATH $JAVA_HOME/bin $PATH
 
 set -gx PATH $PATH ~/android-sdk/platform-tools
@@ -20,10 +29,24 @@ set -gx PATH $PATH ~/android-sdk/platform-tools
 set -gx ANDROID_HOME ~/android-sdk
 set -gx PATH $PATH $ANDROID_HOME/platform-tools
 set -gx PATH $PATH ~/android-sdk/cmdline-tools/latest/bin
+set -gx PATH $PATH $ANDROID_HOME/emulator
 
-set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/
+set -gx VCPKG_ROOT ~/tools/vcpkg
+set -gx PATH $PATH $VCPKG_ROOT
 
-set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Tools/python_tools/utils/
+
+#set -gx PATH $HOME/vcpkg $PATH
+
+#set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/
+#
+#set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Tools/python_tools/utils/
+#
+#set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Tools/rust_tools/utils/
+
+
+set -gx PATH $HOME/.local/share/fnm $PATH
+$HOME/.local/share/fnm/fnm env --use-on-cd | source
+
 
 ## Run fastfetch if session is interactive
 #if status --is-interactive && type -q fastfetch
@@ -108,6 +131,7 @@ alias birth='stat / | grep Birth'
 alias ovpn='sudo openvpn ~/.vpn_stuff/us-free-11.protonvpn.net.udp.ovpn'
 alias py='/home/leo_zhang/miniconda3/envs/web_auto/bin/python'
 alias reset_bt="sudo rfkill unblock all && sudo rmmod btusb && sudo rmmod btintel && sudo modprobe btintel && sudo modprobe btusb"
+alias flst='flatpak list --app --columns=name,size'
 
 set -x BROWSER /usr/bin/firefox
 set -gx VISUAL nvim

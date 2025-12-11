@@ -21,8 +21,8 @@ cd ~/Downloads
 
 # online deb files to retrieve
 #wget -O zoom.deb "https://zoom.us/client/latest/zoom_amd64.deb"
-wget -O chrome.deb "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb"
+#wget -O chrome.deb "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+#wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb"
 wget -O vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
 #wget -O iriun.deb 'https://iriun.gitlab.io/iriunwebcam-2.7.deb'
 #wget -O github_desktop.deb "https://github.com/shiftkey/desktop/releases/download/release-2.6.3-linux1/GitHubDesktop-linux-2.6.3-linux1.deb"
@@ -33,14 +33,98 @@ wget -O xp.deb "xp-pen.com/download/file/id/1949/pid/55/ext/deb.html"
 
 
 # github desktop
-sudo apt install wget apt-transport-https gnupg2 software-properties-common
-
-wget https://github.com/shiftkey/desktop/releases/download/release-3.1.7-linux1/GitHubDesktop-linux-3.1.7-linux1.deb
-
-wget -O edge.deb "https://go.microsoft.com/fwlink?linkid=2149051&brand=M102"
+#sudo apt install wget apt-transport-https gnupg2 software-properties-common
+#
+#wget https://github.com/shiftkey/desktop/releases/download/release-3.1.7-linux1/GitHubDesktop-linux-3.1.7-linux1.deb
+#
+#wget -O edge.deb "https://go.microsoft.com/fwlink?linkid=2149051&brand=M102"
 
 # install all the deb files retrieved from the internet
 sudo apt install -f ./*.deb
+
+# notify-send
+sudo apt install libnotify-bin -y
+
+# grub-install (for creating a windows 11 bootable usb)
+sudo apt install grub-pc-bin grub-efi -y
+
+# terminal copy to clipboard tool
+sudo apt install xclip -y
+#Using `xclip` in a Linux terminal like Pop!_OS is a powerful way to manage text via the clipboard from the command line. Here's how to use it:
+#
+#### 1. **Install `xclip`**
+#If `xclip` isn't already installed, you can add it using:
+#
+#```bash
+#sudo apt update
+#sudo apt install xclip
+#```
+#
+#### 2. **Copy to the Clipboard**
+#To copy the contents of a file or command output to the clipboard, use:
+#
+#```bash
+#cat file.txt | xclip -selection clipboard
+#```
+#
+#Or directly:
+#
+#```bash
+#xclip -selection clipboard < file.txt
+#```
+#
+#You can also copy command output:
+#
+#```bash
+#echo "Hello, clipboard!" | xclip -selection clipboard
+#```
+#
+#### 3. **Paste from the Clipboard**
+#To paste clipboard content to the terminal or another file:
+#
+#```bash
+#xclip -selection clipboard -o
+#```
+#
+#For example, save clipboard content to a file:
+#
+#```bash
+#xclip -selection clipboard -o > output.txt
+#```
+#
+#### 4. **Additional Options**
+#- Copy and paste with the **primary selection** (text selected with the mouse):
+#
+#  **Copy:**
+#  ```bash
+#  echo "Primary selection" | xclip -selection primary
+#  ```
+#
+#  **Paste:**
+#  ```bash
+#  xclip -selection primary -o
+#  ```
+#
+#- Use `Ctrl + Shift + V` or middle-click to paste the primary selection in most terminal environments.
+#
+#### Example: Copying a File Path
+#To copy the path of a file to the clipboard:
+#
+#```bash
+#echo "/path/to/your/file" | xclip -selection clipboard
+#```
+#
+#This will make the file path available to paste in a file manager or another application.
+
+
+# To check size of all flatpak apps:
+# flatpak list --app --columns=name,size
+
+
+# fm6000
+curl https://codeberg.org/anhsirk0/fetch-master-6000/raw/branch/main/fm6000.pl --output fm6000
+chmod +x fm6000
+cp fm6000 ~/.local/bin/
 
 # lf
 sudo apt install -y golang && env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
@@ -55,10 +139,17 @@ sudo apt install flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # flathub packages:
-flatpak install flathub com.brave.Browser --system -y
-flatpak install flathub com.github.xournalpp.xournalpp --system -y
-flatpak install flathub com.obsproject.Studio --system -y
-flatpak install flathub com.getpostman.Postman --system -y
+flatpak install flathub com.discordapp.Discord --user -y
+flatpak install flathub com.github.xournalpp.xournalpp --user -y
+flatpak install flathub com.obsproject.Studio --user -y
+flatpak install flathub com.visualstudio.code --user -y
+#flatpak install flathub com.google.Chrome --user -y
+#flatpak install flathub com.unity.UnityHub --user -y
+flatpak install flathub org.gimp.GIMP --user -y
+flatpak install flathub com.microsoft.Edge --user -y
+# github desktop
+flatpak install flathub io.github.shiftey.Desktop --user -y
+#flatpak install flathub org.mypaint.MyPaint --user -y
 
 # more tools
 sudo apt install -y ncdu exa bat cmake kitty htop rpi-imager cheese tree neofetch cmatrix fish xsel
@@ -80,6 +171,30 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # starship
 curl -sS https://starship.rs/install.sh | sh
+
+# docker cli (run these commands one block at a time)
+# 1) Create keyrings dir and add Docker's GPG key (dearmored)
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# 2) Add the Docker repository (uses your distro codename via lsb_release)
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 3) Update apt and install Docker engine + extras
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 4) Enable and start Docker, add your user to the docker group (log out/in after this)
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+
+# 5) Verify installation
+docker --version
+docker run --rm hello-world
+
 
 # oh-my-fish
 # additional tools set up not in the arch repo:

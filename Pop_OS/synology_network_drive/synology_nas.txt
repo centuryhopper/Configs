@@ -14,9 +14,15 @@ ssh command:
   scp -P 2299 path/to/file leo_admin@192.168.1.188:/volume1/Drive_A
 
 
+
 # to copy certain files over to local directory example:
 
   # here we're assuming the test folder exists in the current directory 
   # and we're copying over all pngs in that location over to it
   scp -P 2299 leo_admin@192.168.1.187:/volume1/Drive_A/memories_backup/'*.png' ./test/
+
+# on windows:
+ go to file explorer and map to network drive:
+  and type in \\your_nas_name\Shared_Folder
+  which is "\\leo_nas\Drive_A" in my case
 

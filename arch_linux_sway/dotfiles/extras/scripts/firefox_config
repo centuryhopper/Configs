@@ -1,0 +1,24 @@
+
+#!/bin/bash
+
+# Specify the regex pattern for the folder name
+regex_pattern=".*?\.default-release"
+
+# Use find to get a list of firefox profiles matching the pattern
+matching_folders=($(find ~/.mozilla/ -type d -regex "$regex_pattern"))
+
+# Loop through the matching folders and execute ./firefox_hide_tab_bar inside each
+for folder in "${matching_folders[@]}"; do 
+
+    echo "found a directory: $folder"
+    cp ~/Documents/GitHub/Configs/arch_linux_hyprland/dotfiles/extras/scripts/helpers/./firefox_hide_tab_bar "$folder"
+
+    if [ -x "$folder/./firefox_hide_tab_bar" ]; then
+        echo "Executing firefox_hide_tab_bar inside $folder"
+        (cd "$folder" && ./firefox_hide_tab_bar)
+    else
+        echo "Error: $folder/./firefox_hide_tab_bar not found or not executable"
+    fi
+done
+
+echo -e "Be sure to enable legacy toolkit style sheets to true in about:config in firefox for this to work"

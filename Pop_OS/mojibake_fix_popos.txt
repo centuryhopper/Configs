@@ -1,0 +1,83 @@
+
+Fixing Mojibake (Weird Characters) in tmux on Pop!_OS
+======================================================
+
+Overview:
+---------
+Mojibake happens when your terminal can't display special Unicode symbols used by tmux, powerline, or Nerd Font themes.
+This guide walks you through fixing that on Pop!_OS using FiraCode Nerd Font.
+
+1. Install a Nerd Font
+-----------------------
+FiraCode is a great choice. The default APT version lacks the required glyphs.
+
+Manual Installation:
+--------------------
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+unzip FiraCode.zip
+fc-cache -fv
+
+2. Set GNOME Terminal Font
+--------------------------
+- Open GNOME Terminal → Preferences
+- Select your profile (usually “Unnamed”)
+- Go to the "Text" tab
+- Enable "Custom Font"
+- Set font to: FiraCode Nerd Font
+
+3. Set UTF-8 Locale
+-------------------
+Run:
+locale
+
+If output isn't showing en_US.UTF-8:
+sudo locale-gen en_US.UTF-8
+sudo update-locale LANG=en_US.UTF-8
+
+Optional (Fish shell users):
+----------------------------
+Add to ~/.config/fish/config.fish:
+set -x LANG en_US.UTF-8
+set -x LC_ALL en_US.UTF-8
+
+4. Update tmux Configuration
+----------------------------
+Edit ~/.tmux.conf:
+set -g utf8 on
+set -g status-utf8 on
+
+Then reload:
+tmux source-file ~/.tmux.conf
+
+5. Restart Terminal
+-------------------
+Close terminal completely and re-open it.
+Reattach your tmux session:
+tmux attach -t <session-name>
+
+Recommended Nerd Fonts
+----------------------
+- FiraCode Nerd Font (recommended)
+- JetBrainsMono Nerd Font
+- Hack Nerd Font
+- MesloLGS Nerd Font
+- CascadiaCode Nerd Font
+- Iosevka Nerd Font
+- Source Code Pro Nerd Font
+
+Fonts to Avoid (Unless Patched)
+-------------------------------
+- Ubuntu Mono
+- Fira Mono
+- Regular FiraCode (from apt)
+- DejaVu Sans Mono
+- Courier New
+- Liberation Mono
+
+Checking Installed Nerd Fonts:
+------------------------------
+fc-list | grep Nerd
+
+That's it! Your tmux and terminal should now show icons and powerline symbols correctly.

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Sway
+Comment=A tiling Wayland compositor
+Exec=sway
+Type=Application
+DesktopNames=Sway

@@ -22,7 +22,7 @@
   docker cp people_first_scraper:/home/PeopleFirstCareersOutput/ ~/projects_output/
 
 # copy from raspberry pi to host system (your pc!)
-scp -r leozhang@192.168.1.252:~/projects_output/ ~/Documents/GitHub/Tools/outputs/
+scp -r leozhang@192.168.1.87:~/projects_output/ ~/Documents/GitHub/Tools/outputs/
 
 
 
