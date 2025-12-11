@@ -1,2 +1,22 @@
 move bios files to /boot folder to reveal them in ez flash menu when updating the bios
 
+To make pop os default terminal transparent and use solarized dark theme:
+  - click 'preferences'
+  - click 'pop' tab
+  - click 'colors' tab
+  - tweak to your liking
+
+To enable wayland:
+  - sudo nvim /etc/gdm3/custom.conf
+  - Set WaylandEnable=true
+  - reboot and select wayland and login :)
+  - https://www.reddit.com/r/pop_os/comments/1d4l49t/how_do_you_enable_wayland_in_pop_os_2024/
+
+To trim a video, use ffmpeg:
+  # grabs the first 10 minutes of your video
+  ffmpeg -i ./your_video.mp4 -ss 00:00:00 -to 00:10:00 -c copy output.mp4
+
+Unity engine tips:
+  - enter playmode faster:
+    - go to edit => project settings => Editor => Set 'Do not reload domain or scene'
+

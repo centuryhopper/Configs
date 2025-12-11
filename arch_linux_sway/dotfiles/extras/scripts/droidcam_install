@@ -1,0 +1,10 @@
+#!/bin/bash
+# https://dev47apps.com/droidcam/linux/
+yay -S --needed --noconfirm linux-zen-headers linux-headers linux-lts-headers wget dkms v4l2loopback-dkms-git
+
+cd /tmp/
+wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.1.2.zip
+unzip droidcam_latest.zip -d droidcam
+rm droidcam_latest.zip
+cd droidcam && sudo ./install-client && sudo ./install-dkms && sudo ./install-video
+

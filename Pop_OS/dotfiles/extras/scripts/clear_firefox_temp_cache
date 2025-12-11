@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Get the Firefox profile directory
+FF_PROFILE=$(ls ~/.cache/mozilla/firefox/ | grep '.default-release' | head -n 1)
+
+if [ -z "$FF_PROFILE" ]; then
+    echo "Firefox profile not found."
+    exit 1
+fi
+
+CACHE_DIR="$HOME/.cache/mozilla/firefox/$FF_PROFILE/cache2"
+STARTUP_CACHE="$HOME/.cache/mozilla/firefox/$FF_PROFILE/startupCache"
+
+echo "Clearing Firefox cache..."
+
+# Remove cache and startup cache
+rm -rf "$CACHE_DIR"/*
+rm -rf "$STARTUP_CACHE"/*
+
+echo "Firefox cache cleared successfully."
+

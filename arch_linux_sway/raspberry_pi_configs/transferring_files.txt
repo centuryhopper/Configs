@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# use this command to find the docker virtual env paths
+# docker exec -it [insert container name] bash
+
+# find current running container in the current directory:
+# docker-compose ps -a
+
+
+# build and run
+# docker-compose build && docker-compose up -d
+
+# find out your raspberry pi private ip:
+  sudo nmap -sn 192.168.1.0/24 | grep -i "raspberry"
+
+# type the following commands inside raspberry pi terminal:
+# copy from docker virtual env to raspberry pi
+  mkdir ~/projects_output/
+  docker cp fetch_nasa_pic:/home/nasa_pic_collection/ ~/projects_output/
+  docker cp dotnet_news_scraper:/app/news/ ~/projects_output/
+  docker cp dotnet_amazon_pricetracker:/app/amazon_products_outputs/ ~/projects_output/
+  docker cp people_first_scraper:/home/PeopleFirstCareersOutput/ ~/projects_output/
+
+# copy from raspberry pi to host system (your pc!)
+scp -r leozhang@192.168.1.87:~/projects_output/ ~/Documents/GitHub/Tools/outputs/
+
+
+

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cat /home/leo_zhang/Documents/GitHub/Configs/Pop_OS/raspberry_pi_configs/transferring_files.txt
+

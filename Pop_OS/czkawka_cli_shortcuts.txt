@@ -1,0 +1,11 @@
+
+
+# remove all empty folders within the current directory (recursively)
+czkawka_cli empty-folders -d . -D
+
+# keep oldest one and delete the other duplicates (non-recursively)
+czkawka_cli image -d . -R -D AEN
+
+# delete all duplicate files (recursively)
+czkawka_cli dup -d . -D AEN
+

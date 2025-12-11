@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# https://cmake.org/download/
+# grab latest targ.gz file
+# tar -xvzf cmake.targ.gz
+# cd ./cmake
+# ./bootstrap
+# if needed: sudo apt install build-essential libssl-dev
+# make -j$(nproc)
+# sudo make install
+# cmake --version
+
+

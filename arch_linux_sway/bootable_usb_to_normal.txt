@@ -1,0 +1,26 @@
+https://www.youtube.com/watch?v=V6m5ZPGIbcI&t=431s
+
+# list all disks
+sudo fdisk -l
+
+sudo wipefs -af /dev/sdb (wipe the flashdrive. The name may or may not be /dev/sdb)
+
+# create a new partition from the command line
+sudo cfdisk /dev/sdb
+then select dos type
+then create new partition
+(use default size)
+then make primary
+then select write
+say yes
+then quit
+
+# you may need to SAFELY unmount and remount and then proceed
+# to the steps below:
+
+# format the partition
+# sudo mkfs.vfat -n 'SANDISK' /dev/sdb1
+sudo mkfs.vfat -n 'SANDISK' /dev/sda -I
+
+mkfs.vfat: Partitions or virtual mappings on device '/dev/sdb', not making filesystem (use -I to override)
+
