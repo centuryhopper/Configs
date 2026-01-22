@@ -21,4 +21,4 @@ for folder in "${matching_folders[@]}"; do
     fi
 done
 
-echo -e "Be sure to enable legacy toolkit style sheets to true in about:config in firefox for this to work"
+echo -e "Be sure to enable toolkit.legacyUserProfileCustomizations.stylesheets to true in about:config in firefox for this to work"

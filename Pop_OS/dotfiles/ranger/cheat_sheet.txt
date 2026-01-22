@@ -1,0 +1,63 @@
+# Ranger Cheat Sheet – Terminal File Manager
+
+## Navigation
+Arrow keys        : move up/down/enter/exit
+h                 : go to parent directory
+l                 : enter subdirectory
+j                 : move down
+k                 : move up
+Enter             : open directory/file
+q                 : quit Ranger
+R                 : reload current directory
+
+## File Operations
+:touch file.txt   : create new file
+:mkdir mydir      : create new directory
+Enter             : open file in default editor
+r                 : open file with another program
+cw new_name.txt   : rename file
+dd                : cut file/directory
+yy                : copy file/directory
+p                 : paste
+D                 : delete file/directory
+DT                : move file/directory to trash (customizable)
+
+## Selection / Bulk Actions
+Space             : mark/unmark a file
+Shift+V           : visual selection mode
+V                 : toggle select all/unselect all
+:bulkrename       : batch rename selected files
+
+## Searching
+/                 : search
+n                 : next match
+N                 : previous match
+
+## Marks & History
+ma                : mark current location as "a" (replace 'a' with any letter)
+'a                : jump to mark "a"
+''                : go to last jump point
+um a              : remove mark "a"
+H                 : go back in history
+L                 : go forward in history
+
+## Sorting
+o                 : choose sorting method
+  b               : by name (default)
+  a               : by access time
+  c               : by creation time
+  s               : by size
+  t               : by type
+
+## Hidden Files
+zh                : toggle hidden files
+
+## Disk Usage
+du                : show directory size
+
+## Tips
+- Combine with --choosedir in shell function to cd into last visited dir
+- Supports mouse interaction and preview pane
+- Use Vim-like keybindings for speed
+- Config files: ~/.config/ranger/rc.conf, rifle.conf, scope.sh
+

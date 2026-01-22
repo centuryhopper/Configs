@@ -1,0 +1,26 @@
+# !/bin/bash
+
+cd ~/Downloads
+tar -xzf JetBrains.Rider-*.tar.gz
+rm -rf ./JetBrains.Rider-*.tar.gz
+mkdir -p ~/apps/rider/
+mv JetBrains\ Rider-* ~/apps/rider
+
+~/apps/rider/bin/rider.sh
+
+nvim ~/.local/share/applications/rider.desktop
+
+paste this into rider.desktop:
+[Desktop Entry]
+Name=JetBrains Rider
+Comment=.NET IDE
+Exec=~/apps/rider/bin/rider.sh
+Icon=~/apps/rider/bin/rider.png
+Terminal=false
+Type=Application
+Categories=Development;IDE;
+StartupWMClass=jetbrains-rider
+
+chmod +x ~/.local/share/applications/rider.desktop
+
+

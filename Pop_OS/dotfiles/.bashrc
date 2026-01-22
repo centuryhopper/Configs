@@ -2,30 +2,22 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-rm() {
-  if [[ "$*" == *" /"* ]]; then
-    echo "Error: Attempt to remove / is blocked."
-  else
-    command rm "$@"
-  fi
-}
-
 # If not running interactively, don't do anything
-#case $- in
-#*i*) ;;
-#*) return ;;
-#esac
+case $- in
+*i*) ;;
+*) return ;;
+esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-#HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-#HISTSIZE=1000
-#HISTFILESIZE=2000
+HISTSIZE=1000
+HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -123,75 +115,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#
-# ~/.bashrc
-#
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-PS1='[\u@\h \W]\$ '
-
-eval "$(starship init bash)"
-
-# immediately go into fish
-if [ -t 1 ]; then exec fish; fi
-
-export LANG=zh_CN.UTF-8
-export LANGUAGE=zh_CN:en_US
-
-# .NET SDK
-export DOTNET_ROOT="$HOME/.dotnet"
-export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
-# should do export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 && mlnet for mlnet to work
-#export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
-#export PATH=$PATH:~/.dotnet/tools/
-# Change working dir in shell to last dir in lf on exit (adapted from ranger).
-#
-# You need to either copy the content of this file to your shell rc file
-# (e.g. ~/.bashrc) or source this file directly:
-#
-#     LFCD="/path/to/lfcd.sh"
-#     if [ -f "$LFCD" ]; then
-#         source "$LFCD"
-#     fi
-#
-# You may also like to assign a key (Ctrl-O) to this command:
-#
-#     bind '"\C-o":"lfcd\C-m"'  # bash
-#     bindkey -s '^o' 'lfcd\n'  # zsh
-#
-
-# maintains consistency with directory navigation when user is entering/exiting lf
-lfcd() {
-  tmp="$(mktemp)"
-  # `command` is needed in case `lfcd` is aliased to `lf`
-  command lf -last-dir-path="$tmp" "$@"
-  if [ -f "$tmp" ]; then
-    dir="$(cat "$tmp")"
-    rm -f "$tmp"
-    if [ -d "$dir" ]; then
-      if [ "$dir" != "$(pwd)" ]; then
-        cd "$dir"
-      fi
-    fi
-  fi
-}
-#"$HOME/.cargo/env"
-#export DOTNET_ROOT=$HOME/.dotnet
-#export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
-. "$HOME/.cargo/env"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-# fnm
-FNM_PATH="/home/leo_zhang/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="$FNM_PATH:$PATH"
-  eval "$(fnm env)"
+# Start fish shell if this is an interactive session
+if [[ $- == *i* ]]; then
+  exec fish
 fi
-export PATH="$HOME/vcpkg:$PATH"
+. "$HOME/.cargo/env"

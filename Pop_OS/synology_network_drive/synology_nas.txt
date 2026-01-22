@@ -11,7 +11,9 @@ ssh command:
 # 2299 is the port number I configured
 
 # secure copying over to the network drive (non-standard ssh):
-  scp -P 2299 path/to/file leo_admin@192.168.1.188:/volume1/Drive_A
+  scp -O -r -P 2299 path/to/file leo_admin@192.168.1.188:/volume1/Drive_A
+  -r is recursive flag to include sub folders
+  -O forces legacy SCP mode
 
 
 
@@ -26,3 +28,6 @@ ssh command:
   and type in \\your_nas_name\Shared_Folder
   which is "\\leo_nas\Drive_A" in my case
 
+# on popos cosmic:
+type smb://192.168.1.188/Drive_A
+when adding a network drive to mount to your cosmic file explorer
