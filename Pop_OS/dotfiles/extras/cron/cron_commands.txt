@@ -23,11 +23,6 @@
 # m h  dom mon dow   command
 #* * * * * /home/leo_zhang/miniconda3/envs/web_auto/bin/python /home/leo_zhang/Documents/GitHub/Tools/python_tools/scrapers/PeopleFirstCareers.py
 
-
-#* * * * * DISPLAY=:0 usr/bin/bash /home/leo_zhang/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/wifi_check.sh /home/leo_zhang/.dotnet/dotnet /home/leo_zhang/Documents/GitHub/Bots/dotnet_bot/test/dotnet_bot.dll > /tmp/dotnet_bot.log 2>&1
-
-#* * * * * DISPLAY=:0 /usr/bin/bash /home/leo_zhang/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/wifi_check.sh /home/leo_zhang/.dotnet/dotnet /home/leo_zhang/Documents/GitHub/Bots/dotnet_bmbl_bot/test/dotnet_bmbl_bot.dll > /tmp/dotnet_bmbl_bot.log 2>&1
-
 #*/5 * * * * /usr/bin/bash /home/leo_zhang/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/wifi_check.sh /home/leo_zhang/miniconda3/envs/web_auto/bin/python /home/leo_zhang/Documents/GitHub/Tools/python_tools/utils/delete_gmails.py > /tmp/delete_gmails.log 2>&1
 
 # make sure cron commands are up to date
@@ -38,5 +33,8 @@
 
 # clear firefox cache every 5 minutes
 */5 * * * * ~/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/clear_firefox_temp_cache
+
+
+
 
 

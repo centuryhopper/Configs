@@ -29,7 +29,7 @@ wget -O vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=l
 
 # xppentablet
 # https://www.xp-pen.com/download-55.html
-wget -O xp.deb "xp-pen.com/download/file/id/1949/pid/55/ext/deb.html"
+# wget -O xp.deb "xp-pen.com/download/file/id/1949/pid/55/ext/deb.html"
 
 
 # github desktop
@@ -142,7 +142,7 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 flatpak install flathub com.discordapp.Discord --user -y
 flatpak install flathub com.github.xournalpp.xournalpp --user -y
 flatpak install flathub com.obsproject.Studio --user -y
-flatpak install flathub com.visualstudio.code --user -y
+#flatpak install flathub com.visualstudio.code --user -y
 #flatpak install flathub com.google.Chrome --user -y
 #flatpak install flathub com.unity.UnityHub --user -y
 flatpak install flathub org.gimp.GIMP --user -y
@@ -152,7 +152,7 @@ flatpak install flathub io.github.shiftey.Desktop --user -y
 #flatpak install flathub org.mypaint.MyPaint --user -y
 
 # more tools
-sudo apt install -y ncdu exa bat cmake kitty htop rpi-imager cheese tree neofetch cmatrix fish xsel
+sudo apt install -y ncdu bat cmake htop rpi-imager cheese tree neofetch cmatrix fish xsel
 
 # iphone transfer Files
 sudo apt install ifuse
@@ -164,10 +164,13 @@ sudo apt install p7zip-full
 sudo apt install -y gstreamer1.0-libav ffmpeg
 
 # postgresql
-sudo apt install -y postgresql
+#sudo apt install -y postgresql
 
 # rustup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# fancy version of ls command
+cargo install exa
 
 # starship
 curl -sS https://starship.rs/install.sh | sh
@@ -223,12 +226,19 @@ sudo apt install -y libssl-dev libmagic-dev file openssl imagemagick coreutils
 git clone https://github.com/NikitaIvanovV/ctpv /tmp/cptv && cd /tmp/ctpv && make && sudo make install
 
 
-# dotnet sdk and runtime
-sudo apt-get update && \
-  sudo apt-get install -y dotnet-sdk-8.0
+# get latest dotnet sdk and runtime
+wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+chmod +x ./dotnet-install.sh
+./dotnet-install.sh
+rm -f ./dotnet-install.sh
 
-sudo apt-get update && \
-  sudo apt-get install -y aspnetcore-runtime-8.0
+sudo apt install samba -y
+
+#sudo apt-get update && \
+#  sudo apt-get install -y dotnet-sdk-10.0
+
+#sudo apt-get update && \
+#  sudo apt-get install -y aspnetcore-runtime-10.0
 
 #wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
 #chmod +x ./dotnet-install.sh
@@ -255,7 +265,7 @@ sudo pip install git+https://github.com/andreafrancia/trash-cli
 read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy config files? (y,n) ' CFG
 if [[ $CFG == "Y" || $CFG == "y" ]]; then
 	echo -e "$CNT - Copying config files..."
-	for DIR in kitty tmux fish lf Wallpapers; do
+	for DIR in tmux fish lf Wallpapers; do
 		DIRPATH=~/.config/$DIR
 		if [ -d "$DIRPATH" ]; then
 			echo -e "$CAT - Config for $DIR located, backing up."

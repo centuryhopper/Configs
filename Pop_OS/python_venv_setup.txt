@@ -1,0 +1,9 @@
+
+sudo apt install python3.12-venv
+python3 -m venv .venv
+source .venv/bin/activate.fish # if using fish shell
+pip install --upgrade pip
+
+# install whatever python packages you want beyond this point
+# use `pip list` to view the packages currently installed in this environment
+

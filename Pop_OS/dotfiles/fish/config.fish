@@ -17,9 +17,7 @@ set -x LC_ALL en_US.UTF-8
 set -gx DOTNET_ROOT /home/leo_zhang/.dotnet
 set -gx PATH $DOTNET_ROOT $PATH $DOTNET_ROOT/tools
 
-
 set PATH $PATH ~/flutter_development/flutter/bin
-
 
 set -gx JAVA_HOME /opt/java/jdk-17.0.12+7
 set -gx PATH $JAVA_HOME/bin $PATH
@@ -34,7 +32,6 @@ set -gx PATH $PATH $ANDROID_HOME/emulator
 set -gx VCPKG_ROOT ~/tools/vcpkg
 set -gx PATH $PATH $VCPKG_ROOT
 
-
 #set -gx PATH $HOME/vcpkg $PATH
 
 #set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/
@@ -43,16 +40,13 @@ set -gx PATH $PATH $VCPKG_ROOT
 #
 #set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Tools/rust_tools/utils/
 
-
-set -gx PATH $HOME/.local/share/fnm $PATH
-$HOME/.local/share/fnm/fnm env --use-on-cd | source
-
+#set -gx PATH $HOME/.local/share/fnm $PATH
+#$HOME/.local/share/fnm/fnm env --use-on-cd | source
 
 ## Run fastfetch if session is interactive
 #if status --is-interactive && type -q fastfetch
 #    fastfetch
 #end
-
 
 if status is-interactive && not set -q TMUX
     exec tmux
@@ -61,7 +55,9 @@ end
 set -x EDITOR /usr/bin/nvim
 set -x PATH ~/.dotnet/tools/ $PATH
 set -x PATH ~/.local/bin/ $PATH
-set -x PATH $(go env GOPATH)/bin/ $PATH
+set -x PATH ~/goroot/bin/ $PATH
+set -x PATH ~/go/bin $PATH
+#set -x PATH $(go env GOPATH)/bin/ $PATH
 #set -x DOTNET_SYSTEM_GLOBALIZATION_INVARIANT 1
 
 # Fish command history
@@ -74,7 +70,6 @@ function rust_find
 end
 
 fish_add_path -g "/home/leo_zhang/.local/bin/"
-
 
 fm6000 -c red -dog -o Pop!_OS -n -m 8 -g 12 -l 40
 
@@ -100,7 +95,6 @@ alias bat='batcat'
 alias cat='bat --style header --style snip --style changes --style header'
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 
-
 alias py='python3'
 alias cls='clear'
 alias dir='ls'
@@ -122,9 +116,10 @@ alias ACP='git add . && git commit -m"update" && git push'
 alias SLEEP='systemctl suspend'
 alias conf='nvim /home/leo_zhang/.config/hypr/hyprland.conf'
 alias v='nvim'
-alias lf='lfcd'
-alias l=lf
-alias lfconf='nvim ~/.config/lf/lfrc'
+alias r='ranger'
+#alias lf='lfcd'
+#alias l=lf
+#alias lfconf='nvim ~/.config/lf/lfrc'
 alias tl='trash-list'
 alias m='math'
 alias birth='stat / | grep Birth'
@@ -137,8 +132,6 @@ set -x BROWSER /usr/bin/firefox
 set -gx VISUAL nvim
 # set -gx PATH $HOME/miniconda3/bin $PATH  # commented out by conda initialize
 
-
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 if test -f /home/leo_zhang/miniconda3/bin/conda
@@ -146,7 +139,6 @@ if test -f /home/leo_zhang/miniconda3/bin/conda
 end
 # <<< conda initialize <<<
 # fi=:\
-
 
 set -x LF_ICONS "\
 di=📁:\
@@ -251,23 +243,51 @@ di=01;34:\
 ex=01;32:\
 "
 
-# needed so that directory navigation is consistent in and out of lf
-function lfcd
-    set tmp (mktemp)
-    # `command` is needed in case `lfcd` is aliased to `lf`
-    command lf -last-dir-path=$tmp $argv
+function ranger --description 'Ranger that cds into last visited dir on exit'
+    # Temporary file to store last directory
+    set -l tmp (mktemp)
+
+    # Launch ranger with choosedir pointing to temp file
+    command ranger --choosedir="$tmp" $argv
+
+    # If the temp file exists and has a valid directory, cd into it
     if test -f "$tmp"
-        set dir (cat $tmp)
+        set -l dir (string trim (cat "$tmp"))
         rm -f $tmp
         if test -d "$dir"
-            if test "$dir" != (pwd)
-                cd $dir
-            end
+            cd "$dir"
         end
     end
 end
 
-
+# needed so that directory navigation is consistent in and out of lf
+#function lfcd --wraps=lf --description 'lf then cd into the selected dir'
+#    set -l tmp (mktemp)
+#
+#    # Run lf — it may or may not write to tmp
+#    command lf -last-dir-path="$tmp" $argv
+#
+#    # If tmp doesn't exist OR is empty, just bail silently
+#    if not test -f "$tmp"
+#        return
+#    end
+#
+#    set -l dir (string trim (cat "$tmp"))
+#    rm -f "$tmp"
+#
+#    # Bail cleanly if dir is empty or invalid
+#    if test -z "$dir"
+#        return
+#    end
+#    if not test -d "$dir"
+#        return
+#    end
+#
+#    # Do the cd
+#    if test "$dir" != (pwd)
+#        cd "$dir"
+#    end
+#end
 
 # lf icons
 #set -x LF_ICONS "\

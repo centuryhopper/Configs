@@ -1,21 +1,18 @@
 #!/bin/bash
 
 # store in public repo
-cp -r /home/leo_zhang/.config/fish/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/fish/
-
-cp -r /home/leo_zhang/.config/lf/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/lf/
-
-cp -r /home/leo_zhang/.config/kitty/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/kitty/
+cp -r ~/.config/fish/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/fish/
 
 # should pull from github for most up to date version
-cp -r /home/leo_zhang/.config/nvim/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/nvim/
+cp -r ~/.config/nvim/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/nvim/
 
-cp -r /home/leo_zhang/.config/tmux/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/tmux/
-
-#cp -r /home/leo_zhang/.config/Wallpapers/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/Wallpapers/
+cp -r ~/.config/tmux/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/tmux/
 
 # bashrc
-cp /home/leo_zhang/.bashrc ~/Documents/GitHub/Configs/Pop_OS/dotfiles/.bashrc
+cp ~/.bashrc ~/Documents/GitHub/Configs/Pop_OS/dotfiles/.bashrc
+
+# ranger
+cp ~/.config/ranger/* ~/Documents/GitHub/Configs/Pop_OS/dotfiles/ranger/
 
 # starship
-#cp /home/leo_zhang/.config/starship.toml ~/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/starship.toml
+#cp ~/.config/starship.toml ~/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/starship.toml
