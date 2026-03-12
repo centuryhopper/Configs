@@ -20,3 +20,24 @@ Unity engine tips:
   - enter playmode faster:
     - go to edit => project settings => Editor => Set 'Do not reload domain or scene'
 
+Check linux machine install date:
+  sudo tune2fs -l $(df / | tail -1 | awk '{print $1}') | grep 'Filesystem created'
+  OR stat / | awk '/Birth: /{print $2}'
+
+Map a folder from linux PC to Windows PC:
+  - Open file explorer on windows and right click on 'This PC' and click on 'Map network drive'
+  - type 'ip a' in linux terminal to get ip address of linux pc
+  - type in \\[ip address of linux pc]\Shared Folder Name
+  - type 'sudo nvim /etc/samba/smb.conf' in the terminal and go the bottom and type this:
+      [LinuxShare]
+        path = /home/your_username/Shared
+        browseable = yes
+        writable = yes
+        read only = no
+        guest ok = yes
+        valid users = leo_zhang
+
+replace the values with your desired ones
+also the name can be anything and not strictly "LinuxShare"
+whatever name you give it will be what you map to in windows
+In this example what you would map to in windows would be: \\[ip address of linux pc]\LinuxShare

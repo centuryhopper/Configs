@@ -1,0 +1,3 @@
+
+- to access ~/ subfolders in windows file explorer, type the following in file explorer:
+  \\wsl$\Ubuntu\home\your_username\ ...

@@ -127,6 +127,7 @@ alias ovpn='sudo openvpn ~/.vpn_stuff/us-free-11.protonvpn.net.udp.ovpn'
 alias py='/home/leo_zhang/miniconda3/envs/web_auto/bin/python'
 alias reset_bt="sudo rfkill unblock all && sudo rmmod btusb && sudo rmmod btintel && sudo modprobe btintel && sudo modprobe btusb"
 alias flst='flatpak list --app --columns=name,size'
+alias nightlight='echo "# From TTY (Ctrl+Alt+F3): Example: sudo drm_colortemp -d /dev/dri/card1 -t 3500"'
 
 set -x BROWSER /usr/bin/firefox
 set -gx VISUAL nvim
