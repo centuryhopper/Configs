@@ -1,0 +1,51 @@
+Registry (Official Windows Way)
+
+This works everywhere — Windows apps, WSL, gedit, games, login screen — truly system-wide.
+
+1️⃣ Open Registry Editor
+
+Press Win + R, type:
+  - regedit
+
+Go to:
+  - HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout
+
+⚠️ Not “Keyboard Layouts” (plural). It must be Keyboard Layout.
+
+2️⃣ Create a New Binary Value
+
+Right-click → New → Binary Value
+
+Name it:
+  - Scancode Map
+
+3️⃣ Paste This Exact Binary Data
+
+Double-click it and paste:
+  "00 00 00 00 00 00 00 00
+  03 00 00 00
+  01 00 3A 00
+  3A 00 01 00
+  00 00 00 00"
+
+Click OK.
+
+🧠 What That Actually Did
+
+3A = Caps Lock
+
+01 = Escape
+
+We mapped:
+
+Caps → Esc
+
+Esc → Caps
+
+It’s a low-level keyboard scan code remap.
+
+🔄 Want to Undo It Later?
+
+Just delete the Scancode Map entry and reboot.
+
+
