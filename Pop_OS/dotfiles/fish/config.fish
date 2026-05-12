@@ -19,8 +19,8 @@ set -gx PATH $DOTNET_ROOT $PATH $DOTNET_ROOT/tools
 
 set PATH $PATH ~/flutter_development/flutter/bin
 
-set -gx JAVA_HOME /opt/java/jdk-17.0.12+7
-set -gx PATH $JAVA_HOME/bin $PATH
+#set -gx JAVA_HOME /opt/java/jdk-17.0.12+7
+#set -gx PATH $JAVA_HOME/bin $PATH
 
 set -gx PATH $PATH ~/android-sdk/platform-tools
 
@@ -128,6 +128,9 @@ alias py='/home/leo_zhang/miniconda3/envs/web_auto/bin/python'
 alias reset_bt="sudo rfkill unblock all && sudo rmmod btusb && sudo rmmod btintel && sudo modprobe btintel && sudo modprobe btusb"
 alias flst='flatpak list --app --columns=name,size'
 alias nightlight='echo "# From TTY (Ctrl+Alt+F3): Example: sudo drm_colortemp -d /dev/dri/card1 -t 3500"'
+
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 set -x BROWSER /usr/bin/firefox
 set -gx VISUAL nvim
