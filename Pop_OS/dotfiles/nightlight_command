@@ -1,0 +1,2 @@
+# !/bin/bash
+sudo drm_colortemp -d /dev/dri/card1 -t 3500
