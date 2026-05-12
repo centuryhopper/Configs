@@ -5,7 +5,7 @@
 regex_pattern=".*?\.default-release"
 
 # Use find to get a list of firefox profiles matching the pattern
-matching_folders=($(find ~/.mozilla/ -type d -regex "$regex_pattern"))
+matching_folders=($(find ~/.config/mozilla/ -type d -regex "$regex_pattern"))
 
 # Loop through the matching folders and execute ./firefox_hide_tab_bar inside each
 for folder in "${matching_folders[@]}"; do 
