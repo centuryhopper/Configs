@@ -160,7 +160,10 @@ ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/fish/ ~/.config/
 ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/nvim/ ~/.config/
 ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/ranger/ ~/.config/
 ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/tmux/ ~/.config/
-ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/bashrc_extras ~/
+ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/bashrc_extras.sh ~/
+
+# copy the night light command over to home directory so that the user can easily recall the command in another tty when setting night light
+cp ~/Documents/GitHub/Configs/Pop_OS/dotfiles/nightlight_command ~/
 
 # use ls -l ~/.config/ to check symlinks
 echo "source ~/bashrc_extras.sh" >> ~/.bashrc
