@@ -69,9 +69,9 @@ function rust_find
     cargo run --manifest-path=/home/leo_zhang/Documents/GitHub/Tools/rust_tools/file_management/Cargo.toml search $argv[1] $argv[2]
 end
 
-fish_add_path -g "/home/leo_zhang/.local/bin/"
+fish_add_path -g "~/.local/bin/"
 
-fm6000 -c red -dog -o Pop!_OS -n -m 8 -g 12 -l 40
+fm6000 -c red -dog -o Ubuntu -n -m 8 -g 12 -l 40
 
 ## Useful aliases
 
