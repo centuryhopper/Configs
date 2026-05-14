@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ssh-keygen -t ed25519 -C leotheasianlion@gmail.com
-eval "ssh-agent -s" > ~/.ssh/tmp.txt
+eval "ssh-agent -s" >~/.ssh/tmp.txt
 
 # export variables using fish syntax
 # for example: if the contents of tmp.txt are:
@@ -9,7 +9,7 @@ eval "ssh-agent -s" > ~/.ssh/tmp.txt
 #   SSH_AGENT_PID=21858; export SSH_AGENT_PID;
 #   echo Agent pid 21858;
 # then the commands run are set -x SSH_AUTH_SOCK /tmp/ssh-XXXXXXpXE7bl/agent.21856
-# and set -x SSH_AGENT_PID 21858 
+# and set -x SSH_AGENT_PID 21858
 
 # Read the file and extract the values using grep and regular expressions
 file_contents=$(cat ~/.ssh/tmp.txt)
@@ -26,12 +26,12 @@ ssh_agent_pid=$(echo "$file_contents" | grep -oP '(?<=SSH_AGENT_PID=).*?(?=;)')
 fish_path=$(which fish) # Get the path to the Fish interpreter
 
 if [ -x "$fish_path" ]; then
-    "$fish_path" ~/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/helpers/set_variables.fish "$ssh_auth_sock" "$ssh_agent_pid"
+  "$fish_path" ~/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/helpers/set_variables.fish "$ssh_auth_sock" "$ssh_agent_pid"
 else
-    echo "Fish interpreter not found."
+  echo "Fish interpreter not found."
 fi
 
-printf "Host *\n AddKeysToAgent yes\n IdentityFile ~/.ssh/id_ed25519" > ~/.ssh/config
+printf "Host *\n AddKeysToAgent yes\n IdentityFile ~/.ssh/id_ed25519" >~/.ssh/config
 
 ssh-add ~/.ssh/id_ed25519
 
@@ -39,4 +39,6 @@ ssh-add ~/.ssh/id_ed25519
 echo -e "TODO: add contents of 'cat ~/.ssh/id_ed25519.pub' to github ssh key"
 echo -e "TODO: then run: ssh -T git@github.com"
 
-
+# you need to set these if you were to add, commit, and push to github
+# git config --global user.name "Leo Zhang"
+# git config --global user.email "leotheasianlion@gmail.com"
