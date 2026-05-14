@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~/Documents/GitHub
+cd ~/projects/
 #git clone git@github.com:centuryhopper/BlazorHostedDotnet8Template.git
 #git clone git@github.com:centuryhopper/Bots.git
 git clone git@github.com:centuryhopper/CustomNugetPackages.git
