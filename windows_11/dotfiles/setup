@@ -1,0 +1,183 @@
+#!/bin/bash
+
+# set some colors
+CNT="[\e[1;36mNOTE\e[0m]"
+COK="[\e[1;32mOK\e[0m]"
+CER="[\e[1;31mERROR\e[0m]"
+CAT="[\e[1;37mATTENTION\e[0m]"
+CWR="[\e[1;35mWARNING\e[0m]"
+CAC="[\e[1;33mACTION\e[0m]"
+INSTLOG="install.log"
+
+#clear the screen
+clear
+
+# notify-send
+#sudo apt install libnotify-bin -y
+
+# grub-install (for creating a windows 11 bootable usb)
+#sudo apt install grub-pc-bin grub-efi -y
+
+# terminal copy to clipboard tool
+sudo apt install xclip -y
+#Using `xclip` in a Linux terminal like Pop!_OS is a powerful way to manage text via the clipboard from the command line. Here's how to use it:
+#
+#### 1. **Install `xclip`**
+#If `xclip` isn't already installed, you can add it using:
+#
+#```bash
+#sudo apt update
+#sudo apt install xclip
+#```
+#
+#### 2. **Copy to the Clipboard**
+#To copy the contents of a file or command output to the clipboard, use:
+#
+#```bash
+#cat file.txt | xclip -selection clipboard
+#```
+#
+#Or directly:
+#
+#```bash
+#xclip -selection clipboard < file.txt
+#```
+#
+#You can also copy command output:
+#
+#```bash
+#echo "Hello, clipboard!" | xclip -selection clipboard
+#```
+#
+#### 3. **Paste from the Clipboard**
+#To paste clipboard content to the terminal or another file:
+#
+#```bash
+#xclip -selection clipboard -o
+#```
+#
+#For example, save clipboard content to a file:
+#
+#```bash
+#xclip -selection clipboard -o > output.txt
+#```
+#
+#### 4. **Additional Options**
+#- Copy and paste with the **primary selection** (text selected with the mouse):
+#
+#  **Copy:**
+#  ```bash
+#  echo "Primary selection" | xclip -selection primary
+#  ```
+#
+#  **Paste:**
+#  ```bash
+#  xclip -selection primary -o
+#  ```
+#
+#- Use `Ctrl + Shift + V` or middle-click to paste the primary selection in most terminal environments.
+#
+#### Example: Copying a File Path
+#To copy the path of a file to the clipboard:
+#
+#```bash
+#echo "/path/to/your/file" | xclip -selection clipboard
+#```
+#
+#This will make the file path available to paste in a file manager or another application.
+
+# To check size of all flatpak apps:
+# flatpak list --app --columns=name,size
+
+# mpv video player
+# use '{' '}' keys to decrease or increase the playback speed of videos
+#sudo apt install mpv -y
+
+# fm6000
+curl https://codeberg.org/anhsirk0/fetch-master-6000/raw/branch/main/fm6000.pl --output fm6000
+chmod +x fm6000
+mkdir -p ~/.local/bin/
+cp fm6000 ~/.local/bin/
+
+# setup symlink to config files
+ln -s ~/projects/Configs/Pop_OS/dotfiles/fish/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/nvim/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/ranger/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/tmux/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/bashrc_extras.sh ~/
+
+# use ls -l ~/.config/ to check symlinks
+echo "source ~/bashrc_extras.sh" >>~/.bashrc
+
+# more tools
+sudo apt install -y ncdu bat cmake htop rpi-imager cheese tree neofetch cmatrix fish xsel ranger
+
+# 7zip
+sudo apt install p7zip-full
+
+# postgresql
+#sudo apt install -y postgresql
+
+# rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# fancy version of ls command
+cargo install exa
+
+# starship
+curl -sS https://starship.rs/install.sh | sh
+
+# oh-my-fish
+# additional tools set up not in the arch repo:
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+omf install bang-bang
+omf install https://github.com/Alaz-Oz/fish-insulter
+
+# neovim version manager
+cargo install --git https://github.com/MordechaiHadad/bob.git
+
+# neovim build from source
+# build prereqs
+sudo apt-get install ninja-build gettext cmake unzip curl build-essential -y
+
+# build neovim from source
+git clone https://github.com/neovim/neovim /tmp/neovim/
+cd /tmp/neovim/
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+git checkout stable
+sudo make install
+
+# cptv from source (previewer for lf file manager)
+#sudo apt install -y libssl-dev libmagic-dev file openssl imagemagick coreutils
+
+#git clone https://github.com/NikitaIvanovV/ctpv /tmp/cptv && cd /tmp/ctpv && make && sudo make install
+
+# get latest dotnet sdk and runtime
+wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+chmod +x ./dotnet-install.sh
+./dotnet-install.sh
+rm -f ./dotnet-install.sh
+
+# for connecting a shared folder to a windows computer
+sudo apt install samba -y
+
+# tmux plugins (hit prefix key + shift + i to install plugins)
+git clone https://github.com/tmux-plugins/tpm ~/projects/Configs/Pop_OS/dotfiles/tmux/plugins/
+
+echo -e "type this in terminal if tmux is already running
+tmux source ~/.config/tmux/tmux.conf"
+
+echo -e "To swap caps lock and esc, install gnome tweaks from pop shop, go to keyboard & mouse and find it in additional options"
+
+# nodejs and python
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&
+  sudo apt install -y nodejs python3-pip
+
+# to copy terminal command output to clipboard on xorg:
+# echo "[your_linux_command]" | xsel -b
+
+# bleeding edge trash-cli useful for tools such as lf
+#sudo pip install git+https://github.com/andreafrancia/trash-cli
+
+### Script is done ###
+echo -e "$CNT - Script had completed!"
