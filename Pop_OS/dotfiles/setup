@@ -243,7 +243,7 @@ rm -f ./dotnet-install.sh
 sudo apt install samba -y
 
 # tmux plugins (hit prefix key + shift + i to install plugins)
-git clone https://github.com/tmux-plugins/tpm ~/Documents/GitHub/Configs/Pop_OS/dotfiles/tmux/plugins/
+git clone https://github.com/tmux-plugins/tpm ~/Documents/GitHub/Configs/Pop_OS/dotfiles/tmux/plugins/tpm/
 
 echo -e "type this in terminal if tmux is already running
 tmux source ~/.config/tmux/tmux.conf"
