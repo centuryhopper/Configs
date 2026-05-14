@@ -162,7 +162,7 @@ cp ~/Documents/GitHub/Configs/Pop_OS/dotfiles/nightlight_command ~/
 echo "source ~/bashrc_extras.sh" >>~/.bashrc
 
 # more tools
-sudo apt install -y ncdu bat cmake htop rpi-imager cheese tree neofetch cmatrix fish xsel
+sudo apt install -y ncdu bat cmake htop rpi-imager cheese tree neofetch cmatrix fish xsel ranger
 
 # iphone transfer Files
 sudo apt install ifuse
