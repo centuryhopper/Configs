@@ -100,11 +100,11 @@ mkdir -p ~/.local/bin/
 cp fm6000 ~/.local/bin/
 
 # setup symlink to config files
-ln -s ~/projects/Configs/Pop_OS/dotfiles/fish/ ~/.config/
-ln -s ~/projects/Configs/Pop_OS/dotfiles/nvim/ ~/.config/
-ln -s ~/projects/Configs/Pop_OS/dotfiles/ranger/ ~/.config/
-ln -s ~/projects/Configs/Pop_OS/dotfiles/tmux/ ~/.config/
-ln -s ~/projects/Configs/Pop_OS/dotfiles/bashrc_extras.sh ~/
+ln -s ~/projects/Configs/windows_11/dotfiles/fish/ ~/.config/
+ln -s ~/projects/Configs/windows_11/dotfiles/nvim/ ~/.config/
+ln -s ~/projects/Configs/windows_11/dotfiles/ranger/ ~/.config/
+ln -s ~/projects/Configs/windows_11/dotfiles/tmux/ ~/.config/
+ln -s ~/projects/Configs/windows_11/dotfiles/bashrc_extras.sh ~/
 
 # use ls -l ~/.config/ to check symlinks
 echo "source ~/bashrc_extras.sh" >>~/.bashrc
@@ -162,7 +162,7 @@ rm -f ./dotnet-install.sh
 sudo apt install samba -y
 
 # tmux plugins (hit prefix key + shift + i to install plugins)
-git clone https://github.com/tmux-plugins/tpm ~/projects/Configs/Pop_OS/dotfiles/tmux/plugins/
+git clone https://github.com/tmux-plugins/tpm ~/projects/Configs/windows_11/dotfiles/tmux/plugins/
 
 echo -e "type this in terminal if tmux is already running
 tmux source ~/.config/tmux/tmux.conf"
