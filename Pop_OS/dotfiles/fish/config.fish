@@ -131,6 +131,7 @@ alias nightlight='echo "# From TTY (Ctrl+Alt+F3): Example: sudo drm_colortemp -d
 
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias pbclear='xclip -selection clipboard /dev/null'
 
 set -x BROWSER /usr/bin/firefox
 set -gx VISUAL nvim
