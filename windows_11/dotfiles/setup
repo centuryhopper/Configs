@@ -12,82 +12,31 @@ INSTLOG="install.log"
 #clear the screen
 clear
 
-# notify-send
-#sudo apt install libnotify-bin -y
+# python poetry package manager
+curl -sSL https://install.python-poetry.org | python3 -
 
-# grub-install (for creating a windows 11 bootable usb)
-#sudo apt install grub-pc-bin grub-efi -y
+# pyenv
+curl https://pyenv.run | bash
+
+# add pyenv to fish config
+set -Ux PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin
+
+# install a certain python version
+# pyenv install 3.12.10
+
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt update && sudo apt upgrade
+sudo apt install fish -y
+
+sudo locale-gen en_US.UTF-8
+sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+# rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # terminal copy to clipboard tool
 sudo apt install xclip -y
-#Using `xclip` in a Linux terminal like Pop!_OS is a powerful way to manage text via the clipboard from the command line. Here's how to use it:
-#
-#### 1. **Install `xclip`**
-#If `xclip` isn't already installed, you can add it using:
-#
-#```bash
-#sudo apt update
-#sudo apt install xclip
-#```
-#
-#### 2. **Copy to the Clipboard**
-#To copy the contents of a file or command output to the clipboard, use:
-#
-#```bash
-#cat file.txt | xclip -selection clipboard
-#```
-#
-#Or directly:
-#
-#```bash
-#xclip -selection clipboard < file.txt
-#```
-#
-#You can also copy command output:
-#
-#```bash
-#echo "Hello, clipboard!" | xclip -selection clipboard
-#```
-#
-#### 3. **Paste from the Clipboard**
-#To paste clipboard content to the terminal or another file:
-#
-#```bash
-#xclip -selection clipboard -o
-#```
-#
-#For example, save clipboard content to a file:
-#
-#```bash
-#xclip -selection clipboard -o > output.txt
-#```
-#
-#### 4. **Additional Options**
-#- Copy and paste with the **primary selection** (text selected with the mouse):
-#
-#  **Copy:**
-#  ```bash
-#  echo "Primary selection" | xclip -selection primary
-#  ```
-#
-#  **Paste:**
-#  ```bash
-#  xclip -selection primary -o
-#  ```
-#
-#- Use `Ctrl + Shift + V` or middle-click to paste the primary selection in most terminal environments.
-#
-#### Example: Copying a File Path
-#To copy the path of a file to the clipboard:
-#
-#```bash
-#echo "/path/to/your/file" | xclip -selection clipboard
-#```
-#
-#This will make the file path available to paste in a file manager or another application.
-
-# To check size of all flatpak apps:
-# flatpak list --app --columns=name,size
 
 # mpv video player
 # use '{' '}' keys to decrease or increase the playback speed of videos
@@ -109,20 +58,42 @@ ln -s ~/projects/Configs/windows_11/dotfiles/bashrc_extras.sh ~/
 # use ls -l ~/.config/ to check symlinks
 echo "source ~/bashrc_extras.sh" >>~/.bashrc
 
+# sync windows directories to root folder
+ln -s /mnt/c/Users/$USER/Downloads ~/downloads
+ln -s /mnt/c/Users/$USER/Desktop ~/desktop
+ln -s /mnt/c/Users/$USER/Pictures ~/pictures
+ln -s /mnt/c/Users/$USER/Videos ~/videos
+
 # more tools
-sudo apt install -y ncdu bat cmake htop rpi-imager cheese tree neofetch cmatrix fish xsel ranger
+sudo apt install -y ncdu cmake htop rpi-imager cheese tree neofetch cmatrix fish xsel fzf \ # fuzzy search
+sqlite3 \
+  zoxide \ # Remembers directories you visit often
+ripgrep \ # insanely fast searching
+bat \ # better cat
+eza \ # modern replacement for ls
+lazygit \ # pairs beautifully with LazyVim.
+btop \ # modern htop replacement
+direnv \ # automatically loads env vars per project.
+delta \ # makes diffs gorgeous
+dust \ # better du
+procs \ # cleaner process listing
+
+# yt-dlp (download youtube urls to local machine)
+sudo add-apt-repository -y ppa:tomtomtom/yt-dlp # Add ppa repo to apt
+sudo apt update                                 # Update package list
+sudo apt install yt-dlp
+
+# cleaner find
+cargo install fd-find
 
 # 7zip
 sudo apt install p7zip-full
 
-# postgresql
-#sudo apt install -y postgresql
-
-# rustup
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
 # fancy version of ls command
-cargo install exa
+cargo install eza
+
+# rust based terminal file manager
+#cargo install --force yazi-build
 
 # starship
 curl -sS https://starship.rs/install.sh | sh
@@ -147,19 +118,14 @@ make CMAKE_BUILD_TYPE=RelWithDebInfo
 git checkout stable
 sudo make install
 
-# cptv from source (previewer for lf file manager)
-#sudo apt install -y libssl-dev libmagic-dev file openssl imagemagick coreutils
-
-#git clone https://github.com/NikitaIvanovV/ctpv /tmp/cptv && cd /tmp/ctpv && make && sudo make install
+# mise
+curl https://mise.run | sh
 
 # get latest dotnet sdk and runtime
 wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
 chmod +x ./dotnet-install.sh
 ./dotnet-install.sh
 rm -f ./dotnet-install.sh
-
-# for connecting a shared folder to a windows computer
-sudo apt install samba -y
 
 # tmux plugins (hit prefix key + shift + i to install plugins)
 git clone https://github.com/tmux-plugins/tpm ~/projects/Configs/windows_11/dotfiles/tmux/plugins/tpm/
@@ -182,5 +148,22 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&
 # bleeding edge trash-cli useful for tools such as lf
 #sudo pip install git+https://github.com/andreafrancia/trash-cli
 
+# faster neofetch
+git clone https://github.com/fastfetch-cli/fastfetch.git && cd fastfetch
+cmake -B build
+cmake --build build
+sudo cmake --install build
+
 ### Script is done ###
 echo -e "$CNT - Script had completed!"
+
+# run this in powershell as admin
+# For showing toast notifications in windows:
+# RemoteSigned = allows local scripts + trusted modules
+# Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+#
+#
+# Install-Module BurntToast -Scope CurrentUser -Force
+#
+# this should work now:
+# powershell.exe -Command "Import-Module BurntToast; New-BurntToastNotification -Text 'WSL', 'Hello from Linux'"
