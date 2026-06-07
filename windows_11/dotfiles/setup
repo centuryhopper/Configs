@@ -16,11 +16,11 @@ clear
 curl -sSL https://install.python-poetry.org | python3 -
 
 # pyenv
-curl https://pyenv.run | bash
+#curl https://pyenv.run | bash
 
 # add pyenv to fish config
-set -Ux PYENV_ROOT $HOME/.pyenv
-fish_add_path $PYENV_ROOT/bin
+#set -Ux PYENV_ROOT $HOME/.pyenv
+#fish_add_path $PYENV_ROOT/bin
 
 # install a certain python version
 # pyenv install 3.12.10
