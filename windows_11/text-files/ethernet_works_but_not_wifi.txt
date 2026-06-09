@@ -1,0 +1,8 @@
+open cmd prompt as admin
+type the following two commands and then reboot pc
+
+ipconfig /flushdns
+netsh winsock reset
+
+
+
