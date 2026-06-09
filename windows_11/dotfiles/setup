@@ -12,22 +12,8 @@ INSTLOG="install.log"
 #clear the screen
 clear
 
-# python poetry package manager
-curl -sSL https://install.python-poetry.org | python3 -
-
-# pyenv
-#curl https://pyenv.run | bash
-
-# add pyenv to fish config
-#set -Ux PYENV_ROOT $HOME/.pyenv
-#fish_add_path $PYENV_ROOT/bin
-
-# install a certain python version
-# pyenv install 3.12.10
-
-sudo apt-add-repository ppa:fish-shell/release-3
+#sudo apt-add-repository ppa:fish-shell/release-3
 sudo apt update && sudo apt upgrade
-sudo apt install fish -y
 
 sudo locale-gen en_US.UTF-8
 sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
@@ -35,12 +21,15 @@ sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 # rustup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-# terminal copy to clipboard tool
-sudo apt install xclip -y
+# xclip terminal copy to clipboard tool
+# yt-dlp (download youtube urls to local machine)
+sudo add-apt-repository -y ppa:tomtomtom/yt-dlp # Add ppa repo to apt
+sudo apt update                                 # Update package list
+sudo apt install yt-dlp
+sudo apt install fish xclip bat ncdu cmake htop rpi-imager tree cmatrix fish xsel fzf sqlite3 p7zip-full lazygit ripgrep direnv btop
 
 # mpv video player
 # use '{' '}' keys to decrease or increase the playback speed of videos
-#sudo apt install mpv -y
 
 # fm6000
 curl https://codeberg.org/anhsirk0/fetch-master-6000/raw/branch/main/fm6000.pl --output fm6000
@@ -65,33 +54,13 @@ ln -s /mnt/c/Users/$USER/Pictures ~/pictures
 ln -s /mnt/c/Users/$USER/Videos ~/videos
 
 # more tools
-sudo apt install -y ncdu cmake htop rpi-imager cheese tree neofetch cmatrix fish xsel fzf \ # fuzzy search
-sqlite3 \
-  zoxide \ # Remembers directories you visit often
-ripgrep \ # insanely fast searching
-bat \ # better cat
-eza \ # modern replacement for ls
-lazygit \ # pairs beautifully with LazyVim.
-btop \ # modern htop replacement
-direnv \ # automatically loads env vars per project.
-delta \ # makes diffs gorgeous
-dust \ # better du
-procs \ # cleaner process listing
-uv
-
-# yt-dlp (download youtube urls to local machine)
-sudo add-apt-repository -y ppa:tomtomtom/yt-dlp # Add ppa repo to apt
-sudo apt update                                 # Update package list
-sudo apt install yt-dlp
+cargo install zoxide bat eza du-dust procs fd-find
 
 # cleaner find
-cargo install fd-find
-
-# 7zip
-sudo apt install p7zip-full
+# fd-find
 
 # fancy version of ls command
-cargo install eza
+# eza
 
 # rust based terminal file manager
 #cargo install --force yazi-build
@@ -106,7 +75,7 @@ omf install bang-bang
 omf install https://github.com/Alaz-Oz/fish-insulter
 
 # neovim version manager
-cargo install --git https://github.com/MordechaiHadad/bob.git
+#cargo install --git https://github.com/MordechaiHadad/bob.git
 
 # neovim build from source
 # build prereqs
@@ -137,17 +106,12 @@ git clone https://github.com/tmux-plugins/tpm ~/projects/Configs/windows_11/dotf
 echo -e "type this in terminal if tmux is already running
 tmux source ~/.config/tmux/tmux.conf"
 
-echo -e "To swap caps lock and esc, install gnome tweaks from pop shop, go to keyboard & mouse and find it in additional options"
-
 # nodejs and python
-curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&
-  sudo apt install -y nodejs python3-pip
-
-# to copy terminal command output to clipboard on xorg:
-# echo "[your_linux_command]" | xsel -b
+#curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&
+#  sudo apt install -y nodejs python3-pip
 
 # bleeding edge trash-cli useful for tools such as lf
-#sudo pip install git+https://github.com/andreafrancia/trash-cli
+uv tool install git+https://github.com/andreafrancia/trash-cli
 
 # faster neofetch
 git clone https://github.com/fastfetch-cli/fastfetch.git && cd fastfetch

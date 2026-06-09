@@ -119,4 +119,4 @@
 if [[ $- == *i* ]]; then
   exec fish
 fi
-. "$HOME/.cargo/env"
+. "$HOME/.cargo/env.fish"
