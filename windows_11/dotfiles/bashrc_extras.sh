@@ -120,3 +120,6 @@ if [[ $- == *i* ]]; then
   exec fish
 fi
 . "$HOME/.cargo/env.fish"
+
+# Remove Windows VS Code from PATH (fixes "code ." not opening WSL mode)
+export PATH=$(echo "$PATH" | tr ':' '\n' | grep -v "Program Files.*Code" | tr '\n' ':')

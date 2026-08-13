@@ -26,7 +26,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 sudo add-apt-repository -y ppa:tomtomtom/yt-dlp # Add ppa repo to apt
 sudo apt update                                 # Update package list
 sudo apt install yt-dlp
-sudo apt install fish xclip bat ncdu cmake htop rpi-imager tree cmatrix fish xsel fzf sqlite3 p7zip-full lazygit ripgrep direnv btop
+sudo apt install fish xclip ncdu cmake htop rpi-imager tree cmatrix fish xsel fzf sqlite3 p7zip-full lazygit ripgrep direnv btop jq nmap mtr clang clangd netcat-openbsd
 
 # mpv video player
 # use '{' '}' keys to decrease or increase the playback speed of videos
@@ -38,23 +38,23 @@ mkdir -p ~/.local/bin/
 cp fm6000 ~/.local/bin/
 
 # setup symlink to config files
-ln -s ~/projects/Configs/windows_11/dotfiles/fish/ ~/.config/
-ln -s ~/projects/Configs/windows_11/dotfiles/nvim/ ~/.config/
-ln -s ~/projects/Configs/windows_11/dotfiles/ranger/ ~/.config/
-ln -s ~/projects/Configs/windows_11/dotfiles/tmux/ ~/.config/
-ln -s ~/projects/Configs/windows_11/dotfiles/bashrc_extras.sh ~/
+ln -sf ~/projects/Configs/windows_11/dotfiles/fish/ ~/.config/
+ln -sf ~/projects/Configs/windows_11/dotfiles/nvim/ ~/.config/
+ln -sf ~/projects/Configs/windows_11/dotfiles/ranger/ ~/.config/
+ln -sf ~/projects/Configs/windows_11/dotfiles/tmux/ ~/.config/
+ln -sf ~/projects/Configs/windows_11/dotfiles/bashrc_extras.sh ~/
 
 # use ls -l ~/.config/ to check symlinks
 echo "source ~/bashrc_extras.sh" >>~/.bashrc
 
 # sync windows directories to root folder
-ln -s /mnt/c/Users/$USER/Downloads ~/downloads
-ln -s /mnt/c/Users/$USER/Desktop ~/desktop
-ln -s /mnt/c/Users/$USER/Pictures ~/pictures
-ln -s /mnt/c/Users/$USER/Videos ~/videos
+ln -sf /mnt/c/Users/$USER/Downloads ~/downloads
+ln -sf /mnt/c/Users/$USER/Desktop ~/desktop
+ln -sf /mnt/c/Users/$USER/Pictures ~/pictures
+ln -sf /mnt/c/Users/$USER/Videos ~/videos
 
 # more tools
-cargo install zoxide bat eza du-dust procs fd-find
+cargo install zoxide bat eza du-dust procs fd-find sd ast-grep yq git-delta doggo bandwhich bottom hyperfine dua-cli watchexec-cli tokei bacon usql litecli gping sshs
 
 # cleaner find
 # fd-find
@@ -113,11 +113,35 @@ tmux source ~/.config/tmux/tmux.conf"
 # bleeding edge trash-cli useful for tools such as lf
 uv tool install git+https://github.com/andreafrancia/trash-cli
 
+# terminal coding assistants
+uv tool install aider-chat
+
+# python linter
+uv tool install ruff@latest
+
+# pytest
+# for individual python projects:
+# uv add --dev pytest
+# run pytest: uv run pytest
+
 # faster neofetch
 git clone https://github.com/fastfetch-cli/fastfetch.git && cd fastfetch
 cmake -B build
 cmake --build build
 sudo cmake --install build
+
+# Fix for better terminal paging + colors in Linux (fish shell)
+
+# Makes LESS allow ANSI color codes (fixes colors in tools like bat, git, man)
+set -Ux LESS -R
+
+# -U  = universal (persists across fish sessions)
+# -x  = export to environment (so child processes can use it)
+# -R  = raw output (keeps color escape sequences)
+
+# Effect:
+# - fixes broken/missing colors in bat, git diff, man, etc.
+# - ensures less doesn't strip ANSI formatting
 
 ### Script is done ###
 echo -e "$CNT - Script had completed!"
