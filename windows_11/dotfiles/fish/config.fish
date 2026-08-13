@@ -89,7 +89,7 @@ alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
 # Recent installed packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
-alias bat='batcat'
+#alias bat='batcat'
 
 # Replace some more things with better alternatives
 alias cat='bat --style header --style snip --style changes --style header'
@@ -118,22 +118,39 @@ alias shutdown='powershell.exe shutdown /s /t 0'
 alias reboot='powershell.exe shutdown /r /t 0'
 alias suspend='powershell.exe -Command "rundll32.exe powrprof.dll,SetSuspendState 0,1,0"'
 alias open='explorer.exe .'
+alias adb='/mnt/c/Android/platform-tools/adb.exe'
+alias emulator '/mnt/c/Android/emulator/emulator.exe'
+# Device management
+alias adbdevices 'adb devices -l'
+alias adbroot 'adb root'
+alias adbreboot 'adb reboot'
+
+# Common shell operations
+alias adbshell 'adb shell'
+alias adblogcat 'adb logcat'
+
+# App management
+alias adbinstall 'adb install'
+alias adbuninstall 'adb uninstall'
+
+# Screenshots
+alias adbscreenshot 'adb exec-out screencap -p > screenshot.png'
 alias r='ranger'
 
+function wsl_code
+    code --remote wsl+Ubuntu "$PWD"
+end
 
 # activate mise
 mise activate fish | source
 
 zoxide init fish | source
 
-
 set -gx VISUAL nvim
-
 
 function notify
     powershell.exe -Command "Import-Module BurntToast; New-BurntToastNotification -Text '$argv[1]', '$argv[2]'"
 end
-
 
 set -x LF_ICONS "\
 di=📁:\
