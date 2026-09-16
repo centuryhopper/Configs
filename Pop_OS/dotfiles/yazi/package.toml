@@ -3,5 +3,12 @@ use = "yazi-rs/plugins:smart-enter"
 rev = "58c4f4e"
 hash = "187cc58ba7ac3befd49c342129e6f1b6"
 
-[flavor]
-deps = []
+[[flavor.deps]]
+use = "BennyOe/tokyo-night"
+rev = "8e6296f"
+hash = "d9da921c3bd37ba32ee27a8a7a40461f"
+
+[[flavor.deps]]
+use = "Chromium-3-Oxide/everforest-medium"
+rev = "e1ead7b"
+hash = "f7dc46200e53da5e94858630184a9220"
