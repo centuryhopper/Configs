@@ -152,6 +152,7 @@ flatpak install flathub io.github.shiftey.Desktop --user -y
 ln -s ~/projects/Configs/Pop_OS/dotfiles/fish/ ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/nvim/ ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/yazi/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/kitty/ ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/tmux/ ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/bashrc_extras.sh ~/
 
