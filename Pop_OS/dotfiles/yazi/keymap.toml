@@ -1,0 +1,65 @@
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "unix"
+run  = 'shell "$SHELL" --block'
+desc = "Open shell here"
+
+[[mgr.prepend_keymap]]
+on   = "e"
+run  = 'shell --block -- nvim %h'
+desc = "Edit hovered file in Neovim"
+
+[[mgr.prepend_keymap]]
+on   = "<Right>"
+run  = "plugin smart-enter"
+desc = "Enter directory or open file"
+
+[[mgr.prepend_keymap]]
+on   = "l"
+run  = "plugin smart-enter"
+desc = "Enter directory or open file"
+
+[[mgr.prepend_keymap]]
+on   = [ "d", "T" ]
+run  = "remove"
+desc = "Move selected files to trash"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "p" ]
+run  = "cd ~/projects"
+desc = "Go to projects"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "d" ]
+run  = "cd ~/Downloads"
+desc = "Go to Downloads"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "H" ]
+run  = "cd ~"
+desc = "Go to home"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "c" ]
+run  = "cd ~/.config"
+desc = "Go to config"
+
+[[mgr.prepend_keymap]]
+on   = "r"
+run  = "rename"
+desc = "Rename"
+
+[[mgr.prepend_keymap]]
+on   = "y"
+run  = "yank"
+desc = "Copy"
+
+[[mgr.prepend_keymap]]
+on   = "x"
+run  = "yank --cut"
+desc = "Cut"
+
+[[mgr.prepend_keymap]]
+on   = "p"
+run  = "paste"
+desc = "Paste"
