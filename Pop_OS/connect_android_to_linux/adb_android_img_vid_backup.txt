@@ -1,0 +1,120 @@
+ADB Android Photo / Video Backup
+
+Use these commands to inspect and copy photos/videos from an Android phone to Linux over ADB.
+
+1. Check that the phone is connected
+adb devices
+
+Expected output should look similar to:
+
+List of devices attached
+192.168.1.221:34353    device
+
+If more than one Android device is connected, specify the device with:
+
+adb -s PHONE_IP:PORT <command>
+
+Example:
+
+adb -s 192.168.1.221:34353 shell
+2. Common Android photo and video directories
+Camera photos and videos
+adb shell ls /sdcard/DCIM/Camera
+
+This is usually where photos and videos taken with the phone's camera are stored.
+
+Pictures
+adb shell ls /sdcard/Pictures
+
+This may contain screenshots, edited images, downloaded images, and app-created image folders.
+
+Movies
+adb shell ls /sdcard/Movies
+
+This may contain videos created, downloaded, or saved by apps.
+
+3. View directory structure
+
+Show all directories under Pictures:
+
+adb shell find /sdcard/Pictures -type d
+
+Limit the output to a few directory levels:
+
+adb shell find /sdcard/Pictures -maxdepth 3 -type d
+
+Recursively show directories and files:
+
+adb shell ls -R /sdcard/Pictures
+
+The same commands can be used with other locations:
+
+adb shell find /sdcard/DCIM -type d
+adb shell find /sdcard/Movies -type d
+4. Create a local backup directory
+mkdir -p ~/galaxy_backup
+
+This creates:
+
+~/galaxy_backup/
+
+The -p option prevents an error if the directory already exists.
+
+5. Copy files from Android to Linux
+
+Copy the entire camera folder:
+
+adb pull /sdcard/DCIM/Camera ~/galaxy_backup/
+
+Copy the entire Pictures folder:
+
+adb pull /sdcard/Pictures ~/galaxy_backup/
+
+Copy the entire Movies folder:
+
+adb pull /sdcard/Movies ~/galaxy_backup/
+
+Afterward, the local directory will look roughly like:
+
+~/galaxy_backup/
+├── Camera/
+├── Pictures/
+└── Movies/
+6. When multiple Android devices are connected
+
+First check their ADB IDs:
+
+adb devices
+
+Then specify the phone using -s:
+
+adb -s 192.168.1.221:34353 pull \
+    /sdcard/DCIM/Camera \
+    ~/galaxy_backup/
+
+General syntax:
+
+adb -s DEVICE_SERIAL pull REMOTE_PATH LOCAL_PATH
+
+For wireless ADB, the device serial is normally:
+
+IP_ADDRESS:PORT
+Quick Reference
+# Check connection
+adb devices
+
+# Browse common media directories
+adb shell ls /sdcard/DCIM/Camera
+adb shell ls /sdcard/Pictures
+adb shell ls /sdcard/Movies
+
+# Show directory tree
+adb shell find /sdcard/Pictures -type d
+
+# Create backup directory
+mkdir -p ~/galaxy_backup
+
+# Copy media to Linux
+adb pull /sdcard/DCIM/Camera ~/galaxy_backup/
+adb pull /sdcard/Pictures ~/galaxy_backup/
+adb pull /sdcard/Movies ~/galaxy_backup/

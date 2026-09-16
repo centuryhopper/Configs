@@ -69,6 +69,10 @@ function rust_find
     cargo run --manifest-path=/home/leo_zhang/Documents/GitHub/Tools/rust_tools/file_management/Cargo.toml search $argv[1] $argv[2]
 end
 
+function suspend_at
+    echo 'systemctl suspend' | sudo at $argv[1]
+end
+
 fish_add_path -g "/home/leo_zhang/.local/bin/"
 
 fm6000 -c red -dog -o Pop!_OS -n -m 8 -g 12 -l 40
@@ -116,10 +120,6 @@ alias ACP='git add . && git commit -m"update" && git push'
 alias SLEEP='systemctl suspend'
 alias conf='nvim /home/leo_zhang/.config/hypr/hyprland.conf'
 alias v='nvim'
-alias r='ranger'
-#alias lf='lfcd'
-#alias l=lf
-#alias lfconf='nvim ~/.config/lf/lfrc'
 alias tl='trash-list'
 alias m='math'
 alias birth='stat / | grep Birth'
@@ -132,6 +132,8 @@ alias nightlight='echo "# From TTY (Ctrl+Alt+F3): Example: sudo drm_colortemp -d
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias pbclear='xclip -selection clipboard /dev/null'
+
+alias COUNT='ls -1 | wc -l'
 
 set -x BROWSER /usr/bin/firefox
 set -gx VISUAL nvim
@@ -247,213 +249,3 @@ ln=01;36:\
 di=01;34:\
 ex=01;32:\
 "
-
-function ranger --description 'Ranger that cds into last visited dir on exit'
-    # Temporary file to store last directory
-    set -l tmp (mktemp)
-
-    # Launch ranger with choosedir pointing to temp file
-    command ranger --choosedir="$tmp" $argv
-
-    # If the temp file exists and has a valid directory, cd into it
-    if test -f "$tmp"
-        set -l dir (string trim (cat "$tmp"))
-        rm -f $tmp
-        if test -d "$dir"
-            cd "$dir"
-        end
-    end
-end
-
-# needed so that directory navigation is consistent in and out of lf
-#function lfcd --wraps=lf --description 'lf then cd into the selected dir'
-#    set -l tmp (mktemp)
-#
-#    # Run lf — it may or may not write to tmp
-#    command lf -last-dir-path="$tmp" $argv
-#
-#    # If tmp doesn't exist OR is empty, just bail silently
-#    if not test -f "$tmp"
-#        return
-#    end
-#
-#    set -l dir (string trim (cat "$tmp"))
-#    rm -f "$tmp"
-#
-#    # Bail cleanly if dir is empty or invalid
-#    if test -z "$dir"
-#        return
-#    end
-#    if not test -d "$dir"
-#        return
-#    end
-#
-#    # Do the cd
-#    if test "$dir" != (pwd)
-#        cd "$dir"
-#    end
-#end
-
-# lf icons
-#set -x LF_ICONS "\
-#tw=:\
-#st=:\
-#ow=:\
-#dt=:\
-#di=:\
-#fi=:\
-#ln=:\
-#or=:\
-#ex=:\
-#*.c=:\
-#*.cc=:\
-#*.clj=:\
-#*.coffee=:\
-#*.cpp=:\
-#*.css=:\
-#*.d=:\
-#*.dart=:\
-#*.erl=:\
-#*.exs=:\
-#*.fs=:\
-#*.go=:\
-#*.h=:\
-#*.hh=:\
-#*.hpp=:\
-#*.hs=:\
-#*.html=:\
-#*.java=:\
-#*.jl=:\
-#*.js=:\
-#*.json=:\
-#*.lua=:\
-#*.md=:\
-#*.php=:\
-#*.pl=:\
-#*.pro=:\
-#*.py=:\
-#*.rb=:\
-#*.rs=:\
-#*.scala=:\
-#*.ts=:\
-#*.vim=:\
-#*.cmd=:\
-#*.ps1=:\
-#*.sh=:\
-#*.bash=:\
-#*.zsh=:\
-#*.fish=:\
-#*.tar=:\
-#*.tgz=:\
-#*.arc=:\
-#*.arj=:\
-#*.taz=:\
-#*.lha=:\
-#*.lz4=:\
-#*.lzh=:\
-#*.lzma=:\
-#*.tlz=:\
-#*.txz=:\
-#*.tzo=:\
-#*.t7z=:\
-#*.zip=:\
-#*.z=:\
-#*.dz=:\
-#*.gz=:\
-#*.lrz=:\
-#*.lz=:\
-#*.lzo=:\
-#*.xz=:\
-#*.zst=:\
-#*.tzst=:\
-#*.bz2=:\
-#*.bz=:\
-#*.tbz=:\
-#*.tbz2=:\
-#*.tz=:\
-#*.deb=:\
-#*.rpm=:\
-#*.jar=:\
-#*.war=:\
-#*.ear=:\
-#*.sar=:\
-#*.rar=:\
-#*.alz=:\
-#*.ace=:\
-#*.zoo=:\
-#*.cpio=:\
-#*.7z=:\
-#*.rz=:\
-#*.cab=:\
-#*.wim=:\
-#*.swm=:\
-#*.dwm=:\
-#*.esd=:\
-#*.jpg=:\
-#*.jpeg=:\
-#*.mjpg=:\
-#*.mjpeg=:\
-#*.gif=:\
-#*.bmp=:\
-#*.pbm=:\
-#*.pgm=:\
-#*.ppm=:\
-#*.tga=:\
-#*.xbm=:\
-#*.xpm=:\
-#*.tif=:\
-#*.tiff=:\
-#*.png=:\
-#*.svg=:\
-#*.svgz=:\
-#*.mng=:\
-#*.pcx=:\
-#*.mov=:\
-#*.mpg=:\
-#*.mpeg=:\
-#*.m2v=:\
-#*.mkv=:\
-#*.webm=:\
-#*.ogm=:\
-#*.mp4=:\
-#*.m4v=:\
-#*.mp4v=:\
-#*.vob=:\
-#*.qt=:\
-#*.nuv=:\
-#*.wmv=:\
-#*.asf=:\
-#*.rm=:\
-#*.rmvb=:\
-#*.flc=:\
-#*.avi=:\
-#*.fli=:\
-#*.flv=:\
-#*.gl=:\
-#*.dl=:\
-#*.xcf=:\
-#*.xwd=:\
-#*.yuv=:\
-#*.cgm=:\
-#*.emf=:\
-#*.ogv=:\
-#*.ogx=:\
-#*.aac=:\
-#*.au=:\
-#*.flac=:\
-#*.m4a=:\
-#*.mid=:\
-#*.midi=:\
-#*.mka=:\
-#*.mp3=:\
-#*.mpc=:\
-#*.ogg=:\
-#*.ra=:\
-#*.wav=:\
-#*.oga=:\
-#*.opus=:\
-#*.spx=:\
-#*.xspf=:\
-#*.pdf=:\
-#*.nix=:\
-#"

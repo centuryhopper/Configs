@@ -1,0 +1,55 @@
+# 1) On your Galaxy S26+:
+#
+# Settings
+#   -> Developer options
+#   -> Wireless debugging
+#   -> Turn it ON
+#
+# Then tap:
+#   "Pair device with pairing code"
+#
+# Your phone will show something like:
+#
+# IP address & port: 192.168.1.123:37145
+# Wi-Fi pairing code: 123456
+
+
+# 2) On Linux, pair the phone:
+adb pair 192.168.1.123:37145
+
+# Enter the 6-digit pairing code shown on the phone when prompted.
+
+
+# 3) Go back to the main "Wireless debugging" screen on the phone.
+#
+# Look for:
+#   IP address & port
+#
+# IMPORTANT:
+# This port is usually DIFFERENT from the pairing port.
+#
+# Example:
+#   192.168.1.123:40211
+
+
+# 4) Connect to the phone:
+adb connect 192.168.1.123:40211
+
+
+# 5) Verify the connection:
+adb devices
+
+# You should see something like:
+#
+# List of devices attached
+# 192.168.1.123:40211    device
+
+
+# 6) Test it:
+adb shell
+
+# Exit the phone shell with:
+exit
+
+
+

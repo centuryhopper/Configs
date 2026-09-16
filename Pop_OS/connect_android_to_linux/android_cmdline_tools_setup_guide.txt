@@ -1,0 +1,101 @@
+===============================================================================
+Android Command-Line Tools & Java Setup Guide (Pop!_OS & Fish Shell)
+===============================================================================
+
+OVERVIEW & DISK SPACE SAVINGS:
+------------------------------
+Installing only the Android Command-Line Tools instead of the full Android Studio
+IDE and Android Emulator saves approximately 10 GB to 20+ GB of disk space.
+
+Disk Space Comparison:
+  - Android Studio IDE + Caches: ~3.5 GB - 5 GB
+  - Android Emulator (AVD Images): ~8 GB - 15 GB per device
+  - Platform-Tools Only: ~20 MB download (~40 MB extracted)
+  - Command Line Tools + SDK Platform: ~250 MB download (~600 MB extracted)
+
+===============================================================================
+STEP 1: DIRECTORY STRUCTURE SETUP
+===============================================================================
+Android's `sdkmanager` requires a specific directory layout (`cmdline-tools/latest/bin`).
+
+Assuming you extracted `commandlinetools-linux-..._latest.zip` into `~/Android/Sdk`:
+
+    # Create the target directory
+    mkdir -p ~/Android/Sdk/cmdline-tools/latest
+
+    # Move extracted contents into 'latest'
+    mv ~/Android/Sdk/cmdline-tools/* ~/Android/Sdk/cmdline-tools/latest/ 2>/dev/null
+
+===============================================================================
+STEP 2: JAVA OPENJDK INSTALLATION & CONFIGURATION
+===============================================================================
+1. Install OpenJDK on Pop!_OS:
+
+    sudo apt update && sudo apt install -y openjdk-17-jdk
+
+2. Find your exact Java installation path:
+
+    realpath (which java)
+    # Example output: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+
+3. Set JAVA_HOME universally in Fish Shell (strip off `/bin/java`):
+
+    set -Ux JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64
+
+   *Note: If you get a warning that a global variable shadows JAVA_HOME, clear it:
+    set -e JAVA_HOME
+
+===============================================================================
+STEP 3: FISH SHELL ENVIRONMENT VARIABLES
+===============================================================================
+Export the Android SDK paths and ANDROID_HOME universally in Fish:
+
+    # Add tools and platform-tools to Fish path helper
+    set -Ua fish_user_paths ~/Android/Sdk/cmdline-tools/latest/bin
+    set -Ua fish_user_paths ~/Android/Sdk/platform-tools
+
+    # Set ANDROID_HOME environment variable
+    set -Ux ANDROID_HOME $HOME/Android/Sdk
+
+    # Flag Explanation:
+    #   -U : Universal variable (persists across sessions and reboots)
+    #   -a : Append to existing list/array variable
+    #   -x : Export to child processes/external commands
+
+===============================================================================
+STEP 4: SDKMANAGER & PACKAGE INSTALLATION
+===============================================================================
+1. Accept all Android SDK licenses:
+
+    sdkmanager --licenses
+
+2. Install Platform-Tools, Build-Tools, and Android Platform API:
+
+    # Option A: Latest Mainstream (Android 15 / API 35)
+    sdkmanager "platform-tools" "build-tools;35.0.0" "platforms;android-35"
+
+    # Option B: Newest Platform API (Android 16 / API 36)
+    sdkmanager "platform-tools" "build-tools;36.0.0" "platforms;android-36"
+
+===============================================================================
+STEP 5: USB PERMISSIONS (UDEV RULES) & PHYSICAL DEVICE
+===============================================================================
+1. Install Linux udev rules for non-root USB access to Android devices:
+
+    sudo apt update && sudo apt install -y android-sdk-platform-tools-common
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger
+
+2. Configure Physical Android Device:
+   - On Phone: Go to Settings > About Phone > Tap 'Build Number' 7 times.
+   - Go to Settings > Developer Options > Enable 'USB Debugging'.
+   - Plug device into PC via USB.
+
+3. Verify ADB Connection:
+
+    adb devices
+
+   - Confirm the prompt on your phone screen: "Always allow from this computer".
+   - Output should show: `<DEVICE_SERIAL>    device`
+
+===============================================================================

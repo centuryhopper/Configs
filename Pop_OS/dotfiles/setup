@@ -149,14 +149,14 @@ flatpak install flathub io.github.shiftey.Desktop --user -y
 #flatpak install flathub org.mypaint.MyPaint --user -y
 
 # setup symlink to config files
-ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/fish/ ~/.config/
-ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/nvim/ ~/.config/
-ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/ranger/ ~/.config/
-ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/tmux/ ~/.config/
-ln -s ~/Documents/GitHub/Configs/Pop_OS/dotfiles/bashrc_extras.sh ~/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/fish/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/nvim/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/yazi/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/tmux/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/bashrc_extras.sh ~/
 
 # copy the night light command over to home directory so that the user can easily recall the command in another tty when setting night light
-cp ~/Documents/GitHub/Configs/Pop_OS/dotfiles/nightlight_command ~/
+cp ~/projects/Configs/Pop_OS/dotfiles/nightlight_command ~/
 
 # use ls -l ~/.config/ to check symlinks
 echo "source ~/bashrc_extras.sh" >>~/.bashrc
@@ -243,7 +243,7 @@ rm -f ./dotnet-install.sh
 sudo apt install samba -y
 
 # tmux plugins (hit prefix key + shift + i to install plugins)
-git clone https://github.com/tmux-plugins/tpm ~/Documents/GitHub/Configs/Pop_OS/dotfiles/tmux/plugins/tpm/
+git clone https://github.com/tmux-plugins/tpm ~/projects/Configs/Pop_OS/dotfiles/tmux/plugins/tpm/
 
 echo -e "type this in terminal if tmux is already running
 tmux source ~/.config/tmux/tmux.conf"
@@ -290,7 +290,7 @@ sudo pip install git+https://github.com/andreafrancia/trash-cli
 #		done
 #
 #		echo -e "copying cron_contents to the crontab..."
-#		crontab ~/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/cron/cron_contents.txt
+#		crontab ~/projects/Configs/Pop_OS/dotfiles/extras/cron/cron_contents.txt
 #
 #    ### Install the starship shell ###
 #read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to activate the starship shell? (y,n) ' STAR

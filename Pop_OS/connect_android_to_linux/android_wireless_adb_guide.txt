@@ -1,0 +1,236 @@
+WIRELESS ADB CONNECTION GUIDE
+=============================
+
+This guide covers both methods of connecting an Android device to ADB wirelessly.
+
+--------------------------------------------------
+METHOD 1: OLDER ANDROID DEVICES
+(Android 10 and older, including Samsung Galaxy S9)
+--------------------------------------------------
+
+Requirements:
+- USB debugging enabled
+- Phone and computer connected to the same Wi-Fi network
+- ADB installed on the computer
+- USB cable required for the initial setup
+
+1. Enable Developer Options on the Android phone.
+
+   Usually:
+   Settings -> About phone -> Software information
+
+   Tap "Build number" 7 times.
+
+2. Enable USB debugging.
+
+   Settings -> Developer options -> USB debugging
+
+3. Connect the phone to the computer using USB.
+
+4. Verify that ADB can see the phone:
+
+   adb devices
+
+   If prompted on the phone, accept the USB debugging authorization.
+
+5. Tell Android's ADB daemon to listen over TCP port 5555:
+
+   adb tcpip 5555
+
+   You should see something similar to:
+
+   restarting in TCP mode port: 5555
+
+6. Find the phone's Wi-Fi IP address.
+
+   On Samsung devices, this is usually under:
+
+   Settings -> Connections -> Wi-Fi -> tap the gear next to the connected network
+
+   Example IP:
+
+   192.168.1.123
+
+7. Unplug the USB cable.
+
+8. Connect to the phone wirelessly:
+
+   adb connect 192.168.1.123:5555
+
+   Replace 192.168.1.123 with the phone's actual IP address.
+
+9. Verify the wireless connection:
+
+   adb devices
+
+   You should see something similar to:
+
+   List of devices attached
+   192.168.1.123:5555    device
+
+10. To disconnect:
+
+    adb disconnect 192.168.1.123:5555
+
+
+Important notes for older Android:
+
+- You normally only need the USB cable to initially run:
+
+  adb tcpip 5555
+
+- If the Wi-Fi connection drops but the phone has NOT rebooted, you can usually reconnect with:
+
+  adb connect PHONE_IP:5555
+
+- After rebooting the phone, you may need to reconnect by USB and run:
+
+  adb tcpip 5555
+
+  again.
+
+- The phone's IP address can change when reconnecting to Wi-Fi, so check it again if adb connect stops working.
+
+- Only use ADB over TCP on a trusted private network.
+
+
+--------------------------------------------------
+METHOD 2: NEWER ANDROID DEVICES
+(Android 11 and newer)
+--------------------------------------------------
+
+Newer Android versions have built-in Wireless debugging and do not require a USB cable.
+
+Requirements:
+- Android 11+
+- Developer Options enabled
+- Wireless debugging enabled
+- Phone and computer connected to the same network
+- ADB installed on the computer
+
+1. Enable Developer Options.
+
+   Usually:
+   Settings -> About phone -> Software information
+
+   Tap "Build number" 7 times.
+
+2. Go to:
+
+   Settings -> Developer options -> Wireless debugging
+
+3. Turn on Wireless debugging.
+
+4. Tap:
+
+   Pair device with pairing code
+
+5. The phone will display:
+
+   - IP address
+   - Pairing port
+   - Pairing code
+
+   Example:
+
+   IP address & port:
+   192.168.1.123:37123
+
+   Pairing code:
+   123456
+
+6. On the computer, run:
+
+   adb pair 192.168.1.123:37123
+
+7. Enter the pairing code shown on the phone when prompted.
+
+8. Return to the main Wireless debugging screen.
+
+   Look for the device's normal Wireless debugging "IP address & port".
+
+   IMPORTANT:
+   This port is often DIFFERENT from the pairing port.
+
+   Example:
+
+   192.168.1.123:41237
+
+9. Connect to the phone:
+
+   adb connect 192.168.1.123:41237
+
+10. Verify:
+
+    adb devices
+
+    You should see something similar to:
+
+    List of devices attached
+    192.168.1.123:41237    device
+
+11. To disconnect:
+
+    adb disconnect 192.168.1.123:41237
+
+
+Important notes for newer Android:
+
+- "adb pair" and "adb connect" commonly use different ports.
+- Pairing normally only needs to be done once for a trusted computer.
+- The connection port may change when Wireless debugging is restarted.
+- If adb connect fails, check the current IP address and port shown in the phone's Wireless debugging settings.
+
+
+--------------------------------------------------
+UIAUTOMATOR2 EXAMPLE
+--------------------------------------------------
+
+Once the phone appears in:
+
+adb devices
+
+you can connect with Python/uiautomator2.
+
+Older Android example:
+
+import uiautomator2 as u2
+
+d = u2.connect("192.168.1.123:5555")
+print(d.info)
+
+
+Newer Android example:
+
+import uiautomator2 as u2
+
+d = u2.connect("192.168.1.123:41237")
+print(d.info)
+
+
+--------------------------------------------------
+QUICK REFERENCE
+--------------------------------------------------
+
+Older Android / Galaxy S9:
+
+USB first:
+adb devices
+adb tcpip 5555
+
+Then unplug USB:
+adb connect PHONE_IP:5555
+adb devices
+
+
+Android 11+ (see more details in the in-depth instructions):
+
+On phone:
+Developer options -> Wireless debugging -> Pair device with pairing code
+
+On computer:
+adb pair PHONE_IP:PAIRING_PORT
+
+Then:
+adb connect PHONE_IP:CONNECTION_PORT
+adb devices

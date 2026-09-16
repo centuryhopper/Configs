@@ -1,0 +1,13 @@
+
+# copying files
+  # pc to phone
+    adb push ~/Downloads/image*.jpg /sdcard/DCIM/
+  # phone to pc
+    adb pull /storage/emulated/0/DCIM/Camera/ ~/Pictures/
+
+
+# rescan for new files on android (need to run this after copying files over to android)
+  adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE \
+  -d file:///sdcard/DCIM/Camera/
+
+
