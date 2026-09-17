@@ -1,0 +1,25 @@
+# !/bin/bash
+
+DIR="/home/leo_zhang/Wallpapers/animated"
+
+WALLPAPER=$(find "$DIR" \
+  -maxdepth 1 \
+  -type f \
+  \( -iname '*.mp4' -o -iname '*.webm' -o -iname '*.mkv' -o -iname '*.gif' \) \
+  | shuf -n 1)
+
+if [ -z "$WALLPAPER" ]; then
+    echo "No animated wallpapers found in $DIR"
+    exit 1
+fi
+
+echo "Using wallpaper: $WALLPAPER"
+
+gdbus call --session \
+  --dest io.github.franz_net.CosmicExtFlux1 \
+  --object-path /io/github/franz_net/CosmicExtFlux \
+  --method io.github.franz_net.CosmicExtFlux1.SetSource \
+  "$WALLPAPER"
+
+
+

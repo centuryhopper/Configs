@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Animated Wallpaper Picker
+Exec=/bin/bash ~/.config/autostart/random_animated_wallpaper
+Hidden=false

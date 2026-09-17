@@ -255,6 +255,14 @@ keymap = [
   ], run = "cd ~/.config/yazi", desc = "Go to yazi config" },
   { on = [
     "g",
+    "a",
+  ], run = "cd ~/.config/autostart", desc = "Go to autostart config" },
+  { on = [
+    "g",
+    "k",
+  ], run = "cd ~/.config/kitty", desc = "Go to kitty config" },
+  { on = [
+    "g",
     "F",
   ], run = "cd ~/.config/fish", desc = "Go to fish config" },
   { on = [
