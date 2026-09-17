@@ -1,0 +1,692 @@
+Yazi setup — Pop!_OS COSMIC
+
+1. Install Yazi
+
+You installed Yazi using its APT repository:
+
+curl -fsSL https://yazi-rs.github.io/builds/yazi-keyring.gpg \
+    | sudo tee /usr/share/keyrings/yazi-keyring.gpg >/dev/null
+
+echo 'deb [signed-by=/usr/share/keyrings/yazi-keyring.gpg] https://yazi-rs.github.io/builds/ stable main' \
+    | sudo tee /etc/apt/sources.list.d/yazi.list >/dev/null
+
+sudo apt update
+sudo apt install yazi
+
+Useful supporting programs:
+
+sudo apt install \
+    ffmpeg \
+    7zip \
+    jq \
+    poppler-utils \
+    fd-find \
+    ripgrep \
+    fzf \
+    zoxide \
+    wl-clipboard
+
+Ubuntu/Pop calls fd "fdfind", so you created the normal fd command:
+
+mkdir -p ~/.local/bin
+ln -sf "$(which fdfind)" ~/.local/bin/fd
+
+Check:
+
+which fd
+which fzf
+which rg
+which zoxide
+
+
+2. Use Kitty instead of COSMIC Terminal
+
+COSMIC Terminal wasn't giving you the image-preview experience you wanted.
+
+Kitty works much better with Yazi because Yazi can use Kitty's graphics protocol.
+
+sudo apt install kitty
+
+You also switched to a Nerd Font — JetBrains Mono Nerd Font — so Yazi's icons render correctly.
+
+Your general stack became:
+
+Pop!_OS COSMIC
+    ↓
+Kitty
+    ↓
+Fish
+    ↓
+Yazi
+    ↓
+Neovim
+
+You also set Kitty transparency:
+
+# ~/.config/kitty/kitty.conf
+
+background_opacity 0.90
+
+Yazi font size
+
+Yazi doesn't really have its own terminal font size. It uses Kitty's.
+
+So increase:
+
+font_size 14.0
+
+or whatever size you prefer.
+
+Restart Kitty afterward.
+
+
+3. Make `y` launch Yazi and CD into the directory you exit from
+
+Create:
+
+mkdir -p ~/.config/fish/functions
+nvim ~/.config/fish/functions/y.fish
+
+Put:
+
+function y
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+
+    command yazi $argv --cwd-file="$tmp"
+
+    if read -z cwd < "$tmp"; and test "$cwd" != "$PWD"; and test -d "$cwd"
+        builtin cd -- "$cwd"
+    end
+
+    rm -f -- "$tmp"
+end
+
+Now:
+
+y
+
+opens Yazi.
+
+If you navigate somewhere in Yazi and quit, your Fish shell remains in that directory.
+
+Important fix you encountered
+
+You previously had:
+
+alias y='yazi'
+
+That shadowed the Fish function.
+
+Remove that alias from your Fish config if present.
+
+Your wrapper function should be the thing handling `y`.
+
+
+4. Your basic `yazi.toml`
+
+Location:
+
+~/.config/yazi/yazi.toml
+
+Your setup included:
+
+[mgr]
+sort_by = "natural"
+sort_dir_first = true
+linemode = "size"
+show_hidden = true
+show_symlink = true
+scrolloff = 5
+
+This gives you:
+
+- natural filename sorting
+- directories before files
+- file sizes displayed
+- hidden files visible
+- symlinks visible
+- some breathing room while scrolling
+
+
+5. Make Neovim Yazi's editor
+
+You set Fish's editor variables:
+
+set -Ux EDITOR nvim
+set -Ux VISUAL nvim
+
+And configured the Yazi opener:
+
+[opener]
+edit = [
+    { run = "nvim %s", block = true, desc = "Neovim", for = "unix" }
+]
+
+This means Yazi knows that your preferred editor is:
+
+nvim
+
+
+6. `e` opens the hovered file in Neovim
+
+In:
+
+~/.config/yazi/keymap.toml
+
+you added:
+
+[[mgr.prepend_keymap]]
+on = "e"
+run = 'shell --block -- nvim %h'
+desc = "Edit hovered file in Neovim"
+
+So:
+
+e
+
+opens the currently highlighted file directly in Neovim.
+
+
+7. Make `l` and → act like Vim/Yazi smart-enter
+
+You installed/used the smart-enter plugin and mapped both:
+
+l
+→
+
+to it.
+
+[[mgr.prepend_keymap]]
+on = "<Right>"
+run = "plugin smart-enter"
+desc = "Enter directory or open file"
+
+[[mgr.prepend_keymap]]
+on = "l"
+run = "plugin smart-enter"
+desc = "Enter directory or open file"
+
+Result:
+
+On a directory:
+
+l
+
+or:
+
+→
+
+enters the directory.
+
+On a file:
+
+The smart-enter behavior opens the file rather than trying to descend farther.
+
+This gave you the Vim-like navigation you wanted.
+
+You confirmed this setup worked.
+
+
+8. Open a shell in the current Yazi directory
+
+You kept:
+
+[[mgr.prepend_keymap]]
+on = "!"
+for = "unix"
+run = 'shell "$SHELL" --block'
+desc = "Open shell here"
+
+Press:
+
+!
+
+to launch your shell in the current directory.
+
+
+9. Your navigation shortcuts
+
+You recreated your old terminal file-manager shortcuts.
+
+[[mgr.prepend_keymap]]
+on = ["g", "p"]
+run = "cd ~/projects"
+desc = "Go to projects"
+
+[[mgr.prepend_keymap]]
+on = ["g", "d"]
+run = "cd ~/Downloads"
+desc = "Go to Downloads"
+
+[[mgr.prepend_keymap]]
+on = ["g", "H"]
+run = "cd ~"
+desc = "Go to home"
+
+[[mgr.prepend_keymap]]
+on = ["g", "c"]
+run = "cd ~/.config"
+desc = "Go to config"
+
+So:
+
+gp → ~/projects
+gd → ~/Downloads
+gH → ~
+gc → ~/.config
+
+
+10. File operations
+
+Your familiar Vim-ish mappings:
+
+[[mgr.prepend_keymap]]
+on = "r"
+run = "rename"
+desc = "Rename"
+
+[[mgr.prepend_keymap]]
+on = "y"
+run = "yank"
+desc = "Copy"
+
+[[mgr.prepend_keymap]]
+on = "x"
+run = "yank --cut"
+desc = "Cut"
+
+[[mgr.prepend_keymap]]
+on = "p"
+run = "paste"
+desc = "Paste"
+
+Meaning:
+
+r    rename
+y    copy
+x    cut
+p    paste
+
+You also retained:
+
+P    force paste
+
+from Yazi's normal/default mappings.
+
+
+11. Trash instead of immediately deleting
+
+You wanted your old:
+
+dT
+
+behavior.
+
+Your Yazi mapping became:
+
+[[mgr.prepend_keymap]]
+on = ["d", "T"]
+run = "remove"
+desc = "Move selected files to trash"
+
+So:
+
+dT
+
+uses Yazi's normal remove/trash mechanism.
+
+Your merged defaults also kept:
+
+D
+
+for permanent deletion.
+
+That's a nice distinction:
+
+dT   trash/remove normally
+D    permanent delete
+
+
+12. Useful search commands you retained
+
+Your merged keymap included:
+
+s → search using fd
+S → search using ripgrep
+
+Equivalent commands:
+
+run = "search --via=fd"
+
+and:
+
+run = "search --via=rg"
+
+So broadly:
+
+s    filename/file search
+S    content search
+
+
+13. Toggle hidden files
+
+Your merged config retained:
+
+.
+
+for toggling hidden files.
+
+Even though you currently have:
+
+show_hidden = true
+
+you can quickly toggle them with:
+
+.
+
+
+14. Copy paths/names
+
+Useful built-in mappings you kept:
+
+cc    copy full path
+cd    copy directory path
+cf    copy filename
+cn    copy filename without extension
+
+Very handy when using Yazi as the hub for your development workflow.
+
+
+15. Yazi tabs
+
+You found that Yazi supports real tabs.
+
+Your merged keymap included:
+
+tt       create tab in current directory
+tr       rename current tab
+
+1        tab 1
+2        tab 2
+3        tab 3
+...
+9        tab 9
+
+[        previous tab
+]        next tab
+
+{        move/swap tab left
+}        move/swap tab right
+
+Internally these correspond to commands such as:
+
+tab_create --current
+tab_rename --interactive
+tab_switch 0
+tab_switch 1
+
+etc.
+
+That gives you a pretty nice terminal file-manager workflow without needing a separate Yazi process for every location.
+
+
+16. Sorting
+
+Your merged config retained Yazi's sorting commands.
+
+You have options including:
+
+natural
+natural reversed
+
+size
+size reversed
+
+random
+
+The sort bindings use Yazi's `,` prefix.
+
+Internally, examples look like:
+
+sort natural --reverse=no
+sort natural --reverse=yes
+sort size --reverse=no
+sort size --reverse=yes
+sort random --reverse=no
+
+Your normal default remains:
+
+sort_by = "natural"
+sort_dir_first = true
+
+which is probably the sensible default for everyday use.
+
+
+17. Tokyo Night theme
+
+You installed the Tokyo Night Yazi flavor with:
+
+ya pkg add BennyOe/tokyo-night
+
+Then:
+
+~/.config/yazi/theme.toml
+
+can contain:
+
+[flavor]
+dark = "tokyo-night"
+
+That activates Tokyo Night when you're using the dark theme.
+
+
+18. Everforest Medium theme
+
+You then installed:
+
+ya pkg add Chromium-3-Oxide/everforest-medium
+
+To use it:
+
+[flavor]
+dark = "everforest-medium"
+
+You also figured out that an extra:
+
+use = "..."
+
+setting wasn't necessary for this setup, so the clean configuration is simply:
+
+[flavor]
+dark = "everforest-medium"
+
+or:
+
+[flavor]
+dark = "tokyo-night"
+
+
+19. Your `ytheme` idea
+
+You set up a `ytheme` helper so you wouldn't have to manually edit:
+
+~/.config/yazi/theme.toml
+
+every time.
+
+The working theme names were:
+
+ytheme tokyo
+ytheme tokyo-night
+
+ytheme everforest
+ytheme everforest-medium
+
+mapping to:
+
+tokyo / tokyo-night
+    ↓
+tokyo-night
+
+everforest / everforest-medium
+    ↓
+everforest-medium
+
+The function edits only the [flavor] section rather than replacing your whole theme configuration.
+
+You later started extending this to light-theme support, but that was the last part you were working on, so I wouldn't treat that final light-theme version as part of the known-good baseline yet.
+
+
+20. Reloading config
+
+One thing that mattered during setup:
+
+after changing certain Yazi config/keymap/plugin settings, the reliable approach was:
+
+quit Yazi
+↓
+launch Yazi again
+
+with:
+
+y
+
+Don't assume every config/plugin change hot-reloads.
+
+
+21. Your known-good custom keymap core
+
+If you ever screw up keymap.toml, this is the important personalized part to restore:
+
+[[mgr.prepend_keymap]]
+on = "!"
+for = "unix"
+run = 'shell "$SHELL" --block'
+desc = "Open shell here"
+
+
+[[mgr.prepend_keymap]]
+on = "e"
+run = 'shell --block -- nvim %h'
+desc = "Edit hovered file in Neovim"
+
+
+[[mgr.prepend_keymap]]
+on = "<Right>"
+run = "plugin smart-enter"
+desc = "Enter directory or open file"
+
+
+[[mgr.prepend_keymap]]
+on = "l"
+run = "plugin smart-enter"
+desc = "Enter directory or open file"
+
+
+[[mgr.prepend_keymap]]
+on = ["d", "T"]
+run = "remove"
+desc = "Move selected files to trash"
+
+
+[[mgr.prepend_keymap]]
+on = ["g", "p"]
+run = "cd ~/projects"
+desc = "Go to projects"
+
+
+[[mgr.prepend_keymap]]
+on = ["g", "d"]
+run = "cd ~/Downloads"
+desc = "Go to Downloads"
+
+
+[[mgr.prepend_keymap]]
+on = ["g", "H"]
+run = "cd ~"
+desc = "Go to home"
+
+
+[[mgr.prepend_keymap]]
+on = ["g", "c"]
+run = "cd ~/.config"
+desc = "Go to config"
+
+
+[[mgr.prepend_keymap]]
+on = "r"
+run = "rename"
+desc = "Rename"
+
+
+[[mgr.prepend_keymap]]
+on = "y"
+run = "yank"
+desc = "Copy"
+
+
+[[mgr.prepend_keymap]]
+on = "x"
+run = "yank --cut"
+desc = "Cut"
+
+
+[[mgr.prepend_keymap]]
+on = "p"
+run = "paste"
+desc = "Paste"
+
+
+Your final Yazi mental cheat sheet
+
+START
+y           Yazi + preserve cwd when exiting
+
+NAVIGATION
+h / ←       back
+l / →       smart-enter
+gp          ~/projects
+gd          ~/Downloads
+gH          ~
+gc          ~/.config
+
+FILES
+e           edit in Neovim
+r           rename
+y           copy
+x           cut
+p           paste
+dT          trash/remove
+D           permanently delete
+.           toggle hidden files
+
+SHELL
+!           shell here
+
+SEARCH
+s           fd search
+S           ripgrep search
+
+TABS
+tt          new tab
+tr          rename tab
+1..9        switch tab
+[ / ]       previous/next tab
+{ / }       move tab
+
+PATH COPY
+cc          full path
+cd          directory path
+cf          filename
+cn          filename without extension
+
+THEMES
+ytheme tokyo
+ytheme everforest
+
+
+Known-good baseline
+
+The pieces I'd consider your known-good baseline are Kitty + Nerd Font, the Fish `y` wrapper, Neovim integration, smart-enter on `l`/Right, your custom navigation/file mappings, tabs, and Tokyo Night/Everforest Medium.
+
+The zoxide/FZF integration was still being debugged, so it is intentionally not labeled as finished here.

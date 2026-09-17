@@ -154,6 +154,8 @@ ln -s ~/projects/Configs/Pop_OS/dotfiles/nvim/ ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/yazi/ ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/kitty/ ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/tmux/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/autostart/random_animated_wallpaper ~/.config/autostart/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/autostart/random_animated_wallpaper.desktop ~/.config/autostart/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/bashrc_extras.sh ~/
 
 # copy the night light command over to home directory so that the user can easily recall the command in another tty when setting night light
@@ -260,6 +262,16 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&
 
 # bleeding edge trash-cli useful for tools such as lf
 sudo pip install git+https://github.com/andreafrancia/trash-cli
+
+# csmic ext flux (for animated wallpapers)
+wget -qO- \
+  https://api.github.com/repos/franz-net/cosmic-ext-flux/releases/latest |
+  jq -r '.assets[]
+      | select(.name | endswith("_amd64.deb"))
+      | .browser_download_url' |
+  xargs wget
+
+sudo apt install ./cosmic-ext-flux_*_amd64.deb && rm -f ./cosmic-ext-flux_*_amd64.deb
 
 ### Copy Config Files ###
 #read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy config files? (y,n) ' CFG
