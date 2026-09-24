@@ -1,2 +1,3 @@
-# !/bin/bash
+#!/bin/bash
+# nightlight command 
 sudo drm_colortemp -d /dev/dri/card1 -t 3500

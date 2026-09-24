@@ -37,6 +37,9 @@ wget -O vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=l
 # install all the deb files retrieved from the internet
 sudo apt install -f ./*.deb
 
+# brave Browser
+curl -fsS https://dl.brave.com/install.sh | sh
+
 # notify-send
 sudo apt install libnotify-bin -y
 
@@ -135,7 +138,7 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 
 # flathub packages:
 flatpak install flathub org.flameshot.Flameshot --user -y
-flatpak install flathub com.brave.Browser --user -y
+#flatpak install flathub com.brave.Browser --user -y
 flatpak install flathub com.discordapp.Discord --user -y
 flatpak install flathub com.github.xournalpp.xournalpp --user -y
 flatpak install flathub com.obsproject.Studio --user -y
@@ -154,8 +157,13 @@ ln -s ~/projects/Configs/Pop_OS/dotfiles/nvim/ ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/yazi/ ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/kitty/ ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/tmux/ ~/.config/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/extras/starship.toml ~/.config/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/autostart/random_animated_wallpaper ~/.config/autostart/
-ln -s ~/projects/Configs/Pop_OS/dotfiles/autostart/random_animated_wallpaper.desktop ~/.config/autostart/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/autostart/autostart-test.desktop ~/.config/autostart/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/autostart/code-ws1.desktop ~/.config/autostart/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/autostart/code-ws2.desktop ~/.config/autostart/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/autostart/connect_to_synology ~/.config/autostart/
+ln -s ~/projects/Configs/Pop_OS/dotfiles/autostart/open_file_explorer ~/.config/autostart/
 ln -s ~/projects/Configs/Pop_OS/dotfiles/bashrc_extras.sh ~/
 
 # copy the night light command over to home directory so that the user can easily recall the command in another tty when setting night light

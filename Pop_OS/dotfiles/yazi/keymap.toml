@@ -263,7 +263,7 @@ keymap = [
   ], run = "cd ~/.config/kitty", desc = "Go to kitty config" },
   { on = [
     "g",
-    "F",
+    "f",
   ], run = "cd ~/.config/fish", desc = "Go to fish config" },
   { on = [
     "g",
@@ -279,8 +279,8 @@ keymap = [
   ], run = "cd --interactive", desc = "Jump interactively" },
   { on = [
     "g",
-    "f",
-  ], run = "follow", desc = "Follow hovered symlink" },
+    "s",
+  ], run = "follow to symlink root", desc = "Follow hovered symlink" },
 
   # Tabs
   { on = [

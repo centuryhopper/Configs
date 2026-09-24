@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=VS Code on workspace 1
+Exec=fish -c '/usr/bin/code /home/leo_zhang/projects/Tools/cpp_tools/similar_files_checker ; move-code-window similar_files_checker 1'

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+MOUNT="/home/leo_zhang/synology"
+
+mkdir -p "$MOUNT"
+
+# Don't mount again if it's already mounted
+if mountpoint -q "$MOUNT"; then
+  exit 0
+fi
+
+# Give Wi-Fi/networking a little time after login
+sleep 5
+
+sshfs leo_admin@192.168.1.188:/Drive_A "$MOUNT" \
+  -o reconnect \
+  -o ServerAliveInterval=15 \
+  -o ServerAliveCountMax=3
+
+echo "$(date): mounting Synology" >>"/home/leo_zhang/.local/state/synology-mount.log"

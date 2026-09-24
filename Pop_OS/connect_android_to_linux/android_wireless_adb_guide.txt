@@ -234,3 +234,7 @@ adb pair PHONE_IP:PAIRING_PORT
 Then:
 adb connect PHONE_IP:CONNECTION_PORT
 adb devices
+
+
+# to pick a particular device (if there are multiple connected):
+adb -s [device_id] pull /sdcard/DCIM/

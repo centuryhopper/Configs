@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Autostart Test
+Exec=/usr/bin/touch /tmp/cosmic-autostart-worked
+Hidden=false

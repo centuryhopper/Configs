@@ -137,4 +137,26 @@ alias COUNT='ls -1 | wc -l'
 
 set -x BROWSER /usr/bin/firefox
 set -gx VISUAL nvim
-# set -gx PATH $HOME/miniconda3/bin $PATH  # commented out by conda initialize
+
+# Run my COSMIC startup scripts once per login session
+if status is-interactive
+    set -l boot_id (cat /proc/sys/kernel/random/boot_id)
+    set -l marker "$XDG_RUNTIME_DIR/cosmic-startup-$boot_id"
+
+    if not test -e "$marker"
+        touch "$marker"
+
+        sleep 1
+
+        /usr/bin/bash /home/leo_zhang/.config/autostart/open_file_explorer >/tmp/open_file_explorer.log 2>&1 &
+
+        /usr/bin/bash /home/leo_zhang/.config/autostart/connect_to_synology >/tmp/connect_to_synology.log 2>&1 &
+
+        #/usr/bin/code /home/leo_zhang/projects/Tools/cpp_tools/similar_files_checker >/tmp/code-ws1.log 2>&1 &
+
+        #code-ws2 /home/leo_zhang/projects/AndroidAutomatorApps/dating_app_bots >/tmp/code-ws2.log 2>&1 &
+
+        /usr/bin/bash /home/leo_zhang/.config/autostart/random_animated_wallpaper >/tmp/random_animated_wallpaper.log 2>&1 &
+
+    end
+end
