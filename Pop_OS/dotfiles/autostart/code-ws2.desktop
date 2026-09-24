@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=VS Code on workspace 2
+Exec=fish -c 'sleep 3; /usr/bin/code /home/leo_zhang/projects/AndroidAutomatorApps/dating_app_bots ; move-code-window dating_app 2'

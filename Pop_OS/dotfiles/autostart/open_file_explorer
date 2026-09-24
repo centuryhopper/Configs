@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+/usr/bin/cosmic-files
+
+/home/leo_zhang/.cargo/bin/cos-cli move \
+  -a com.system76.CosmicFiles \
+  -w 1 \
+  --wait 20
+
+echo "Finished with exit code $?"
