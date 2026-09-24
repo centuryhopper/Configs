@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# animated wallpaper player
+
+
+# Download and install the latest gSlapper .deb for Ubuntu 24.04 / Pop!_OS
+API="https://api.github.com/repos/Nomadcxx/gSlapper/releases/latest"
+
+URL=$(curl -fsSL "$API" \
+  | grep -o '"browser_download_url": *"[^"]*ubuntu24\.04_amd64\.deb"' \
+  | grep -o 'https://[^"]*')
+
+if [ -z "$URL" ]; then
+    echo "Couldn't find an Ubuntu 24.04 .deb in the latest release."
+    exit 1
+fi
+
+FILE="/tmp/$(basename "$URL")"
+LATEST=$(basename "$URL" | cut -d_ -f2)
+INSTALLED=$(dpkg-query -W -f='${Version}' gslapper 2>/dev/null)
+
+if [ "${INSTALLED%%-*}" = "$LATEST" ]; then
+    echo "gSlapper $LATEST is already installed."
+    exit 0
+fi
+
+echo "Installing gSlapper $LATEST (currently: ${INSTALLED:-not installed})"
+wget -q --show-progress -O "$FILE" "$URL" && sudo apt install "$FILE"
+rm -f "$FILE"

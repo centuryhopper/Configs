@@ -1,25 +1,30 @@
 #!/bin/bash
 
 DIR="/home/leo_zhang/Wallpapers/animated"
+OUTPUT="DP-3" # use '*' for all monitors
+
+if ! command -v gslapper >/dev/null 2>&1; then
+  echo "gslapper not found (run update-gslapper to install it)"
+  exit 1
+fi
 
 WALLPAPER=$(find "$DIR" \
   -maxdepth 1 \
   -type f \
-  \( -iname '*.mp4' -o -iname '*.webm' -o -iname '*.mkv' -o -iname '*.gif' \) \
-  | shuf -n 1)
+  \( -iname '*.mp4' -o -iname '*.webm' -o -iname '*.mkv' -o -iname '*.gif' \
+  -o -iname '*.avi' -o -iname '*.mov' \) |
+  shuf -n 1)
 
 if [ -z "$WALLPAPER" ]; then
-    echo "No animated wallpapers found in $DIR"
-    exit 1
+  echo "No animated wallpapers found in $DIR"
+  exit 1
 fi
 
 echo "Using wallpaper: $WALLPAPER"
 
-gdbus call --session \
-  --dest io.github.franz_net.CosmicExtFlux1 \
-  --object-path /io/github/franz_net/CosmicExtFlux \
-  --method io.github.franz_net.CosmicExtFlux1.SetSource \
-  "$WALLPAPER"
+# Replace whatever is running now
+pkill -x gslapper
+pkill -x mpvpaper
+sleep 0.3
 
-
-
+setsid -f gslapper -o "loop" "$OUTPUT" "$WALLPAPER" >/dev/null 2>&1
