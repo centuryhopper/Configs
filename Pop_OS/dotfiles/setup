@@ -16,23 +16,7 @@ clear
 cd ~/Downloads
 
 # online deb files to retrieve
-#wget -O zoom.deb "https://zoom.us/client/latest/zoom_amd64.deb"
-#wget -O chrome.deb "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-#wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb"
 wget -O vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
-#wget -O iriun.deb 'https://iriun.gitlab.io/iriunwebcam-2.7.deb'
-#wget -O github_desktop.deb "https://github.com/shiftkey/desktop/releases/download/release-2.6.3-linux1/GitHubDesktop-linux-2.6.3-linux1.deb"
-
-# xppentablet
-# https://www.xp-pen.com/download-55.html
-# wget -O xp.deb "xp-pen.com/download/file/id/1949/pid/55/ext/deb.html"
-
-# github desktop
-#sudo apt install wget apt-transport-https gnupg2 software-properties-common
-#
-#wget https://github.com/shiftkey/desktop/releases/download/release-3.1.7-linux1/GitHubDesktop-linux-3.1.7-linux1.deb
-#
-#wget -O edge.deb "https://go.microsoft.com/fwlink?linkid=2149051&brand=M102"
 
 # install all the deb files retrieved from the internet
 sudo apt install -f ./*.deb
@@ -48,78 +32,6 @@ sudo apt install grub-pc-bin grub-efi -y
 
 # terminal copy to clipboard tool
 sudo apt install xclip -y
-#Using `xclip` in a Linux terminal like Pop!_OS is a powerful way to manage text via the clipboard from the command line. Here's how to use it:
-#
-#### 1. **Install `xclip`**
-#If `xclip` isn't already installed, you can add it using:
-#
-#```bash
-#sudo apt update
-#sudo apt install xclip
-#```
-#
-#### 2. **Copy to the Clipboard**
-#To copy the contents of a file or command output to the clipboard, use:
-#
-#```bash
-#cat file.txt | xclip -selection clipboard
-#```
-#
-#Or directly:
-#
-#```bash
-#xclip -selection clipboard < file.txt
-#```
-#
-#You can also copy command output:
-#
-#```bash
-#echo "Hello, clipboard!" | xclip -selection clipboard
-#```
-#
-#### 3. **Paste from the Clipboard**
-#To paste clipboard content to the terminal or another file:
-#
-#```bash
-#xclip -selection clipboard -o
-#```
-#
-#For example, save clipboard content to a file:
-#
-#```bash
-#xclip -selection clipboard -o > output.txt
-#```
-#
-#### 4. **Additional Options**
-#- Copy and paste with the **primary selection** (text selected with the mouse):
-#
-#  **Copy:**
-#  ```bash
-#  echo "Primary selection" | xclip -selection primary
-#  ```
-#
-#  **Paste:**
-#  ```bash
-#  xclip -selection primary -o
-#  ```
-#
-#- Use `Ctrl + Shift + V` or middle-click to paste the primary selection in most terminal environments.
-#
-#### Example: Copying a File Path
-#To copy the path of a file to the clipboard:
-#
-#```bash
-#echo "/path/to/your/file" | xclip -selection clipboard
-#```
-#
-#This will make the file path available to paste in a file manager or another application.
-
-# To check size of all flatpak apps:
-# flatpak list --app --columns=name,size
-
-# mpv video player
-# use '{' '}' keys to decrease or increase the playback speed of videos
-sudo apt install mpv -y
 
 # fm6000
 curl https://codeberg.org/anhsirk0/fetch-master-6000/raw/branch/main/fm6000.pl --output fm6000
@@ -142,8 +54,6 @@ flatpak install flathub org.flameshot.Flameshot --user -y
 flatpak install flathub com.discordapp.Discord --user -y
 flatpak install flathub com.github.xournalpp.xournalpp --user -y
 flatpak install flathub com.obsproject.Studio --user -y
-#flatpak install flathub com.visualstudio.code --user -y
-#flatpak install flathub com.google.Chrome --user -y
 #flatpak install flathub com.unity.UnityHub --user -y
 flatpak install flathub org.gimp.GIMP --user -y
 flatpak install flathub com.microsoft.Edge --user -y
@@ -173,7 +83,7 @@ cp ~/projects/Configs/Pop_OS/dotfiles/nightlight_command ~/
 echo "source ~/bashrc_extras.sh" >>~/.bashrc
 
 # more tools
-sudo apt install -y ncdu bat cmake htop rpi-imager cheese tree neofetch cmatrix fish xsel ranger
+sudo apt install -y ncdu bat cmake htop rpi-imager cheese tree neofetch cmatrix fish xsel nmap git-filter-repo
 
 # iphone transfer Files
 sudo apt install ifuse
@@ -239,11 +149,6 @@ make CMAKE_BUILD_TYPE=RelWithDebInfo
 git checkout stable
 sudo make install
 
-# cptv from source (previewer for lf file manager)
-#sudo apt install -y libssl-dev libmagic-dev file openssl imagemagick coreutils
-
-#git clone https://github.com/NikitaIvanovV/ctpv /tmp/cptv && cd /tmp/ctpv && make && sudo make install
-
 # get latest dotnet sdk and runtime
 wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
 chmod +x ./dotnet-install.sh
@@ -281,35 +186,6 @@ wget -qO- \
 
 sudo apt install ./cosmic-ext-flux_*_amd64.deb && rm -f ./cosmic-ext-flux_*_amd64.deb
 
-### Copy Config Files ###
-#read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy config files? (y,n) ' CFG
-#if [[ $CFG == "Y" || $CFG == "y" ]]; then
-#	echo -e "$CNT - Copying config files..."
-#	for DIR in tmux fish lf Wallpapers; do
-#		DIRPATH=~/.config/$DIR
-#		if [ -d "$DIRPATH" ]; then
-#			echo -e "$CAT - Config for $DIR located, backing up."
-#			mv $DIRPATH $DIRPATH-back &>>$INSTLOG
-#			echo -e "$COK - Backed up $DIR to $DIRPATH-back."
-#		fi
-#		echo -e "$CNT - Copying $DIR config to $DIRPATH."
-#		cp -R $DIR ~/.config/ &>>$INSTLOG
-#	done
-#
-#	read -n1 -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy files to home directory? (y,n) ' CFG
-#	if [[ $CFG == "Y" || $CFG == "y" ]]; then
-#		echo -e "$CNT - Copying config files..."
-#		for DIR in .bashrc; do
-#			DIRPATH=~/$DIR
-#			if [ -d "$DIRPATH" ]; then
-#				echo -e "$CAT - Config for $DIR located, backing up."
-#				mv $DIRPATH $DIRPATH-back &>>$INSTLOG
-#				echo -e "$COK - Backed up $DIR to $DIRPATH-back."
-#			fi
-#			echo -e "$CNT - Copying $DIR config to $DIRPATH."
-#			cp -R $DIR ~ &>>$INSTLOG
-#		done
-#
 #		echo -e "copying cron_contents to the crontab..."
 #		crontab ~/projects/Configs/Pop_OS/dotfiles/extras/cron/cron_contents.txt
 #
