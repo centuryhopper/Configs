@@ -170,9 +170,6 @@ echo -e "To swap caps lock and esc, install gnome tweaks from pop shop, go to ke
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&
   sudo apt install -y nodejs python3-pip
 
-# to copy terminal command output to clipboard on xorg:
-# echo "[your_linux_command]" | xsel -b
-
 # bleeding edge trash-cli useful for tools such as lf
 sudo pip install git+https://github.com/andreafrancia/trash-cli
 
