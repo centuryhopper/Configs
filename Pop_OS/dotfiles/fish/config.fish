@@ -134,9 +134,15 @@ alias pbpaste='xclip -selection clipboard -o'
 alias pbclear='xclip -selection clipboard /dev/null'
 
 alias COUNT='ls -1 | wc -l'
+alias S9='adb tcpip 5555;adb connect 192.168.1.143:5555'
+alias S26='adb tcpip 5555;adb connect 192.168.1.101:5555'
 
 set -x BROWSER /usr/bin/firefox
 set -gx VISUAL nvim
+
+# force into wayland so that gslapper works
+set -x WAYLAND_DISPLAY wayland-1
+set -x XDG_SESSION_TYPE wayland
 
 # Run my COSMIC startup scripts once per login session
 if status is-interactive
