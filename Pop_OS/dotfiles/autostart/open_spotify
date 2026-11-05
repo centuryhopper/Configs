@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+/usr/bin/spotify
+
+sleep 10
+
+/home/leo_zhang/.cargo/bin/cos-cli move \
+  -a Spotify \
+  -w 2 \
+  --wait 20
+
+echo "Finished with exit code $?"

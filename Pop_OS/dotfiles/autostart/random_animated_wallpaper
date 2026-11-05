@@ -3,6 +3,9 @@
 DIR="/home/leo_zhang/Wallpapers/animated"
 OUTPUT="DP-3" # use '*' for all monitors
 
+# allow for some time to let wayland load in first
+sleep 5
+
 if ! command -v gslapper >/dev/null 2>&1; then
   echo "gslapper not found (run update-gslapper to install it)"
   exit 1

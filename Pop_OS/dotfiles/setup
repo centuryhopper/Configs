@@ -69,12 +69,16 @@ ln -sf ~/projects/Configs/Pop_OS/dotfiles/kitty/ ~/.config/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/tmux/ ~/.config/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/extras/starship.toml ~/.config/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/Wallpapers/ ~/
+ln -sf ~/projects/Configs/Pop_OS/dotfiles/.gdbinit ~/
+ln -sf ~/projects/Configs/Pop_OS/dotfiles/.pdbrc.py ~/
+ln -sf ~/projects/Configs/Pop_OS/dotfiles/.pdbrc ~/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/random_animated_wallpaper ~/.config/autostart/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/autostart-test.desktop ~/.config/autostart/
-ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/code-ws1.desktop ~/.config/autostart/
-ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/code-ws2.desktop ~/.config/autostart/
+ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/code1.desktop ~/.config/autostart/
+ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/code2.desktop ~/.config/autostart/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/connect_to_synology ~/.config/autostart/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/open_file_explorer ~/.config/autostart/
+ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/open_spotify ~/.config/autostart/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/bashrc_extras.sh ~/
 
 # copy the night light command over to home directory so that the user can easily recall the command in another tty when setting night light
@@ -100,6 +104,9 @@ sudo apt install -y gstreamer1.0-libav ffmpeg
 
 # rustup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# add rust-analyzer for lazyvim rust intellisense
+rustup component add rust-analyzer
 
 # fancy version of ls command
 cargo install exa

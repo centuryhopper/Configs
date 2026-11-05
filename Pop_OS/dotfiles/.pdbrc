@@ -1,0 +1,4 @@
+alias pwhat _pwhat(%*)
+alias disas __import__('dis').dis(%*)
+alias finish return
+alias locals pp locals()

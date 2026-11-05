@@ -1,0 +1,4 @@
+#[Desktop Entry]
+#Type=Application
+#Name=VS Code on workspace 3
+#Exec=fish -c 'sleep 3; /usr/bin/code /home/leo_zhang/projects/Tools/python_tools/product_price_tracker/ ; move-code-window product_price_tracker 2'
