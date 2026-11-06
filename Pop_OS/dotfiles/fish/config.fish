@@ -124,7 +124,6 @@ alias tl='trash-list'
 alias m='math'
 alias birth='stat / | grep Birth'
 alias ovpn='sudo openvpn ~/.vpn_stuff/us-free-11.protonvpn.net.udp.ovpn'
-alias py='/home/leo_zhang/miniconda3/envs/web_auto/bin/python'
 alias reset_bt="sudo rfkill unblock all && sudo rmmod btusb && sudo rmmod btintel && sudo modprobe btintel && sudo modprobe btusb"
 alias flst='flatpak list --app --columns=name,size'
 alias nightlight='echo "# From TTY (Ctrl+Alt+F3): Example: sudo drm_colortemp -d /dev/dri/card1 -t 3500"'
@@ -164,13 +163,14 @@ if status is-interactive
 
         sleep 1
 
+        /home/leo_zhang/.cargo/bin/cos-cli move \
+            -a Spotify \
+            -w 1 \
+            --wait 20
+
         /usr/bin/bash /home/leo_zhang/.config/autostart/open_file_explorer >/tmp/open_file_explorer.log 2>&1 &
 
         /usr/bin/bash /home/leo_zhang/.config/autostart/connect_to_synology >/tmp/connect_to_synology.log 2>&1 &
-
-        #/usr/bin/code /home/leo_zhang/projects/Tools/cpp_tools/similar_files_checker >/tmp/code-ws1.log 2>&1 &
-
-        #code-ws2 /home/leo_zhang/projects/AndroidAutomatorApps/dating_app_bots >/tmp/code-ws2.log 2>&1 &
 
         /usr/bin/bash /home/leo_zhang/.config/autostart/random_animated_wallpaper >/tmp/random_animated_wallpaper.log 2>&1 &
 

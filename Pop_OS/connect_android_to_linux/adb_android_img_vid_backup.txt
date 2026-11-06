@@ -115,6 +115,12 @@ adb shell find /sdcard/Pictures -type d
 mkdir -p ~/galaxy_backup
 
 # Copy media to Linux
-adb pull /sdcard/DCIM/Camera ~/galaxy_backup/
-adb pull /sdcard/Pictures ~/galaxy_backup/
-adb pull /sdcard/Movies ~/galaxy_backup/
+# -a to keep original timestamp of dates
+adb pull -a /sdcard/DCIM ~/galaxy_backup/
+adb pull -a /sdcard/Pictures ~/galaxy_backup/
+adb pull -a /sdcard/Movies ~/galaxy_backup/
+adb pull -a /sdcard/Download ~/galaxy_backup/
+adb pull -a /sdcard/Android/media/com.whatsapp/WhatsApp/Media ~/galaxy_backup/WhatsApp
+
+
+

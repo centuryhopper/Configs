@@ -1,0 +1,13 @@
+[Unit]
+Description=Workspace layout
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+KillMode=process
+ExecStart=/home/leo_zhang/projects/Configs/Pop_OS/dotfiles/autostart/random_animated_wallpaper
+
+[Install]
+WantedBy=graphical-session.target

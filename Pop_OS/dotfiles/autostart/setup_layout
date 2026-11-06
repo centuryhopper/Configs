@@ -1,0 +1,55 @@
+#!/usr/bin/bash
+
+#exec >>/tmp/autostart-files.log 2>&1 # log output so you can debug
+#
+#/usr/bin/cosmic-files &
+#
+#sleep 2 # small buffer for the session/workspaces to be ready at login
+#/home/leo_zhang/.cargo/bin/cos-cli move \
+#  -a com.system76.CosmicFiles \
+#  -w 1 \
+#  --wait 20
+#
+#echo "Finished with exit code $?"
+
+exec >>/tmp/autostart-layout.log 2>&1
+COS=/home/leo_zhang/.cargo/bin/cos-cli
+
+# wait_for <jq filter> — wait up to ~30s for a matching window
+wait_for() {
+  for i in $(seq 60); do
+    "$COS" info --json | jq -e ".apps[] | select($1)" >/dev/null && return 0
+    sleep 0.5
+  done
+  echo "Timed out: $1"
+  return 1
+}
+
+sleep 3 # let the session settle
+
+# Workspace 1 (index 0)
+"$COS" ws-activate -w 0
+#/usr/bin/cosmic-files &
+#wait_for '.app_id | test("CosmicFiles")'
+
+# Workspace 2 (index 1)
+"$COS" ws-activate -w 1
+kitty --single-instance --title dating_app_bots -d ~/projects/AndroidAutomatorApps/dating_app_bots/ fish -c 'set -e TMUX; exec tmux' &>/dev/null &
+disown
+wait_for '.title == "dating_app_bots"'
+
+# Workspace 3 (index 2)
+"$COS" ws-activate -w 2
+kitty --single-instance --title social_media_cross_post -d ~/projects/AndroidAutomatorApps/social_media_cross_post/ fish -c 'set -e TMUX; exec tmux' &>/dev/null &
+disown
+wait_for '.title == "social_media_cross_post"'
+
+# Workspace 4 (index 3)
+"$COS" ws-activate -w 3
+sleep 1
+spotify &
+wait_for '.app_id == "Spotify"'
+
+sleep 1
+"$COS" ws-activate -w 0
+echo "Done"

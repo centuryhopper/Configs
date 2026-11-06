@@ -79,7 +79,19 @@ ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/code2.desktop ~/.config/auto
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/connect_to_synology ~/.config/autostart/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/open_file_explorer ~/.config/autostart/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/open_spotify ~/.config/autostart/
+ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/layout.desktop ~/.config/autostart/
+ln -sf ~/projects/Configs/Pop_OS/dotfiles/autostart/open_kitty_terminals ~/.config/autostart/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/bashrc_extras.sh ~/
+
+# link up systemd services
+systemctl --user link ~/projects/Configs/Pop_OS/dotfiles/systemd/setup-layout.service
+systemctl --user enable setup-layout.service
+
+systemctl --user link ~/projects/Configs/Pop_OS/dotfiles/systemd/init-random-animated-wallpaper.service
+systemctl --user enable init-random-animated-wallpaper.service
+
+systemctl --user link ~/projects/Configs/Pop_OS/dotfiles/systemd/link-synology.service
+systemctl --user enable link-synology.service
 
 # copy the night light command over to home directory so that the user can easily recall the command in another tty when setting night light
 cp ~/projects/Configs/Pop_OS/dotfiles/nightlight_command ~/
@@ -90,8 +102,11 @@ echo "source ~/bashrc_extras.sh" >>~/.bashrc
 # more tools
 sudo apt install -y ncdu bat cmake htop rpi-imager cheese tree neofetch cmatrix fish xsel nmap git-filter-repo
 
+# dex stands for “Desktop Entry eXecution”. It’s a small tool that reads a .desktop file and runs it the way a desktop environment would: it parses the Exec= line and launches that command.
+sudo apt install dex -y
+
 # iphone transfer Files
-sudo apt install ifuse
+#sudo apt install ifuse
 
 # 7zip
 sudo apt install p7zip-full

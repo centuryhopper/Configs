@@ -1,0 +1,30 @@
+##!/usr/bin/bash
+#exec >>/tmp/autostart-kitty.log 2>&1
+#
+#COS=/home/leo_zhang/.cargo/bin/cos-cli
+#
+## open_and_move <dir> <title> <workspace>
+#open_and_move() {
+#  kitty --single-instance --title "$2" -d "$1" fish -c 'set -e TMUX; exec tmux' &>/dev/null &
+#  disown
+#
+#  for i in $( # up to ~20s
+#    seq 40
+#  ); do
+#    idx=$("$COS" info --json | jq --arg t "$2" \
+#      'first(.apps[] | select(.app_id=="kitty" and (.title | test($t; "i"))) | .index)')
+#    if [[ -n "$idx" ]]; then
+#      "$COS" move -w "$3" -i "$idx"
+#      echo "Moved $2 -> workspace $3 (exit $?)"
+#      return
+#    fi
+#    sleep 0.5
+#  done
+#  echo "Timed out waiting for $2"
+#}
+#
+#sleep 1
+#open_and_move ~/projects/AndroidAutomatorApps/dating_app_bots/ dating_app_bots 1
+#
+#sleep 2
+#open_and_move ~/projects/AndroidAutomatorApps/social_media_cross_post/ social_media_cross_post 2

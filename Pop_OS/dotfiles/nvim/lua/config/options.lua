@@ -4,5 +4,5 @@
 
 local opt = vim.opt
 opt.wrap = true
-opt.relativenumber = false
+--opt.relativenumber = false
 vim.g.lazyvim_python_lsp = "basedpyright"

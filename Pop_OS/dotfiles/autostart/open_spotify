@@ -1,12 +1,17 @@
-#!/usr/bin/bash
-
-/usr/bin/spotify
-
-sleep 10
-
-/home/leo_zhang/.cargo/bin/cos-cli move \
-  -a Spotify \
-  -w 2 \
-  --wait 20
-
-echo "Finished with exit code $?"
+##!/usr/bin/bash
+#exec >>/tmp/autostart-spotify.log 2>&1
+#COS=/home/leo_zhang/.cargo/bin/cos-cli
+#
+#/usr/bin/spotify &
+#
+## wait up to ~30s for a Spotify window with a real title
+#for i in $(seq 60); do
+#  if "$COS" info --json | jq -e '.apps[] | select(.app_id=="Spotify" and (.title | length > 0))' >/dev/null; then
+#    sleep 2
+#    "$COS" move -a Spotify -w 1
+#    echo "Moved Spotify (exit $?)"
+#    exit
+#  fi
+#  sleep 0.5
+#done
+#echo "Timed out waiting for Spotify"

@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Workspace layout
+Exec=/home/leo_zhang/projects/Configs/Pop_OS/dotfiles/autostart/setup_layout
+X-GNOME-Autostart-Delay=5

@@ -280,6 +280,10 @@ keymap = [
   { on = [
     "g",
     "s",
+  ], run = "cd ~/.config/systemd/user/", desc = "Examine systemd config files" },
+  { on = [
+    "g",
+    "r",
   ], run = "follow to symlink root", desc = "Follow hovered symlink" },
 
   # Tabs
