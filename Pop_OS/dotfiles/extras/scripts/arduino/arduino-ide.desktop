@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Arduino IDE
+GenericName=Arduino IDE
+Comment=Write, compile and upload sketches to Arduino boards
+Exec=/home/leo_zhang/apps/arduino-ide.AppImage %U
+Icon=/home/leo_zhang/projects/Configs/Pop_OS/dotfiles/extras/scripts/arduino/arduino-ide.png
+Terminal=false
+Categories=Development;IDE;Electronics;
+Keywords=arduino;embedded;microcontroller;sketch;
+StartupWMClass=arduino-ide
+StartupNotify=true
+

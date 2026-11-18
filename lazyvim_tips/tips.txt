@@ -1,0 +1,13 @@
+
+Built-in Diagnostic Navigation Keymaps
+
+• Jump to next error: Press ]e
+• Jump to previous error: Press [e
+• Jump to next diagnostic (any severity — error, warning, hint): Press ]d
+• Jump to previous diagnostic: Press [d
+• Jump to next warning: Press ]w
+• Jump to previous warning: Press [w
+
+Viewing & Searching Errors
+
+• Show error details under cursor: Press <leader>cd (usually Space + c + d) to open the floating diagnostic popup with the full message.

@@ -1,5 +1,6 @@
 # GDB init — save as ~/.config/gdb/gdbinit (GDB 11+) or ~/.gdbinit
 
+tui enable
 # ---------- General ----------
 set confirm off
 set pagination off

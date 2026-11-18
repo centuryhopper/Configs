@@ -1,11 +1,20 @@
 #!/bin/bash
 
+# connect to pi5:
+ssh leo_zhang@192.168.1.86
+
+
 # use this command to find the docker virtual env paths
 # docker exec -it [insert container name] bash
 
 # find current running container in the current directory:
 # docker-compose ps -a
 
+# check out logs that your code made while it is in docker:
+docker compose logs -f # shows prints that follows as the container is running live
+
+# show what the docker compose config file sees
+# docker compose config
 
 # build and run
 # docker compose build && docker compose up -d

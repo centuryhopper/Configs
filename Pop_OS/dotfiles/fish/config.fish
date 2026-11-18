@@ -3,16 +3,14 @@ if status is-interactive
     starship init fish | source
 end
 
-#source ~/emsdk/emsdk_env.fish ^/dev/null
-
-#status --is-interactive; and source ~/emsdk/emsdk_env.fish
-#source ~/emsdk/emsdk_env.fish
+# Autoload functions from subfolders of ~/.config/fish/functions/
+for dir in ~/.config/fish/functions/**/
+    set -p fish_function_path $dir
+end
 
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
 
-#set -gx DOTNET_ROOT /usr/bin/dotnet
-#set -gx DOTNET_ROOT /usr/lib/dotnet
 
 set -gx DOTNET_ROOT /home/leo_zhang/.dotnet
 set -gx PATH $DOTNET_ROOT $PATH $DOTNET_ROOT/tools
@@ -29,7 +27,7 @@ set -gx PATH $PATH $ANDROID_HOME/platform-tools
 set -gx PATH $PATH ~/android-sdk/cmdline-tools/latest/bin
 set -gx PATH $PATH $ANDROID_HOME/emulator
 
-set -gx VCPKG_ROOT ~/tools/vcpkg
+set -gx VCPKG_ROOT ~/vcpkg
 set -gx PATH $PATH $VCPKG_ROOT
 
 #set -gx PATH $HOME/vcpkg $PATH
@@ -75,7 +73,9 @@ end
 
 fish_add_path -g "/home/leo_zhang/.local/bin/"
 
-fm6000 -c red -dog -o Pop!_OS -n -m 8 -g 12 -l 40
+if status is-interactive
+    fm6000 -c red -dog -o Pop!_OS -n -m 8 -g 12 -l 40
+end
 
 ## Useful aliases
 
@@ -133,8 +133,10 @@ alias pbpaste='xclip -selection clipboard -o'
 alias pbclear='xclip -selection clipboard /dev/null'
 
 alias COUNT='ls -1 | wc -l'
-alias S9='adb tcpip 5555;adb connect 192.168.1.143:5555'
-alias S26='adb tcpip 5555;adb connect 192.168.1.101:5555'
+alias SCREEN_OFF="sleep (random 1 5); wlopm --off '*'"
+
+set -x S9 '192.168.1.133:5555'
+set -x S26 '192.168.1.64:5555'
 
 source ~/.config/fish/secrets.fish
 

@@ -1,3 +1,5 @@
 
-adb tcpip 5555
-adb connect 192.168.1.143:5555 
+# assuming this serial number is obtained from connecting phone to pc
+adb -s R5GL74546KY tcpip 5555
+
+adb connect 192.168.1.64:5555 

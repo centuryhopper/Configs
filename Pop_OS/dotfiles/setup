@@ -62,6 +62,7 @@ flatpak install flathub io.github.shiftey.Desktop --user -y
 #flatpak install flathub org.mypaint.MyPaint --user -y
 
 # setup symlink to config files
+ln -sf /home/leo_zhang/projects/Configs/Pop_OS/dotfiles/mpv ~/.config
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/fish/ ~/.config/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/nvim/ ~/.config/
 ln -sf ~/projects/Configs/Pop_OS/dotfiles/yazi/ ~/.config/

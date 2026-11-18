@@ -116,11 +116,29 @@ mkdir -p ~/galaxy_backup
 
 # Copy media to Linux
 # -a to keep original timestamp of dates
-adb pull -a /sdcard/DCIM ~/galaxy_backup/
-adb pull -a /sdcard/Pictures ~/galaxy_backup/
-adb pull -a /sdcard/Movies ~/galaxy_backup/
-adb pull -a /sdcard/Download ~/galaxy_backup/
-adb pull -a /sdcard/Android/media/com.whatsapp/WhatsApp/Media ~/galaxy_backup/WhatsApp
+adb -s 192.168.1.64:5555 pull -a /sdcard/DCIM ~/galaxy_s26_backup/
+adb -s 192.168.1.64:5555 pull -a /sdcard/Pictures ~/galaxy_s26_backup/
+adb -s 192.168.1.64:5555 pull -a /sdcard/Movies ~/galaxy_s26_backup/
+adb -s 192.168.1.64:5555 pull -a /sdcard/Download ~/galaxy_s26_backup/
+adb -s 192.168.1.64:5555 pull -a /sdcard/Android/media/com.whatsapp/WhatsApp/Media ~/galaxy_s26_backup/WhatsApp
+
+
+# fish shell
+mkdir -p ~/galaxy_s26_backup && time begin
+    set -l dev "192.168.1.64:5555"
+    set -l dest ~/galaxy_s26_backup
+
+    for dir in DCIM Pictures Movies Download
+        adb -s $dev pull -a /sdcard/$dir $dest/ || break
+    end
+    adb -s $dev pull -a /sdcard/Android/media/com.whatsapp/WhatsApp/Media $dest/WhatsApp
+end
+
+# Push files from pc to android:
+adb -s <device> push *.jpg /sdcard/Pictures/Pushed/
+
+# tells android to scan for the files
+adb -s <device> shell 'for f in /sdcard/Pictures/Pushed/*.jpg; do am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d "file://$f"; done'
 
 
 

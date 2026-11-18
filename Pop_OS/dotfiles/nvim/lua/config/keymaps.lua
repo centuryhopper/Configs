@@ -27,3 +27,16 @@ end
 vim.keymap.set("n", "<C-k>0", "zM", { desc = "Fold all" })
 vim.keymap.set("n", "<C-k>j", "zR", { desc = "Unfold all" })
 vim.keymap.set("n", "<C-k><C-j>", "zR", { desc = "Unfold all" })
+
+-- switching betweeen terminal and editor
+-- vim.keymap.set({ "n", "t" }, "<C-Up>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
+-- vim.keymap.set({ "n", "t" }, "<C-Down>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
+
+-- swapping what they do with each other
+vim.keymap.set("n", "<leader>ft", function()
+  Snacks.terminal()
+end, { desc = "Terminal (cwd)" })
+
+vim.keymap.set("n", "<leader>fT", function()
+  Snacks.terminal(nil, { cwd = LazyVim.root() })
+end, { desc = "Terminal (Root Dir)" })
