@@ -11,7 +11,6 @@ end
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
 
-
 set -gx DOTNET_ROOT /home/leo_zhang/.dotnet
 set -gx PATH $DOTNET_ROOT $PATH $DOTNET_ROOT/tools
 
@@ -26,11 +25,6 @@ set -gx ANDROID_HOME ~/android-sdk
 set -gx PATH $PATH $ANDROID_HOME/platform-tools
 set -gx PATH $PATH ~/android-sdk/cmdline-tools/latest/bin
 set -gx PATH $PATH $ANDROID_HOME/emulator
-
-set -gx VCPKG_ROOT ~/vcpkg
-set -gx PATH $PATH $VCPKG_ROOT
-
-#set -gx PATH $HOME/vcpkg $PATH
 
 #set -Ua fish_user_paths /home/leo_zhang/Documents/GitHub/Configs/Pop_OS/dotfiles/extras/scripts/
 #
@@ -74,7 +68,11 @@ end
 fish_add_path -g "/home/leo_zhang/.local/bin/"
 
 if status is-interactive
-    fm6000 -c red -dog -o Pop!_OS -n -m 8 -g 12 -l 40
+    if string match -q -i "*microsoft*" (uname -r)
+        fm6000 -c red -dog -o Windows_WSL -n -m 8 -g 12 -l 40
+    else
+        fm6000 -c red -dog -o Pop!_OS -n -m 8 -g 12 -l 40
+    end
 end
 
 ## Useful aliases
@@ -147,34 +145,6 @@ set -gx VISUAL nvim
 set -x WAYLAND_DISPLAY wayland-1
 set -x XDG_SESSION_TYPE wayland
 
-if status is-interactive; and set -q KITTY_PID
-    set -l flag $XDG_RUNTIME_DIR/kitty_autocd_done
-    if not test -e $flag
-        touch $flag
-        cd ~/projects/AndroidAutomatorApps/social_media_cross_post
-    end
-end
-
-# Run my COSMIC startup scripts once per login session
-if status is-interactive
-    set -l boot_id (cat /proc/sys/kernel/random/boot_id)
-    set -l marker "$XDG_RUNTIME_DIR/cosmic-startup-$boot_id"
-
-    if not test -e "$marker"
-        touch "$marker"
-
-        sleep 1
-
-        /home/leo_zhang/.cargo/bin/cos-cli move \
-            -a Spotify \
-            -w 1 \
-            --wait 20
-
-        /usr/bin/bash /home/leo_zhang/.config/autostart/open_file_explorer >/tmp/open_file_explorer.log 2>&1 &
-
-        /usr/bin/bash /home/leo_zhang/.config/autostart/connect_to_synology >/tmp/connect_to_synology.log 2>&1 &
-
-        /usr/bin/bash /home/leo_zhang/.config/autostart/random_animated_wallpaper >/tmp/random_animated_wallpaper.log 2>&1 &
-
-    end
+if string match -q -i "*microsoft*" (uname -r)
+    source ~/projects/Configs/windows_11/fish-files/windows-11.fish
 end
